@@ -7,15 +7,14 @@ function PcpApp() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+           <code>In progress</code> 
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="https://www.instagram.com/manu.lopezanido/?hl=es-la"
+          target="_blank" rel="noreferrer"
         >
-          Learn React
+          Created by Manu
         </a>
       </header>
     </div>
