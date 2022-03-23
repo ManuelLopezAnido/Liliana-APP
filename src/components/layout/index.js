@@ -1,10 +1,10 @@
-import Header from '../header'
-import Body from '../body'
+import Header from './header'
+import Body from './body'
 const Layout = () => {
   return (
   <>
-  <Header/>
-  <Body/>
+    <Header/>
+    <Body/>
   </>
   )
 }

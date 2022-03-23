@@ -25,16 +25,17 @@ overflow: hidden;
   overflow: hidden;
 }
 
-li {
+.textlink{
+  text-decoration: none;
+  color: white; 
   float: left;
   display: block;
-  color: white;
   text-align: center;
   padding: 16px;
   text-decoration: none;
   cursor: pointer;
 }
-li:hover{
+.textlink:hover{
 color: #61dafb;
 transition: 0.3s;
 }
@@ -79,10 +80,10 @@ display: none;
   .menu.active ul{
   left:0;
   }
-  .menu li{
+  .textlink{
     color:black;
   }
-  .menu li:hover{
+  .textlink:hover{
     color: #61dafb;
     transition: 0.3s;
   }

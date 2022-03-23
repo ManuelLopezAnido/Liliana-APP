@@ -1,6 +1,6 @@
 import styles from './header.module.css'
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 const Header = () => {
   const [isActive, setActive] = useState(false);
   const mobileMenu = (e) => {
@@ -12,15 +12,15 @@ const Header = () => {
       <a href='https://www.liliana.com.ar/' className={styles.logo}> </a>
       <nav className={`${styles.menu} ${isActive? styles.active: ''}`}>
         <ul>
-          <li>
-            CARGA PRODUCCION
-          </li>
-          <li>
+          <Link to = '/pcp' className={styles.textlink} >
+            PCP
+          </Link >
+          <Link to = '/inyeccion' className={styles.textlink}>
+            INYECCION
+          </Link>
+          <Link to = '/deposito' className={styles.textlink}>
             DEPOSITO
-          </li>
-          <li>
-            MACROS
-          </li>
+          </Link>
         </ul>
       </nav>
       <div className= {`${styles.hamburger} ${isActive? styles.active: ''}`} onClick= {mobileMenu}>
