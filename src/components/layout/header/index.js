@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   const [isActive, setActive] = useState(false);
   const mobileMenu = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     setActive (!isActive);
   }
   return (
@@ -12,13 +12,13 @@ const Header = () => {
       <a href='https://www.liliana.com.ar/' className={styles.logo}> </a>
       <nav className={`${styles.menu} ${isActive? styles.active: ''}`}>
         <ul>
-          <Link to = '/pcp' className={styles.textlink} >
+          <Link  to = '/pcp' onClick={mobileMenu} className={styles.textlink} >
             PCP
           </Link >
-          <Link to = '/inyeccion' className={styles.textlink}>
+          <Link to = '/inyeccion' onClick={mobileMenu} className={styles.textlink}>
             INYECCION
           </Link>
-          <Link to = '/deposito' className={styles.textlink}>
+          <Link to = '/deposito' onClick={mobileMenu} className={styles.textlink}>
             DEPOSITO
           </Link>
         </ul>

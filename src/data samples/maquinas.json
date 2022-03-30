@@ -1,0 +1,202 @@
+[
+ {
+  "Maquina": "A1",
+  "Tonelaje": 800
+ },
+ {
+  "Maquina": "A2",
+  "Tonelaje": 500
+ },
+ {
+  "Maquina": "A3",
+  "Tonelaje": 530
+ },
+ {
+  "Maquina": "A4",
+  "Tonelaje": 530
+ },
+ {
+  "Maquina": "A5",
+  "Tonelaje": 450
+ },
+ {
+  "Maquina": "A6",
+  "Tonelaje": 470
+ },
+ {
+  "Maquina": "B1",
+  "Tonelaje": 408
+ },
+ {
+  "Maquina": "B2",
+  "Tonelaje": 328
+ },
+ {
+  "Maquina": "B3",
+  "Tonelaje": 380
+ },
+ {
+  "Maquina": "B4",
+  "Tonelaje": 200
+ },
+ {
+  "Maquina": "B5",
+  "Tonelaje": 470
+ },
+ {
+  "Maquina": "B6",
+  "Tonelaje": 200
+ },
+ {
+  "Maquina": "C1",
+  "Tonelaje": 380
+ },
+ {
+  "Maquina": "C2",
+  "Tonelaje": 328
+ },
+ {
+  "Maquina": "C3",
+  "Tonelaje": 380
+ },
+ {
+  "Maquina": "C4",
+  "Tonelaje": 320
+ },
+ {
+  "Maquina": "C5",
+  "Tonelaje": 320
+ },
+ {
+  "Maquina": "C6",
+  "Tonelaje": 320
+ },
+ {
+  "Maquina": "C7",
+  "Tonelaje": 328
+ },
+ {
+  "Maquina": "D1",
+  "Tonelaje": 320
+ },
+ {
+  "Maquina": "D2",
+  "Tonelaje": 268
+ },
+ {
+  "Maquina": "D3",
+  "Tonelaje": 320
+ },
+ {
+  "Maquina": "D4",
+  "Tonelaje": 268
+ },
+ {
+  "Maquina": "D5",
+  "Tonelaje": 320
+ },
+ {
+  "Maquina": "D6",
+  "Tonelaje": 268
+ },
+ {
+  "Maquina": "D7",
+  "Tonelaje": 268
+ },
+ {
+  "Maquina": "E1",
+  "Tonelaje": 250
+ },
+ {
+  "Maquina": "E2",
+  "Tonelaje": 120
+ },
+ {
+  "Maquina": "E3",
+  "Tonelaje": 60
+ },
+ {
+  "Maquina": "E4",
+  "Tonelaje": 120
+ },
+ {
+  "Maquina": "E5",
+  "Tonelaje": 60
+ },
+ {
+  "Maquina": "E6",
+  "Tonelaje": 120
+ },
+ {
+  "Maquina": "E7",
+  "Tonelaje": 60
+ },
+ {
+  "Maquina": "F1",
+  "Tonelaje": 200
+ },
+ {
+  "Maquina": "F2",
+  "Tonelaje": 160
+ },
+ {
+  "Maquina": "F3",
+  "Tonelaje": 160
+ },
+ {
+  "Maquina": "F4",
+  "Tonelaje": 60
+ },
+ {
+  "Maquina": "F5",
+  "Tonelaje": 120
+ },
+ {
+  "Maquina": "F6",
+  "Tonelaje": 90
+ },
+ {
+  "Maquina": "F7",
+  "Tonelaje": 90
+ },
+ {
+  "Maquina": "G1",
+  "Tonelaje": 90
+ },
+ {
+  "Maquina": "G2",
+  "Tonelaje": 90
+ },
+ {
+  "Maquina": "G3",
+  "Tonelaje": 160
+ },
+ {
+  "Maquina": "G4",
+  "Tonelaje": 160
+ },
+ {
+  "Maquina": "G5",
+  "Tonelaje": 160
+ },
+ {
+  "Maquina": "G6",
+  "Tonelaje": 160
+ },
+ {
+  "Maquina": "H1",
+  "Tonelaje": 200
+ },
+ {
+  "Maquina": "H2",
+  "Tonelaje": 200
+ },
+ {
+  "Maquina": "H3",
+  "Tonelaje": 200
+ },
+ {
+  "Maquina": "H4",
+  "Tonelaje": 200
+ }
+]
