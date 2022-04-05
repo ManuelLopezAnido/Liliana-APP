@@ -1,10 +1,15 @@
 import styles from './produccion.module.css'
-//import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {Fragment} from 'react'
 import maquinas from '../../../data samples/maquinas.json'
 const Produccion = (props) => {
   let dataTable=props.data
-  console.log(maquinas) 
+  const [openRows,setOpenRows] = useState([])
+  const activeAcordion = (i) =>{
+    openRows[i]=!openRows[i]
+    setOpenRows([...openRows])
+  }
+  console.log('open row is:',openRows)
   return(
     <>
       <h3 className={styles.produccion}>
@@ -60,7 +65,7 @@ const Produccion = (props) => {
             {dataTable?.map((d,index) => {
             return (
               <Fragment key={index}>
-                <tr key={index} className={styles.view}>
+                <tr className={`${styles.view} ${openRows[index]? styles.viewOpen : ''}`} onClick={()=>activeAcordion(index)}>
                   <td>
                     {d.Maquina}
                   </td>
@@ -98,41 +103,39 @@ const Produccion = (props) => {
                     {d.Ti}
                   </td>
                 </tr>
-                <tr className={styles.fold}>
-                  <td className={styles.foldContent} colSpan={0}>
-                    <div >
-                      <h4>  
+                <tr className={`${styles.fold} ${openRows[index]? styles.open : ''}`} >
+                  <td colSpan='11' className={styles.foldContent} >
+                    <h4>  
                         Lista de Piezas
-                      </h4>  
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>
-                              Pieza
-                            </th>                                                
-                            <th>
-                              Cantidad
-                            </th>                                                
-                            <th>
-                              Bocas
-                            </th>                                                
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              AM1042
-                            </td>
-                            <td>
-                              1000
-                            </td>
-                            <td>
-                              2
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                    </h4>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>
+                            Pieza
+                          </th>                                                
+                          <th>
+                            Cantidad
+                          </th>                                                
+                          <th>
+                            Bocas
+                          </th>                                                
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            AM1042
+                          </td>
+                          <td>
+                            1000
+                          </td>
+                          <td>
+                            2
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </td>
                 </tr>   
               </Fragment>
