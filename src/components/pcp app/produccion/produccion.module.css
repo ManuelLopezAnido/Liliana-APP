@@ -29,19 +29,20 @@
 	 content: "\f0d7";
 	 transition: all 0.3s ease;
 }
-  .foldTable > tbody > tr.view:nth-child(4n-1) {
-	 background: rgb(204, 204, 204);
-}
-.foldContent > table > tbody tr:nth-child(even) {
-  background: #eee;
+  .foldTable tr.view:nth-child(4n-1) {
+	 background: rgb(233, 231, 231);
 }
   .foldTable > tbody > tr.view:hover {
     background: black;
     color: #61dafb;
 }
- .foldTable .viewOpen {
+ .foldTable tr.viewOpen {
 	 background: black;
 	 color: white;
+}
+.foldTable tr.viewOpen:nth-child(4n-1) {
+  background: black;
+	color: white;
 }
  .foldTable tr.view.viewOpen td:first-child:before{
 	 transform: rotate(-180deg);
@@ -69,5 +70,3 @@
    width: 100%;
 	 border: 2px solid #ccc;
 }
-
- 

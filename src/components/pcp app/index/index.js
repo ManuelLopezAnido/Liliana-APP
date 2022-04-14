@@ -8,13 +8,19 @@ function PcpApp() {
         <img src={logo} className={styles.Applogo} alt="logo" />
         <div className={styles.pcpMenu}> 
           <Link to = 'produccion'>
-            Produccion
+            <button>
+              Produccion
+            </button>
           </Link>
           <Link to = 'cambio-de-turno'> 
-            Cambios de Turno
-          </Link>
+            <button>
+                Cambios de Turno
+            </button>
+          </Link> 
           <Link to = 'macros'>
-            Macros
+            <button>
+                Macros
+            </button>
           </Link>
         </div>
         <p>

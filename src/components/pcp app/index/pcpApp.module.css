@@ -32,8 +32,29 @@
   cursor: pointer;
 }
 .pcpMenu a{
+  width: 100%;
   text-decoration: none;
+}
+.pcpMenu button{
+  margin: 10px 0px;
+  width: 15vw;
+  box-shadow: -5px -5px 20px #393f4b, 5px 5px 20px black;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: #282c34;
   color: white;
+  font-family: 'Roboto', sans-serif;
+}
+.pcpMenu button:hover{
+  box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
+}
+.pcpMenu button:active{
+  box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px #393f4b;
 }
 .Applink {
   color: #61dafb;
@@ -46,5 +67,15 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .pcpMenu{
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .pcpMenu button{
+    width:60% ;
   }
 }

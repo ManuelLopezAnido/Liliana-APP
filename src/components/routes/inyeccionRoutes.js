@@ -1,8 +1,7 @@
+import InputForm from "../inyeccion/input form"
 const InyeccionRoutes = () => {
   return(
-    <h2>
-      Inyección
-    </h2>
+    <InputForm/>
   )
 }
 export default InyeccionRoutes

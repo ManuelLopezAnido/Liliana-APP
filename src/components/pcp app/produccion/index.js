@@ -1,10 +1,14 @@
 import styles from './produccion.module.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {Fragment} from 'react'
 import maquinas from '../../../data samples/maquinas.json'
+import MachineList from '../../common components/machine list'
 const Produccion = (props) => {
   let dataTable=props.data
   const [openRows,setOpenRows] = useState([])
+  const selectMachine = (maq) =>{
+    console.log('click en: ', maq)
+  }
   const activeAcordion = (i) =>{
     openRows[i]=!openRows[i]
     setOpenRows([...openRows])
@@ -15,13 +19,10 @@ const Produccion = (props) => {
       <h3 className={styles.produccion}>
         Tablas producción
       </h3>
-      <div>
-        {maquinas.map((maq,index)=>{
-          return(
-            ' - ' + maq.Maquina + ' '
-          )
-        })}
-      </div>
+      <MachineList
+        selectMachine = {selectMachine}
+        maqs={maquinas}
+      />
       <div>
         <table className={styles.foldTable}>
           <thead>

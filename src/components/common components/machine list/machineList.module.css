@@ -1,0 +1,52 @@
+.machineSelect{
+  display: none;
+}
+ .machineList{
+   display: flex;
+   flex-wrap: wrap;
+   margin: 10px 0px;
+   padding: 0px 5px;
+ }
+ .machine{
+  margin: 0px 3.5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+ .machine:hover{
+   color:#61dafb;
+ }
+ 
+@media only screen and (max-width: 768px) {
+  .machineList{
+    display: none;
+  }
+  .machineSelect{
+    display: block;
+  }
+
+  .machineSelect {
+    display: flex;
+    align-items: baseline;
+    overflow: hidden;
+    padding: 5px 10px ;
+    cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+    border: 0.06em solid transparent;
+    border-radius: 1em;
+    background-color: #61dafb;
+    transition: 0.3s all ease-in-out;
+  }
+  .machineSelect label{
+    font-weight: bold;
+    margin-right: 5px ;
+  }
+  .machineSelect select{
+  background: #f0f1f1;
+  font: 400 17px/2em 'Source Sans Pro', sans-serif;
+  border-radius: 1em;
+  width: 100%;
+  }
+}
+
+ 
