@@ -1,9 +1,8 @@
-import ModalOk from "../common components/modal Ok"
-
+import InputAbastecimiento from "../abastecimiento"
 const DepositoRoutes = () => {
   return(
     <>
-      <ModalOk/>
+      <InputAbastecimiento/>
     </>
   )
 }

@@ -18,6 +18,9 @@ const Header = () => {
           <Link to = '/inyeccion' onClick={mobileMenu} className={styles.textlink}>
             INYECCION
           </Link>
+          <Link to = '/abastecimiento' onClick={mobileMenu} className={styles.textlink}>
+            ABASTECIMIENTO
+          </Link>
           <Link to = '/deposito' onClick={mobileMenu} className={styles.textlink}>
             DEPOSITO
           </Link>

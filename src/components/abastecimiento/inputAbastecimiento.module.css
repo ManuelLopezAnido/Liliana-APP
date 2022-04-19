@@ -1,0 +1,115 @@
+.deposit body, p, input, select, textarea, button {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.2px;
+  font-size: 16px;
+}
+.depositForm {
+  padding: 16px;
+  width: 320px;
+  margin: 0 auto;
+}
+.segment {
+  color: black;
+  padding: 32px 0;
+  text-align: center;
+}
+.depositForm input {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: white;
+}
+.depositForm label {
+  display: block;
+  margin-bottom: 24px;
+  width: 100%;
+}
+.depositForm input {
+  margin-right: 8px;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.depositForm  input:focus {
+  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+
+.depositForm button{
+  margin: 10px 0px;
+  width: 100%;
+  box-shadow: -5px -5px 20px rgb(204, 203, 203), 5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: white;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+.depositForm button:hover{
+  box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
+}
+.depositForm button:active{
+  box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px #393f4b;
+}
+.buttonDisable{
+  background-color: gray !important;
+}
+.buttonDisable:hover{
+  box-shadow:none !important;
+}
+.radioBox{
+  display: flex;
+  justify-content: space-around;
+}
+.radioBox label {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  margin: 3px;
+  width: 10px;
+  border: 0.5px solid #282c34;
+  cursor: pointer;
+  box-shadow: none;
+}
+.container div{
+  display: flex;
+  align-items: center;
+}
+/* On mouse-over, add a grey background color */
+.container input:hover {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked {
+  background-color: #61dafb;
+  /* border: 0.5px solid white; */
+}
+.container input:focus {
+  box-shadow: none;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+/* Show the indicator (dot/circle) when checked */
+
+/* Style the indicator (dot/circle) */

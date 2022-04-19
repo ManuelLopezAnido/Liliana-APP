@@ -1,0 +1,51 @@
+
+.modalFade{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0,0,0,.5);
+}
+.modaldialog{
+  position: fixed;
+  flex-direction: column;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  background-color: green;
+  top:200px;
+  width: 60%;
+  height: 50%;
+  border-radius: 4rem;
+  font-family: 'PT Sans', sans-serif;
+}
+.modalheader{
+  top: 15px;
+  right: 20px;
+  position: absolute;
+  background-color: aqua;
+}
+.modalcontent {
+  background-color: #f1da36;
+  width: 70%;
+  height: 50%;
+}
+.modalbutton {
+  border: 3px solid #333;
+  background: #f1f1f1;
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  display: block;
+  transition: all 150ms ease-out;
+  transform: translateY(0px);
+}
+.modalbutton:hover, .modalbutton:focus {
+  outline: 0;
+  transform: translateY(-5px);
+  transition: all 100ms ease-in;
+  box-shadow: 0 5px 10px rgba(51, 51, 51, 0.4);
+}
+.modalbutton:active {
+  transform: translateY(-3px);
+}
