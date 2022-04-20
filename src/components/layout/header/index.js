@@ -12,8 +12,8 @@ const Header = () => {
       <a href='https://www.liliana.com.ar/' className={styles.logo}> </a>
       <nav className={`${styles.menu} ${isActive? styles.active: ''}`}>
         <ul>
-          <Link  to = '/pcp' onClick={mobileMenu} className={styles.textlink} >
-            PCP
+          <Link  to = '/armado' onClick={mobileMenu} className={styles.textlink} >
+            ARMADO
           </Link >
           <Link to = '/inyeccion' onClick={mobileMenu} className={styles.textlink}>
             INYECCION
@@ -24,6 +24,9 @@ const Header = () => {
           <Link to = '/deposito' onClick={mobileMenu} className={styles.textlink}>
             DEPOSITO
           </Link>
+          <Link  to = '/pcp' onClick={mobileMenu} className={styles.textlink} >
+            PCP
+          </Link >
         </ul>
       </nav>
       <div className= {`${styles.hamburger} ${isActive? styles.active: ''}`} onClick= {mobileMenu}>
