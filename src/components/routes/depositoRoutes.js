@@ -1,7 +1,7 @@
 
 const DepositoRoutes = () => {
-  const str='PO1008'
-  const rgex= /^[A-Z]{2}[0-9]{4}$/
+  const str= 2500
+  const rgex= /^([1-9]|[1-9][0-9]|[1-9][0-9][0-9])$/
   const result=rgex.test(str)
   console.log(result)
   return(

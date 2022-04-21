@@ -3,7 +3,7 @@
   letter-spacing: -0.2px;
   font-size: 16px;
 }
-.depositForm {
+.armadoForm {
   padding: 16px;
   width: 320px;
   margin: 0 auto;
@@ -13,16 +13,22 @@
   padding: 32px 0;
   text-align: center;
 }
-.depositForm input {
+.armadoForm input, select {
   border: 0;
   outline: 0;
   font-size: 16px;
   border-radius: 320px;
   padding: 16px;
   background-color: white;
-  outline: none;
+  margin-right: 8px;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
 }
-.depositForm label {
+.armadoForm label {
   display: block;
   margin-bottom: 24px;
   width: 100%;
@@ -37,20 +43,12 @@
 .notValid.visible{
   display: block;
 }
-.depositForm input {
-  margin-right: 8px;
-  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
-  width: 100%;
-  box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
-  appearance: none;
-  -webkit-appearance: none;
-}
-.depositForm  input:focus {
+
+.armadoForm  input:focus , select:focus {
   box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
 }
 
-.depositForm button{
+.armadoForm button{
   margin: 10px 0px;
   width: 100%;
   box-shadow: -5px -5px 20px rgb(204, 203, 203), 5px 5px 20px #BABECC;
@@ -65,10 +63,10 @@
   color: black;
   font-family: 'Roboto', sans-serif;
 }
-.depositForm button:hover{
+.armadoForm button:hover{
   box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
 }
-.depositForm button:active{
+.armadoForm button:active{
   box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px #393f4b;
 }
 .buttonDisable{
