@@ -1,8 +1,4 @@
-.deposit body, p, input, select, textarea, button {
-  font-family: 'Montserrat', sans-serif;
-  letter-spacing: -0.2px;
-  font-size: 16px;
-}
+
 .armadoForm {
   padding: 16px;
   width: 320px;
@@ -13,7 +9,7 @@
   padding: 32px 0;
   text-align: center;
 }
-.armadoForm input, select {
+.armadoForm input, .select {
   border: 0;
   outline: 0;
   font-size: 16px;
@@ -28,6 +24,21 @@
   appearance: none;
   -webkit-appearance: none;
 }
+.placeholder{
+  color: gray;  
+}
+.select{
+  appearance: none;
+  cursor: pointer;
+}
+.armadoForm .select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: var(--select-arrow);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
 .armadoForm label {
   display: block;
   margin-bottom: 24px;
@@ -43,8 +54,22 @@
 .notValid.visible{
   display: block;
 }
-
-.armadoForm  input:focus , select:focus {
+.armadoForm textarea{
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  padding: 16px;
+  background-color: white;
+  margin-right: 8px;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 15px;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.armadoForm  input:focus , select:focus, textarea:focus{
   box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
 }
 
