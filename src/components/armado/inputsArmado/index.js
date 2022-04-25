@@ -19,30 +19,24 @@ const InputArmado = ()=>{
   }
   const handleCheckData = () => {
     let arr = []
-    const codigoPz = inputs?.codigo
-    const pzOk = piezas.find(pz =>pz.Articulo===('ZZ'+codigoPz))?.Articulo
-    console.log('pzOk',pzOk)
+    const ins = inputs?.insumo
+    const pzOk = piezas.find(pz =>pz.Articulo===('ZZ'+ins))?.Articulo
+    console.log('pzOk: ',pzOk)
     if (!pzOk) {
-      arr.push('Codigo de pieza')
+      arr.push('Insumo')
     }
-    const estanteria = inputs?.estanteria
-    const rgexEstanteria = /^[A-TV-Z]{1}$/
-    if (!rgexEstanteria.test(estanteria)) {
-      arr.push('Estanteria')
-    }
-    const posicion = inputs?.posicion
-    
-    if (posicion<1 || posicion>53 ) {
-      arr.push('Posicion')
-    }
-    const altura = inputs?.altura
-    const rgexAltura = /^[1-4]{1}$/
-    if (!rgexAltura.test(altura)) {
-      arr.push('Altura')
-    }
-    const cantidad = inputs?.cantidad
-    if (cantidad<0) {
+    const cant = inputs?.cantidad
+    if (cant<1) {
       arr.push('Cantidad')
+    }
+    const dur = inputs?.duracion
+    if (dur<1) {
+      arr.push('Duracion')
+    }
+    //const prod = inputs?.producto
+    //const prodOk = producto.find(pr =>pr.Articulo===('ZZ'+prod))?.Articulo
+    if (false) {
+      arr.push('Insumo')
     }
     console.log('arr after chek: ',arr)
     return arr
@@ -54,7 +48,7 @@ const InputArmado = ()=>{
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const arr = []//handleCheckData()
+    const arr = handleCheckData()
     console.log ('resultado del arr', arr)
     setArrErrors(arr)
     if (arr.length !== 0){
@@ -119,29 +113,44 @@ const InputArmado = ()=>{
           name='motivo' 
           value={inputs.motivo || ''}  
           onChange={handleChange}
-          placeholder={"jghas"}
           >
             <option className={styles.placeholder} disabled value = "" hidden> Motivo </option>"
-            <option>Reproceso</option>
-            <option>Incopleto</option>
-            <option>Defecto</option>
-            <option>Funcionamiento</option>
-            <option>Faltante</option>
-            <option>Otros</option>
+            <option value={'incompleto'}>Incompleto</option>
+            <option value= {'defecto'}>Defecto</option>
+            <option value={'faltante'}>Faltante</option>
           </select>
         </label>
         <label >
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Duracion')  ? styles.visible:''}`}>
+            Duración no válida
+          </div>
           <input 
           className={styles.select}
-          hidden = {inputs.motivo === 'Faltante' ? false : true}
-          required
+          hidden = {!(inputs.motivo === 'faltante')}
+          required = {inputs.motivo === 'faltante'}
           onFocus={clearErrMsg}
           type="number" 
           name='duracion' 
           value={inputs.duracion || ''}  
           onChange={handleChange} 
           placeholder={'Duración (en minutos)'}>
-        </input>
+          </input>
+        </label>
+        <label >
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Cantidad')  ? styles.visible:''}`}>
+            Cantidad no válida
+          </div>
+          <input 
+          className={styles.select}
+          hidden = {!(inputs.motivo === 'defecto' ||  inputs.motivo === 'incompleto')}
+          required = {inputs.motivo === 'defecto' ||  inputs.motivo === 'incompleto'}
+          onFocus={clearErrMsg}
+          type="number" 
+          name='cantidad' 
+          value={inputs.cantidad || ''}  
+          onChange={handleChange}
+          placeholder={'Cantidad'}>
+          </input>
         </label>
         <label >
           <select 
@@ -192,6 +201,9 @@ const InputArmado = ()=>{
             </select>
         </label>
         <label>
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Producto')  ? styles.visible:''}`}>
+            Codigo de producto no válido
+          </div>
           <input 
             className={styles.inputs}
             required
@@ -203,6 +215,9 @@ const InputArmado = ()=>{
             placeholder="Producto"/>
         </label>
         <label>
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Insumo')  ? styles.visible:''}`}>
+            Codigo de insumo no válido
+          </div>
           <input 
            className={styles.inputs}
            required
@@ -216,7 +231,6 @@ const InputArmado = ()=>{
         <label>
           <textarea
           className={styles.textarea}
-          required
           onFocus={clearErrMsg}
           type="text" 
           name='descripcion' 

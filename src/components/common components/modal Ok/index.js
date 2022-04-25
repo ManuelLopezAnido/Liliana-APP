@@ -19,7 +19,7 @@ const ModalOk = (props)=>{
           <span onClick={props.close}>&#x2715;</span>
         </div>
         <div className={styles.modalcontent}>
-          Datos cargados correctamente 
+          {props.messege}
         </div>
           <button className={styles.modalbutton} onClick={props.close}>Aceptar &#8594;</button>
         </div>

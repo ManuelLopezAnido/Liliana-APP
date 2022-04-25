@@ -9,7 +9,7 @@ const InputAbastecimiento = ()=>{
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
-  
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -19,7 +19,6 @@ const InputAbastecimiento = ()=>{
     let arr = []
     const codigoPz = inputs?.codigo
     const pzOk = piezas.find(pz =>pz.Articulo===('ZZ'+codigoPz))?.Articulo
-    console.log('pzOk',pzOk)
     if (!pzOk) {
       arr.push('Codigo de pieza')
     }
@@ -42,7 +41,6 @@ const InputAbastecimiento = ()=>{
     if (cantidad<0) {
       arr.push('Cantidad')
     }
-    console.log('arr after chek: ',arr)
     return arr
   }
   console.log ('arrErrors: ', arrErrors)
