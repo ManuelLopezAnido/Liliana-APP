@@ -1,0 +1,72 @@
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+ .foldTable {
+	 box-sizing: border-box;
+   width: 100%;
+  }
+ .foldTable th {
+	 text-align: left;
+	 border-bottom: 1px solid #ccc;
+}
+ .foldTable th, table td {
+	 padding: 0.4em;
+}
+ .foldTable > tbody > tr.view td, table.foldTable > tbody > tr > .foldContent > table td {
+	 cursor: pointer;
+}
+ .foldTable > tbody > tr.view td:first-child, table.foldTable > tbody > tr.view th:first-child {
+	 position: relative;
+	 padding-left: 20px;
+}
+ .foldTable > tbody > tr.view td:first-child:before {
+	 position: absolute;
+	 top: 50%;
+	 left: 5px;
+	 width: 9px;
+	 height: 16px;
+	 margin-top: -8px;
+	 font: 16px fontawesome;
+	 color: #999;
+	 content: "\f0d7";
+	 transition: all 0.3s ease;
+}
+  .foldTable tr.view:nth-child(2n-1) {
+	 background: rgb(233, 231, 231);
+}
+  .foldTable > tbody > tr.view:hover {
+    background: black;
+    color: #61dafb;
+}
+ .foldTable tr.viewOpen {
+	 background: black;
+	 color: white;
+}
+.foldTable tr.viewOpen:nth-child(4n-1) {
+  background: black;
+	color: white;
+}
+ .foldTable tr.view.viewOpen td:first-child:before{
+	 transform: rotate(-180deg);
+	 color: white;
+}
+.foldTable .fold {
+	 display: none;
+}
+.foldTable .open {
+  display: table-row;
+}
+.foldContent{
+  display: table-cell;
+}
+.foldTable .fold {
+  border: solid 1px rebeccapurple;
+}
+ .foldContent {
+	 padding: 0.5em;
+}
+ .foldContent h3 {
+	 margin-top: 0;
+}
+ .foldContent > table {
+   width: 100%;
+	 border: 2px solid #ccc;
+}

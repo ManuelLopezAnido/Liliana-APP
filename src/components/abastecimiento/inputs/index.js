@@ -1,15 +1,15 @@
 import { useState } from "react"
-import ModalOk from "../common components/modal ok";
-import ModalError from "../common components/modal error";
+import ModalOk from "../../common components/modal ok";
+import ModalError from "../../common components/modal error";
 import styles from "./inputAbastecimiento.module.css"
-import piezas from "../../data samples/piezas.json"
+import piezas from "../../../data samples/piezas.json"
 
 const InputAbastecimiento = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
-
+  const abasUser = sessionStorage.getItem('AbastecimientoUser')
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -68,7 +68,7 @@ const InputAbastecimiento = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139:4000/abastecimiento',options)
+    fetch('http://192.168.11.139:4000/abastecimiento/relevamiento',options)
       .then(res=>{
         console.log('Respuetsa del servidor',res.ok)
         if(res.ok){
@@ -104,8 +104,21 @@ const InputAbastecimiento = ()=>{
       />
       <form onSubmit={handleSubmit} autoComplete="off" className={styles.depositForm} >
         <div className={styles.segment}>
-          <h1>Abastecimiento</h1>
+          <h1>Depósito Abastecimiento</h1>
         </div>
+        <label>
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Codigo de pieza')  ? styles.visible:''}`}>
+            Codigo de pieza no válido
+          </div>
+          <input
+            disabled
+            onFocus={clearErrMsg}
+            type="text" 
+            name="codigo"
+            value={abasUser}  
+            onChange={handleChange} 
+            placeholder="Operario"/>
+        </label>
         <label>
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Codigo de pieza')  ? styles.visible:''}`}>
             Codigo de pieza no válido

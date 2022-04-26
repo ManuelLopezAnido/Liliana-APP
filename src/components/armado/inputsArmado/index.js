@@ -10,11 +10,15 @@ const InputArmado = ()=>{
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
-  
+  const liderName = sessionStorage.getItem('LiderUser')
+
   console.log(inputs)
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    let value = e.target.value;
+    if (name === 'producto'|| name ==='insumo') {
+      value=e.target.value.toUpperCase()
+    }
     setInputs (({...inputs, [name]: value}))
   }
   const handleCheckData = () => {
@@ -36,7 +40,7 @@ const InputArmado = ()=>{
     //const prod = inputs?.producto
     //const prodOk = producto.find(pr =>pr.Articulo===('ZZ'+prod))?.Articulo
     if (false) {
-      arr.push('Insumo')
+      arr.push('Producto')
     }
     console.log('arr after chek: ',arr)
     return arr
@@ -50,9 +54,9 @@ const InputArmado = ()=>{
     event.preventDefault();
     const arr = handleCheckData()
     console.log ('resultado del arr', arr)
-    setArrErrors(arr)
     if (arr.length !== 0){
       console.log('exit')
+      setArrErrors(arr)
       return
     } 
     const today = new Date();
@@ -66,16 +70,20 @@ const InputArmado = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139:4000/armado/relevameinto',options)
+    fetch('http://192.168.11.139:4000/armado/relevamiento',options)
       .then(res=>{
         console.log('Respuetsa del servidor',res.ok)
         if(res.ok){
-         openModal()
+          return(res)
         }else{
           throw res ;
         }
-      }).then(
+      }).then(res=>{
+        const prod = inputs.producto
+        openModal()
         setInputs({})
+        setInputs({'producto':prod})
+        }
       )
       .catch(res => {
         console.log('error es: ',res.statusText)
@@ -153,65 +161,28 @@ const InputArmado = ()=>{
           </input>
         </label>
         <label >
-          <select 
+          <input 
           className={`${styles.select} ${!inputs.lider ? styles.placeholder : ''}`}
-          required
+          disabled
           onFocus={clearErrMsg}
           type="text" 
           name='lider' 
-          value={inputs.lider || ''}  
+          value={liderName}  
           onChange={handleChange} 
-          >
-            <option disabled value="" hidden> Lider </option>"
-            <optgroup label="Armado 1"/>
-            <option>AUYEROS, CRISTIAN LEONARDO</option>
-            <option>BATTISTELLI, MARCOS</option>
-            <option>CABRERA, MARIANO</option>
-            <option>DELGADO, RICARDO</option>
-            <option>GAMARRA, JONATAN</option>
-            <option>MEDINA BENITEZ, JOSE</option>
-            <option>MONZON, AYELEN MARIBEL</option>
-            <option>ARGAÑARAS, LEANDRO RODRIGO</option>
-            <option>ROBLEDO, PATRICIO</option>
-            <option>SARMIENTO, BRIAN EZEQUIEL</option>
-            <option>GONZALEZ, WALTER DAVID </option>
-            <optgroup label="Armado 2"/>
-            <option>ARGAÑARAS, LEANDRO RODRIGO</option>
-            <option>ROBLEDO, PATRICIO</option>
-            <option>SAUCEDO, NESTOR</option>
-            <option>SCHOENFELD, LUCIANO ADRIAN</option>
-            <option>SEGOVIA, ARIEL</option>
-            <option>SAUCEDO, HUGO HECTOR</option>
-            <option>SARMIENTO, BRIAN EZEQUIEL</option>
-            <option>MONZON, AYELEN MARIBEL</option>
-            <option>GAMARRA, JONATAN</option>
-            <optgroup label="Armado 3"/>
-            <option>CORREA, OSCAR NICOLAS</option>
-            <option>GOMEZ, ISAIAS MAXIMILIANO</option>
-            <option>LEZCANO, FABIAN GASTON</option>
-            <option>CARDOZO, VICTOR EMANUEL</option>
-            <option>PEDERNERA, LUIS OMAR</option>
-            <optgroup label="Armado 4"/>
-            <option>VICICH, FERNANDO MARTIN</option>
-            <option>GARCIA, FEDERICO</option>
-            <option>LEDESMA, CLAUDIO ANDRES</option>
-            <option>JAUME, LUCAS DARIO</option>
-            <option>MENDOZA, CARLOS FERNANDO</option>
-            <option>ZALAZAR, JONATAN MATIAS</option>
-            </select>
+          />
         </label>
         <label>
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Producto')  ? styles.visible:''}`}>
             Codigo de producto no válido
           </div>
           <input 
-            className={styles.inputs}
+            className={`${styles.inputs} ${styles.producto}`}
             required
             onFocus={clearErrMsg}
             type="text" 
             name='producto' 
-            value={inputs.producto || ''}  
-            onChange={handleChange} 
+            value={inputs.producto || ''}
+            onChange={handleChange}
             placeholder="Producto"/>
         </label>
         <label>

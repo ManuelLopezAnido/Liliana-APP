@@ -1,23 +1,20 @@
-import styles from './armadoHome.module.css'
+import styles from './abastecimientoHome.module.css'
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
+import usersAbas from '../../../data samples/usuariosAbastecimiento.json'
 
-const ArmadoHome = ()=>{
+const AbastecimientoHome = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
-  const [arrErrors, setArrErrors]= useState([])
-  const [passOk, setPassOk]=useState(sessionStorage.getItem('LiderUser'))
+  const [passOk, setPassOk]=useState(sessionStorage.getItem('AbastecimientoUser'))
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs (({...inputs, [name]: value}))
-  }
-  const clearErrMsg = () =>{
-    setArrErrors([])
   }
 
   const handleSubmit = (event) => {
@@ -30,7 +27,7 @@ const ArmadoHome = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139:4000/armado/login',options)
+    fetch('http://192.168.11.139:4000/abastecimiento/login',options)
       .then(res=>{
         console.log('Respuetsa del servidor',res.ok)
         if(res.ok){
@@ -42,7 +39,7 @@ const ArmadoHome = ()=>{
       .then(res=>res.json())
       .then((json)=>{
         console.log('respuesta de armdo:',json)
-        sessionStorage.setItem("LiderUser",json.user)
+        sessionStorage.setItem("AbastecimientoUser",json.user)
         openModal()
         setPassOk(json.user)
         setInputs({})
@@ -62,7 +59,7 @@ const ArmadoHome = ()=>{
     setShowModal(true)
   }
   const closeSession=()=>{
-    sessionStorage.setItem('LiderUser','')
+    sessionStorage.setItem('AbastecimientoUser','')
     setPassOk(false)
   }
   return(
@@ -78,55 +75,26 @@ const ArmadoHome = ()=>{
       />
       <div className={styles.App}>
         <div className={styles.title}>
-          ARMADO
+          ABASTECIMIENTO
         </div>
         <form className={passOk ? styles.hidden : styles.armadoForm} autoComplete="off" onSubmit={handleSubmit}>
           <label >
             <select 
             className={`${styles.select} ${!inputs.lider ? styles.placeholder : ''}`}
             required
-            onFocus={clearErrMsg}
             type="text" 
             name='lider' 
             value={inputs.lider || ''}  
             onChange={handleChange} 
             >
-              <option disabled value="" hidden> Lider </option>"
-              <optgroup label="Armado 1"/>
-              <option>AUYEROS, CRISTIAN LEONARDO</option>
-              <option>BATTISTELLI, MARCOS</option>
-              <option>CABRERA, MARIANO</option>
-              <option>DELGADO, RICARDO</option>
-              <option>GAMARRA, JONATAN</option>
-              <option>MEDINA BENITEZ, JOSE</option>
-              <option>MONZON, AYELEN MARIBEL</option>
-              <option>ARGAÑARAS, LEANDRO RODRIGO</option>
-              <option>ROBLEDO, PATRICIO</option>
-              <option>SARMIENTO, BRIAN EZEQUIEL</option>
-              <option>GONZALEZ, WALTER DAVID </option>
-              <optgroup label="Armado 2"/>
-              <option>ARGAÑARAS, LEANDRO RODRIGO</option>
-              <option>ROBLEDO, PATRICIO</option>
-              <option>SAUCEDO, NESTOR</option>
-              <option>SCHOENFELD, LUCIANO ADRIAN</option>
-              <option>SEGOVIA, ARIEL</option>
-              <option>SAUCEDO, HUGO HECTOR</option>
-              <option>SARMIENTO, BRIAN EZEQUIEL</option>
-              <option>MONZON, AYELEN MARIBEL</option>
-              <option>GAMARRA, JONATAN</option>
-              <optgroup label="Armado 3"/>
-              <option>CORREA, OSCAR NICOLAS</option>
-              <option>GOMEZ, ISAIAS MAXIMILIANO</option>
-              <option>LEZCANO, FABIAN GASTON</option>
-              <option>CARDOZO, VICTOR EMANUEL</option>
-              <option>PEDERNERA, LUIS OMAR</option>
-              <optgroup label="Armado 4"/>
-              <option>VICICH, FERNANDO MARTIN</option>
-              <option>GARCIA, FEDERICO</option>
-              <option>LEDESMA, CLAUDIO ANDRES</option>
-              <option>JAUME, LUCAS DARIO</option>
-              <option>MENDOZA, CARLOS FERNANDO</option>
-              <option>ZALAZAR, JONATAN MATIAS</option>
+              <option disabled value="" hidden> Operario </option>"
+              {usersAbas.map(user=>{
+                return(
+                  <option key={user.user}>
+                    {user.user}
+                  </option>
+                )
+              })}
               </select>
           </label>
           <label>
@@ -135,7 +103,6 @@ const ArmadoHome = ()=>{
                 required
                 pattern={'[0-9]{4}'}
                 title={'Contraseña de 4 numeros'}
-                onFocus={clearErrMsg}
                 type="password" 
                 autoComplete="on"
                 name='contraseña' 
@@ -145,13 +112,12 @@ const ArmadoHome = ()=>{
           </label>
           <button type="submit" className={styles.button}>Ingresar</button>
         </form>
-        
         <div className={passOk ? styles.pcpMenu : styles.hidden }> 
-          <a href = 'https://www.liliana.com.ar/internodos/administracion/Dp.php'>
+          <Link to = 'tablas'>
             <button>
-              Despiece
+              Tablas
             </button>
-          </a>
+          </Link>
           <Link to = 'relevamiento'>
             <button>
               Relevamiento
@@ -165,4 +131,4 @@ const ArmadoHome = ()=>{
     </div>
   )
 }
-export default ArmadoHome
+export default AbastecimientoHome
