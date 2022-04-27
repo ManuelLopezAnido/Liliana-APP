@@ -30,7 +30,7 @@ const ArmadoHome = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139:4000/armado/login',options)
+    fetch('http://192.168.11.139:4000/api/armado/login',options)
       .then(res=>{
         console.log('Respuetsa del servidor',res.ok)
         if(res.ok){
