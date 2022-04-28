@@ -1,7 +1,7 @@
 import {Route, Routes} from "react-router-dom"
 import InputAbastecimiento from "../abastecimiento/inputs"
 import AbastecimientoHome from "../abastecimiento/index"
-import TablasAbastecimiento from "../abastecimiento/tablas"
+import TablasAbastecimiento from "../abastecimiento/tables"
 const DepositoRoutes = () => {
   return(
     <>

@@ -1,15 +1,15 @@
 import { useState } from "react"
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
-import styles from "./inputAbastecimiento.module.css"
+import styles from "./inputsDeposito.module.css"
 import piezas from "../../../data samples/piezas.json"
 
-const InputAbastecimiento = ()=>{
+const InputDeposito = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
-  const abasUser = sessionStorage.getItem('AbastecimientoUser')
+  const depositoUser = sessionStorage.getItem('DepositoUser')
   console.log (inputs)
   const handleChange = (e) => {
     const name = e.target.name;
@@ -131,7 +131,7 @@ const InputAbastecimiento = ()=>{
             onFocus={clearErrMsg}
             type="text" 
             name="codigo"
-            value={abasUser}  
+            value={depositoUser}  
             onChange={handleChange} 
             placeholder="Operario"/>
         </label>
@@ -233,4 +233,4 @@ const InputAbastecimiento = ()=>{
     </>
   )
 }
-export default InputAbastecimiento
+export default InputDeposito
