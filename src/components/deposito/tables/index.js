@@ -7,13 +7,15 @@ const TablasDeposito =() =>{
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])
   const [inputs, setInputs] = useState([])
   useEffect (()=>{
-    fetch('http://192.168.11.139:4000/api/deposito/tables')
+    fetch('http://192.168.11.139:4000/api/deposito/tablas')
       .then((res)=>res.json())
       .then ((json)=>{
         setDataAbs (json)
         setDataAbsFiltred(json)
       })
-      .catch (err => console.log(err))
+      .catch ((err) => {
+        console.log('error table: ',err)
+      })
   },[])
   
   const handleChange = (e) => {
@@ -131,7 +133,7 @@ const TablasDeposito =() =>{
                   {d.estanteria}
                 </td>
                 <td>
-                {d.posicion}
+                  {d.posicion}
                 </td>
                 <td>
                   {d.altura}

@@ -1,10 +1,122 @@
 [
   {
-    "user": "AUYEROS, CRISTIAN LEONARDO",
-    "password": "7896"  
+    "user": "CABRERA, GERARDO SEBASTIAN",
+    "cargo": "SUP. ALMACENES",
+    "password": ""
   },
   {
-    "user": "BATTISTELLI, MARCOS",
-    "password": "1234"
+    "user": "GONZALEZ, CESAR LUIS GERARDO",
+    "cargo": "LIDER ALMACENES T. TARDE",
+    "password": ""
+  },
+  {
+    "user": "HILDEBRATD, EMANUEL ADRIAN",
+    "cargo": "ALMACENES T. MAÑANA",
+    "password": ""
+  },
+  {
+    "user": "GIMENEZ SANTIAGO JUAN",
+    "cargo": "ALMACENES T. MAÑANA",
+    "password": ""
+  },
+  {
+    "user": "GONZALEZ ,OSCAR GASPAR",
+    "cargo": "ALMACENES T. MAÑANA",
+    "password": ""
+  },
+  {
+    "user": "VENTURA , PABLO DAMIAN",
+    "cargo": "ALMACENES T. MAÑANA",
+    "password": ""
+  },
+  {
+    "user": "VELEZ, BRIAN MAXIMILIANO",
+    "cargo": "ALMACENES T. MAÑANA",
+    "password": ""
+  },
+  {
+    "user": "TOMAS RUSSMAN",
+    "cargo": "ALMACENES T. MAÑANA",
+    "password": ""
+  },
+  {
+    "user": "OVIEDO,JORGE DANIEL",
+    "cargo": "ALMACENES T. MAÑANA",
+    "password": ""
+  },
+  {
+    "user": "TOLOZA ,MAURO TOMAS",
+    "cargo": "ALMACENES T. MAÑANA",
+    "password": ""
+  },
+  {
+    "user": "FONT, YAIR ISAIAS",
+    "cargo": "LIDER ALMACENES T. TARDE",
+    "password": ""
+  },
+  {
+    "user": "RIGONI, FRANCO",
+    "cargo": "ALMACENES T. TARDE",
+    "password": ""
+  },
+  {
+    "user": "MIRANDA,NICOLAS MATIAS",
+    "cargo": "ALMACENES T. TARDE",
+    "password": ""
+  },
+  {
+    "user": "BRAVO,HECTOR NAHUEL",
+    "cargo": "ALMACENES T. TARDE",
+    "password": ""
+  },
+  {
+    "user": "PATRICHELLI,BRIAN DANIEL",
+    "cargo": "ALMACENES T. TARDE",
+    "password": ""
+  },
+  {
+    "user": "ESCUBILLA, JONATAN GABRIEL",
+    "cargo": "ALMACENES T. TARDE",
+    "password": ""
+  },
+  {
+    "user": "CISNERO , ROBERTO DANIEL",
+    "cargo": "ALMACENES T. TARDE",
+    "password": ""
+  },
+  {
+    "user": "MOREYRA, GUSTAVO DAVID",
+    "cargo": "LIDER ALMACENES T. NOCHE",
+    "password": ""
+  },
+  {
+    "user": "JONATAN, OLARTE ELIAS",
+    "cargo": "ALMACENES T. NOCHE",
+    "password": ""
+  },
+  {
+    "user": "ENTESANO,FRANCO DANIEL",
+    "cargo": "ALMACENES T. NOCHE",
+    "password": ""
+  },
+  {
+    "user": "CRUZ ,MAXIMILIANO HERNAN",
+    "cargo": "ALMACENES T. NOCHE",
+    "password": ""
+  },
+  {
+    "user": "NETO,LUIS ALEJANDRO",
+    "cargo": "ALMACENES T. NOCHE",
+    "password": ""
+  },
+  {
+    "user": "ALBORNOZ, CRISTIAN",
+    "cargo": "ALMACENES T. NOCHE",
+    "password": ""
+  },
+  {
+    "user": "AGUIRRE , NICOLAS",
+    "cargo": "ALMACENES T. NOCHE",
+    "password": ""
   }
 ]

@@ -66,7 +66,9 @@ const InputAbastecimiento = ()=>{
     } 
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
+    const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
     inputs.time = time
+    inputs.date = date
     if (inputs.radio === "Baja") {
       inputs.cantidad = inputs.cantidad * -1
     }
@@ -123,14 +125,11 @@ const InputAbastecimiento = ()=>{
           <h1>Depósito Abastecimiento</h1>
         </div>
         <label>
-          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Codigo de pieza')  ? styles.visible:''}`}>
-            Codigo de pieza no válido
-          </div>
           <input
             disabled
             onFocus={clearErrMsg}
             type="text" 
-            name="codigo"
+            name="operario"
             value={abasUser}  
             onChange={handleChange} 
             placeholder="Operario"/>

@@ -17,9 +17,6 @@ const InputDeposito = ()=>{
     if (name === 'codigo' || name === 'estanteria') {
       value=e.target.value.toUpperCase()
     }
-    if (name ==='cantidad'){
-      value = parseInt(e.target.value)
-    }
     setInputs (({...inputs, [name]: value}))
   }
   const handleCheckData = () => {
@@ -30,22 +27,24 @@ const InputDeposito = ()=>{
       arr.push('Codigo de pieza')
     }
     const estanteria = inputs?.estanteria
-    const rgexEstanteria = /^[A-TV-Z]{1}$/
+    const rgexEstanteria = /^[A-EG-H]{1}$/
     if (!rgexEstanteria.test(estanteria)) {
       arr.push('Estanteria')
     }
-    const posicion = inputs?.posicion
     
-    if (posicion<1 || posicion>53 ) {
+    const posicion = inputs?.posicion
+    if (posicion<1 || posicion>38) {
       arr.push('Posicion')
     }
-    const altura = inputs?.altura
-    const rgexAltura = /^[1-4]{1}$/
+    
+    const altura = inputs?.altura || ''
+    const rgexAltura = /^$|^[1-5\s]{1}$/
     if (!rgexAltura.test(altura)) {
       arr.push('Altura')
     }
-    const cantidad = inputs?.cantidad
-    if (cantidad<0) {
+
+    const cantidad = parseInt(inputs?.cantidad)
+    if (cantidad<1) {
       arr.push('Cantidad')
     }
     return arr
@@ -67,9 +66,13 @@ const InputDeposito = ()=>{
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
     inputs.time = time
+    const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
+    inputs.date = date
+    inputs.cantidad = parseInt(inputs.cantidad)
     if (inputs.radio === "Baja") {
       inputs.cantidad = inputs.cantidad * -1
     }
+    inputs['operario']=depositoUser
     setInputs ({...inputs}) 
     const options = {
       method: 'PUT',
@@ -78,7 +81,7 @@ const InputDeposito = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139:4000/api/abastecimiento/upload',options)
+    fetch('http://192.168.11.139:4000/api/deposito/upload',options)
       .then((res)=>{
         console.log('Respuetsa del servidor',res.ok)
         if(!res.ok){
@@ -94,11 +97,14 @@ const InputDeposito = ()=>{
       })
       .catch(res => {
         console.log('res = ',res)
-        res.json().then(json=>{
+        res.json()
+        .then(json=>{
           console.log(json)
           console.log('error es: ',res.statusText)
-          SetErrorMsg(json.message)})
-      })    
+          SetErrorMsg(json.message)
+        })
+        .catch(SetErrorMsg(res.statusText))
+      })
     }
   const closeModal=()=>{
     SetErrorMsg('')
@@ -123,14 +129,11 @@ const InputDeposito = ()=>{
           <h1>Depósito Abastecimiento</h1>
         </div>
         <label>
-          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Codigo de pieza')  ? styles.visible:''}`}>
-            Codigo de pieza no válido
-          </div>
-          <input
+            <input
             disabled
             onFocus={clearErrMsg}
             type="text" 
-            name="codigo"
+            name="operario"
             value={depositoUser}  
             onChange={handleChange} 
             placeholder="Operario"/>
@@ -146,7 +149,7 @@ const InputDeposito = ()=>{
             name="codigo"
             value={inputs.codigo || ''}  
             onChange={handleChange} 
-            placeholder="Codigo de insumo"/>
+            placeholder="Codigo de pieza"/>
         </label>
         <label>
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Estanteria')  ? styles.visible:''}`}>
@@ -179,7 +182,8 @@ const InputDeposito = ()=>{
             Ingreso no válido:
           </div>
           <input
-            required
+            hidden = {!/^[A-D]{1}$/.test(inputs.estanteria)}
+            required = {/^[A-D]{1}$/.test(inputs.estanteria)}
             onFocus={clearErrMsg}
             type="number" 
             name='altura' 

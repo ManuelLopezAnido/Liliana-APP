@@ -3,6 +3,7 @@ import { useState } from "react"
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
 import piezas from "../../../data samples/piezas.json"
+import productos from "../../../data samples/productos.json"
 
 const InputArmado = ()=>{
   
@@ -37,9 +38,9 @@ const InputArmado = ()=>{
     if (dur<1) {
       arr.push('Duracion')
     }
-    //const prod = inputs?.producto
-    //const prodOk = producto.find(pr =>pr.Articulo===('ZZ'+prod))?.Articulo
-    if (false) {
+    const prod = inputs?.producto
+    const prodOk = productos.find(pr =>pr.Articulo===(prod))?.Articulo
+    if (!prodOk) {
       arr.push('Producto')
     }
     console.log('arr after chek: ',arr)
@@ -62,6 +63,8 @@ const InputArmado = ()=>{
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
     inputs.time = time
+    const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
+    inputs.date = date
     setInputs ({...inputs}) 
     const options = {
       method: 'PUT',
