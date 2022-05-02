@@ -1,14 +1,15 @@
-import styles from './armadoHome.module.css'
+import styles from './inyeccionHome.module.css'
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
+import usersInye from '../../../data samples/usuariosInyeccion.json'
 
-const ArmadoHome = ()=>{
+const InyeccionHome = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
-  const [passOk, setPassOk]=useState(sessionStorage.getItem('LiderUser'))
+  const [passOk, setPassOk]=useState(sessionStorage.getItem('InyeccionUser'))
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -26,7 +27,7 @@ const ArmadoHome = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139:4000/api/armado/login',options)
+    fetch('http://192.168.11.139:4000/api/inyeccion/login',options)
       .then(res=>{
         console.log('Respuetsa del servidor',res.ok)
         if(res.ok){
@@ -38,22 +39,16 @@ const ArmadoHome = ()=>{
       .then(res=>res.json())
       .then((json)=>{
         console.log('respuesta de armdo:',json)
-        sessionStorage.setItem("LiderUser",json.user)
+        sessionStorage.setItem("InyeccionUser",json.user)
         openModal()
         setPassOk(json.user)
         setInputs({})
       })
       .catch(res => {
-        try{
-          res.json()
-          .then(json=>{
-            console.log(json)
-            SetErrorMsg(json.message)
-          })
-        } 
-        catch {
-          SetErrorMsg('Error de conexion')
-        }
+        res.json().then(json=>{
+          console.log('ERROR: ',json)
+          SetErrorMsg('Contraseña Incorrecta')
+        })
       })    
     }
   const closeModal=()=>{
@@ -64,7 +59,7 @@ const ArmadoHome = ()=>{
     setShowModal(true)
   }
   const closeSession=()=>{
-    sessionStorage.setItem('LiderUser','')
+    sessionStorage.setItem('InyeccionUser','')
     setPassOk(false)
   }
   return(
@@ -80,7 +75,7 @@ const ArmadoHome = ()=>{
       />
       <div className={styles.App}>
         <div className={styles.title}>
-          ARMADO
+          INYECCION
         </div>
         <form className={passOk ? styles.hidden : styles.armadoForm} autoComplete="off" onSubmit={handleSubmit}>
           <label >
@@ -92,42 +87,14 @@ const ArmadoHome = ()=>{
             value={inputs.lider || ''}  
             onChange={handleChange} 
             >
-              <option disabled value="" hidden> Lider </option>"
-              <optgroup label="Armado 1"/>
-              <option>AUYEROS, CRISTIAN LEONARDO</option>
-              <option>BATTISTELLI, MARCOS</option>
-              <option>CABRERA, MARIANO</option>
-              <option>DELGADO, RICARDO</option>
-              <option>GAMARRA, JONATAN</option>
-              <option>MEDINA BENITEZ, JOSE</option>
-              <option>MONZON, AYELEN MARIBEL</option>
-              <option>ARGAÑARAS, LEANDRO RODRIGO</option>
-              <option>ROBLEDO, PATRICIO</option>
-              <option>SARMIENTO, BRIAN EZEQUIEL</option>
-              <option>GONZALEZ, WALTER DAVID </option>
-              <optgroup label="Armado 2"/>
-              <option>ARGAÑARAS, LEANDRO RODRIGO</option>
-              <option>ROBLEDO, PATRICIO</option>
-              <option>SAUCEDO, NESTOR</option>
-              <option>SCHOENFELD, LUCIANO ADRIAN</option>
-              <option>SEGOVIA, ARIEL</option>
-              <option>SAUCEDO, HUGO HECTOR</option>
-              <option>SARMIENTO, BRIAN EZEQUIEL</option>
-              <option>MONZON, AYELEN MARIBEL</option>
-              <option>GAMARRA, JONATAN</option>
-              <optgroup label="Armado 3"/>
-              <option>CORREA, OSCAR NICOLAS</option>
-              <option>GOMEZ, ISAIAS MAXIMILIANO</option>
-              <option>LEZCANO, FABIAN GASTON</option>
-              <option>CARDOZO, VICTOR EMANUEL</option>
-              <option>PEDERNERA, LUIS OMAR</option>
-              <optgroup label="Armado 4"/>
-              <option>VICICH, FERNANDO MARTIN</option>
-              <option>GARCIA, FEDERICO</option>
-              <option>LEDESMA, CLAUDIO ANDRES</option>
-              <option>JAUME, LUCAS DARIO</option>
-              <option>MENDOZA, CARLOS FERNANDO</option>
-              <option>ZALAZAR, JONATAN MATIAS</option>
+              <option disabled value="" hidden> Operario </option>"
+              {usersInye.map(user=>{
+                return(
+                  <option key={user.user}>
+                    {user.user}
+                  </option>
+                )
+              })}
               </select>
           </label>
           <label>
@@ -145,13 +112,12 @@ const ArmadoHome = ()=>{
           </label>
           <button type="submit" className={styles.button}>Ingresar</button>
         </form>
-        
         <div className={passOk ? styles.pcpMenu : styles.hidden }> 
-          <a href = 'https://www.liliana.com.ar/internodos/administracion/Dp.php'>
+          <Link to = 'tablas'>
             <button>
-              Despiece
+              Tablas
             </button>
-          </a>
+          </Link>
           <Link to = 'relevamiento'>
             <button>
               Relevamiento
@@ -165,4 +131,4 @@ const ArmadoHome = ()=>{
     </div>
   )
 }
-export default ArmadoHome
+export default InyeccionHome

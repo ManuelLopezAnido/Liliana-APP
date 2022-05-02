@@ -7,8 +7,8 @@ import usersAbas from '../../../data samples/usuariosAbastecimiento.json'
 
 const AbastecimientoHome = ()=>{
   const [inputs, setInputs] = useState({});
-  const[showModal,setShowModal]=useState(false)
-  const[errorMsg, SetErrorMsg] =useState('')
+  const [showModal,setShowModal]=useState(false)
+  const [errorMsg, SetErrorMsg] =useState('')
   const [passOk, setPassOk]=useState(sessionStorage.getItem('AbastecimientoUser'))
 
   const handleChange = (e) => {
@@ -45,10 +45,16 @@ const AbastecimientoHome = ()=>{
         setInputs({})
       })
       .catch(res => {
-        res.json().then(json=>{
-          console.log('ERROR: ',json)
-          SetErrorMsg('Contraseña Incorrecta')
-        })
+        try{
+          res.json()
+          .then(json=>{
+            console.log(json)
+            SetErrorMsg(json.message)
+          })
+        } 
+        catch {
+          SetErrorMsg('Error de conexion')
+        }
       })    
     }
   const closeModal=()=>{

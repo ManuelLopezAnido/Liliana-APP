@@ -1,7 +1,7 @@
 import styles from './inputForm.module.css';
 import MachineList from '../../common components/machine list';
 import maquinas from '../../../data samples/maquinas.json'
-const InputForm =()=>{
+const InputInyeccion =()=>{
   const selectMachine = (maq) =>{
     console.log('click en: ', maq)
   }
@@ -13,22 +13,29 @@ const InputForm =()=>{
       />
       <form className={styles.depositForm}>
         <div className={styles.segment}>
-          <h1>Sign up</h1>
+          <h1>Carga producción</h1>
+        </div>
+        <div className={styles.segment}>
+          <h1>A1</h1>
         </div>
         <label>
-          <input type="text" placeholder="Email Address"/>
+          <input type="text" placeholder="Lider"/>
         </label>
         <label>
-          <input type="passwrod" placeholder="Password" autoComplete='on'/>
+          <input type="text" placeholder="Turno"/>
         </label>
-        <div className={styles.input_group}>
-          <label>
-            <input type="text" placeholder="Email Address"/>
-          </label>
-        </div>
+        <label>
+          <input type="text" placeholder="Máquina"/>
+        </label>
+        <label>
+          <input type="text" placeholder="Operario"/>
+        </label>
+        <label>
+          <input type="text" placeholder="Cantidad"/>
+        </label>
       </form>
     </div> 
   )
 
 }
-export default InputForm
+export default InputInyeccion

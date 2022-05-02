@@ -58,14 +58,12 @@
   .depositForm {
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 90%;
     margin-top: 10px;
   }
-  .depositForm label {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    width: 25%;
+  .depositForm .filtros {
+    min-width: fit-content;
   }
   .depositForm input {
     border: 0;

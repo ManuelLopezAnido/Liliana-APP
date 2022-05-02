@@ -1,6 +1,7 @@
 import styles from './tablasDeposito.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
+import Total from '../../common components/total'
 import piezas from '../../../data samples/piezas.json'
 const TablasDeposito =() =>{
   const [dataAbs, setDataAbs] = useState([])
@@ -20,7 +21,7 @@ const TablasDeposito =() =>{
   
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    const value = e.target.value.toUpperCase();
     let input = inputs
     input[name] = value
     console.log('valores: ',input.codigo, input.estanteria)
@@ -75,7 +76,7 @@ const TablasDeposito =() =>{
             name="codigo"
             value={inputs.codigo || ''}  
             onChange={handleChange} 
-            placeholder="Codigo de insumo"/>
+            placeholder="Código de insumo"/>
         </label>
         <label>
           <input 
@@ -102,7 +103,7 @@ const TablasDeposito =() =>{
         <thead>
           <tr>
             <th>
-              Estanteria
+              Estantería
             </th>
             <th>
               Posición
@@ -118,6 +119,9 @@ const TablasDeposito =() =>{
             </th>
             <th>
               Descripción
+            </th>
+            <th>
+              Ultima actualización 
             </th>
             <th>
               Comentarios
@@ -142,7 +146,7 @@ const TablasDeposito =() =>{
                   {d.codigo}
                 </td>
                 <td>
-                  {d.cantidad || '-'}
+                  {d.cantidad || (d.codigo ? 'Indefinido' : '-') }
                 </td>
                 <td>
                   {piezas.find((pz)=>{return (pz.Articulo===d.codigo)
@@ -150,12 +154,19 @@ const TablasDeposito =() =>{
                   }
                 </td>
                 <td>
+                  {d.date}
+                </td>
+                <td>
                   {d.observaciones}
                 </td>
               </tr>
             </Fragment>
             )
-          })} 
+          })}
+          <Total
+            codigo = {inputs.codigo}
+            table = {dataAbsFiltred}
+          /> 
         </tbody> 
       </table>
     </div>

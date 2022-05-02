@@ -66,7 +66,7 @@ const InputDeposito = ()=>{
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
     inputs.time = time
-    const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
+    const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.date = date
     inputs.cantidad = parseInt(inputs.cantidad)
     if (inputs.radio === "Baja") {
@@ -196,7 +196,6 @@ const InputDeposito = ()=>{
             Ingreso no válido:
           </div>
           <input 
-            required
             onFocus={clearErrMsg}
             type='number'
             name='cantidad' 

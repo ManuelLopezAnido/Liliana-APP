@@ -2,6 +2,7 @@ import styles from './tablasAbastecimiento.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
 import piezas from '../../../data samples/piezas.json'
+import Total from '../../common components/total'
 const TablasAbastecimiento =() =>{
   const [dataAbs, setDataAbs] = useState([])
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])
@@ -18,7 +19,7 @@ const TablasAbastecimiento =() =>{
   
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    const value = e.target.value.toUpperCase();
     let input = inputs
     input[name] = value
     console.log('valores: ',input.codigo, input.estanteria)
@@ -73,7 +74,7 @@ const TablasAbastecimiento =() =>{
             name="codigo"
             value={inputs.codigo || ''}  
             onChange={handleChange} 
-            placeholder="Codigo de insumo"/>
+            placeholder="Código de insumo"/>
         </label>
         <label>
           <input 
@@ -100,7 +101,7 @@ const TablasAbastecimiento =() =>{
         <thead>
           <tr>
             <th>
-              Estanteria
+              Estantería
             </th>
             <th>
               Posición
@@ -153,7 +154,11 @@ const TablasAbastecimiento =() =>{
               </tr>
             </Fragment>
             )
-          })} 
+          })}
+          <Total
+            codigo = {inputs.codigo}
+            table = {dataAbsFiltred}
+          />
         </tbody> 
       </table>
     </div>

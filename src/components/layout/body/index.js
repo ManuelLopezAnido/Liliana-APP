@@ -11,7 +11,7 @@ const Body = () => {
   <section className={styles.content}>
     <Routes>
       <Route path='/pcp/*' element = {<PcpRoutes/>}/>
-      <Route path='/inyeccion' element = {<InyeccionRoutes/>}/>
+      <Route path='/inyeccion/*' element = {<InyeccionRoutes/>}/>
       <Route path='/abastecimiento/*' element = {<AbastecimientoRoutes/>}/>
       <Route path='/deposito/*' element = {<DepositoRoutes/>}/>
       <Route path='/armado/*' element={<ArmadoRoutes/>}/>
