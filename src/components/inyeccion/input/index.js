@@ -15,8 +15,8 @@ const InputInyeccion =()=>{
         <div className={styles.segment}>
           <h1>Carga producción</h1>
         </div>
-        <div className={styles.segment}>
-          <h1>A1</h1>
+        <div className={styles.machine}>
+          <span> A1 </span>
         </div>
         <label>
           <input type="text" placeholder="Lider"/>

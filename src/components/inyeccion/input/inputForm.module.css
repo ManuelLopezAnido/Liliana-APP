@@ -10,8 +10,17 @@
 }
 .segment {
   color: black;
-  padding: 32px 0;
+  padding: 25px 0 0px 0;
   text-align: center;
+}
+.machine{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 1.35rem;
+  font-weight: bolder;
+  color: #61dafb;
 }
 .depositForm input {
   border: 0;

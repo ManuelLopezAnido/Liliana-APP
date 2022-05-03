@@ -15,6 +15,10 @@
  .machine:hover{
    color:#61dafb;
  }
+ .maqSelected{
+   color: #61dafb;
+   text-decoration: underline;
+ }
  
 @media only screen and (max-width: 768px) {
   .machineList{

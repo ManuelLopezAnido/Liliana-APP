@@ -45,10 +45,16 @@ const InyeccionHome = ()=>{
         setInputs({})
       })
       .catch(res => {
-        res.json().then(json=>{
-          console.log('ERROR: ',json)
-          SetErrorMsg('Contraseña Incorrecta')
-        })
+        try {
+          res.json()
+          .then(json=>{
+            console.log(json)
+            SetErrorMsg(json.message)
+          })
+        } 
+        catch {
+          SetErrorMsg('Error de conexion')
+        }
       })    
     }
   const closeModal=()=>{
