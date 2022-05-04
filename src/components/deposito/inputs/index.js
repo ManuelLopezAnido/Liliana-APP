@@ -81,7 +81,7 @@ const InputDeposito = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139:4000/api/deposito/upload',options)
+    fetch('http://192.168.11.139'+ process.env.serverPORT +'/api/deposito/upload',options)
       .then((res)=>{
         console.log('Respuetsa del servidor',res.ok)
         if(!res.ok){

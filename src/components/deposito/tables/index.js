@@ -8,7 +8,7 @@ const TablasDeposito =() =>{
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])
   const [inputs, setInputs] = useState([])
   useEffect (()=>{
-    fetch('http://192.168.11.139:4000/api/deposito/tablas')
+    fetch('http://192.168.11.139'+ process.env.serverPORT +'/api/deposito/tablas')
       .then((res)=>res.json())
       .then ((json)=>{
         setDataAbs (json)

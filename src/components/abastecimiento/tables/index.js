@@ -9,7 +9,7 @@ const TablasAbastecimiento =() =>{
   const [inputs, setInputs] = useState([])
   console.log(dataAbsFiltred)
   useEffect (()=>{
-    fetch('http://192.168.11.139:4000/api/abastecimiento/tables')
+    fetch('http://192.168.11.139'+ process.env.serverPORT +'/api/abastecimiento/tables')
       .then((res)=>res.json())
       .then ((json)=>{
         setDataAbs (json)
