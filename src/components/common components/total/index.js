@@ -4,9 +4,14 @@ const Total = (props) => {
     return null
   }
 
-  console.log('FILTRDADO: ',props.table)
   const tot = props.table.reduce((prev,curr) => {
-    return (prev + curr.cantidad)
+    return (
+      prev + curr.insumos.reduce((prev2,curr2)=>{
+        return(
+          prev2 + curr2.cantidad
+        )
+      },0)
+    )
   },0)
   return ( 
     <tr className={styles.total}>

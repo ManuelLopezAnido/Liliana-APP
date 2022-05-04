@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 const PcpRoutes = () => {
   const [data, setData] = useState([])
   useEffect (()=>{
-    fetch('http://192.168.11.139'+ process.env.serverPORT +'/')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/')
       .then((res)=>res.json())
       .then ((json)=>{
         setData (json)

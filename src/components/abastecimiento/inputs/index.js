@@ -10,7 +10,7 @@ const InputAbastecimiento = ()=>{
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
   const abasUser = sessionStorage.getItem('AbastecimientoUser')
-  console.log (inputs)
+  console.log ('Inputs: ',inputs)
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
@@ -50,8 +50,7 @@ const InputAbastecimiento = ()=>{
     }
     return arr
   }
-  console.log ('arrErrors: ', arrErrors)
-  const clearErrMsg = () =>{
+   const clearErrMsg = () =>{
     setArrErrors([])
   }
 
@@ -80,7 +79,7 @@ const InputAbastecimiento = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139'+ process.env.serverPORT +'/api/abastecimiento/upload',options)
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/upload',options)
       .then((res)=>{
         console.log('Respuetsa del servidor',res.ok)
         if(!res.ok){
@@ -92,7 +91,12 @@ const InputAbastecimiento = ()=>{
       .then((json)=>{
         console.log('SEGUNDO THEN')
         console.log(json)
-        setInputs({})
+        const fetchedInputs = {}
+        if (inputs.radio === 'down'){
+          fetchedInputs.cantidad = inputs.cantidad
+          fetchedInputs.codigo = inputs.codigo
+        }
+        setInputs({...fetchedInputs})
       })
       .catch(res => {
         console.log('res = ',res)
@@ -139,7 +143,7 @@ const InputAbastecimiento = ()=>{
             Codigo de pieza no válido
           </div>
           <input
-            required
+            required= {!(inputs.radio === 'clean')}
             onFocus={clearErrMsg}
             type="text" 
             name="codigo"
@@ -191,7 +195,7 @@ const InputAbastecimiento = ()=>{
             Ingreso no válido:
           </div>
           <input 
-            required
+            required = {(inputs.radio === 'add' || inputs.radio === 'replace')}
             onFocus={clearErrMsg}
             type='number'
             name='cantidad' 
@@ -204,21 +208,41 @@ const InputAbastecimiento = ()=>{
             <input 
               type="radio" 
               name="radio"
-              value={'Alta'} 
-              checked = {inputs.radio==='Alta'?true:false}
+              value={'add'} 
+              checked = {inputs.radio==='add'?true:false}
               onChange={handleChange}
               />
-            <div>Alta</div>
+            <div>Suma</div>
           </label>
           <label className={styles.container}>
             <input 
               type="radio" 
               name="radio"
-              value={'Baja'} 
-              checked = {inputs.radio==='Baja'?true:false}
+              value={'replace'} 
+              checked = {inputs.radio==='replace'?true:false}
+              onChange={handleChange}
+              />
+            <div>Pisa</div>
+          </label>
+          <label className={styles.container}>
+            <input 
+              type="radio" 
+              name="radio"
+              value={'down'} 
+              checked = {inputs.radio==='down' ? true : false}
               onChange={handleChange}
               />
             <div>Baja</div>
+          </label>
+          <label className={styles.container}>
+            <input 
+              type="radio" 
+              name="radio"
+              value={'clean'} 
+              checked = {inputs.radio==='clean' ? true : false}
+              onChange={handleChange}
+              />
+            <div>Limpia</div>
           </label>
         </div>
         <button 

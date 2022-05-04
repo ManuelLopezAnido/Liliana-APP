@@ -27,7 +27,7 @@ const DepositoHome = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139'+ process.env.serverPORT +'/api/deposito/login',options)
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/login',options)
       .then(res=>{
         console.log('Respuetsa del servidor',res.ok)
         if(res.ok){

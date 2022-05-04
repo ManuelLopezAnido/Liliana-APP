@@ -7,9 +7,8 @@ const TablasAbastecimiento =() =>{
   const [dataAbs, setDataAbs] = useState([])
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])
   const [inputs, setInputs] = useState([])
-  console.log(dataAbsFiltred)
   useEffect (()=>{
-    fetch('http://192.168.11.139'+ process.env.serverPORT +'/api/abastecimiento/tables')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/tables')
       .then((res)=>res.json())
       .then ((json)=>{
         setDataAbs (json)
@@ -17,13 +16,14 @@ const TablasAbastecimiento =() =>{
       })
       .catch (err => console.log(err))
   },[])
-  
+    
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value.toUpperCase();
     let input = inputs
     input[name] = value
     console.log('valores: ',input.codigo, input.estanteria)
+    
     setInputs({...input})
     if(!input.codigo){
       if(!input.estanteria){
@@ -37,30 +37,37 @@ const TablasAbastecimiento =() =>{
         })
         setDataAbsFiltred([...dataAbsFil])
       }
-    } else {
+    } 
+    else {
       if(!input.estanteria){
-        let dataAbsFil = dataAbs.map((estan)=>{
+        const dataAbsFil = dataAbs.map((estan)=>{
           const insumosFiltred = estan.insumos.filter((pos)=>{
             return(
               pos.codigo===input.codigo
             )    
           })
           if (!insumosFiltred.length){
-            estan.insumos = [...insumosFiltred]
-            return(
-              estan
-            )
-          } else {
             return false
           }
-        })
+          estan.insumos = [...insumosFiltred]
+          return(estan)
+        }).filter(est=>est)
+        console.log('DATA FILTRADA: ',dataAbsFil)
         setDataAbsFiltred([...dataAbsFil])
       } else {
-        let dataAbsFil = dataAbs.filter((pos)=>{
-          return(
-            (pos.codigo===input.codigo) && (pos.estanteria===input.estanteria)
-          )    
-        })
+        const dataAbsFil = dataAbs.map((estan)=>{
+          const insumosFiltred = estan.insumos.filter((pos)=>{
+            return(
+              pos.codigo===input.codigo
+            )    
+          })
+          if (!insumosFiltred.length || estan.estanteria!==input.estanteria){
+            return false
+          }
+          estan.insumos = [...insumosFiltred]
+          return(estan)
+        }).filter(est=>est)
+        console.log('DATA FILTRADA: ',dataAbsFil)
         setDataAbsFiltred([...dataAbsFil])
       }
     }
