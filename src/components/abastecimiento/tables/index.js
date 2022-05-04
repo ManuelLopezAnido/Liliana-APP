@@ -7,6 +7,7 @@ const TablasAbastecimiento =() =>{
   const [dataAbs, setDataAbs] = useState([])
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])
   const [inputs, setInputs] = useState([])
+  console.log(dataAbsFiltred)
   useEffect (()=>{
     fetch('http://192.168.11.139:4000/api/abastecimiento/tables')
       .then((res)=>res.json())
@@ -38,10 +39,20 @@ const TablasAbastecimiento =() =>{
       }
     } else {
       if(!input.estanteria){
-        let dataAbsFil = dataAbs.filter((pos)=>{
-          return(
-            pos.codigo===input.codigo
-          )    
+        let dataAbsFil = dataAbs.map((estan)=>{
+          const insumosFiltred = estan.insumos.filter((pos)=>{
+            return(
+              pos.codigo===input.codigo
+            )    
+          })
+          if (!insumosFiltred.length){
+            estan.insumos = [...insumosFiltred]
+            return(
+              estan
+            )
+          } else {
+            return false
+          }
         })
         setDataAbsFiltred([...dataAbsFil])
       } else {
@@ -124,35 +135,39 @@ const TablasAbastecimiento =() =>{
           </tr>
         </thead>
         <tbody>
-          {dataAbsFiltred?.map((d,index) => {
-          return (
-            <Fragment key={index}>
-              <tr className={styles.view} >
-                <td>
-                  {d.estanteria}
-                </td>
-                <td>
-                {d.posicion}
-                </td>
-                <td>
-                  {d.altura}
-                </td>
-                <td>
-                  {d.codigo}
-                </td>
-                <td>
-                  {d.cantidad || '-'}
-                </td>
-                <td>
-                  {piezas.find((pz)=>{return (pz.Articulo===d.codigo)
-                  })?.Detalle
-                  }
-                </td>
-                <td>
-                  {d.observaciones}
-                </td>
-              </tr>
-            </Fragment>
+          {dataAbsFiltred?.map((estan,index) => {
+            return(
+              estan.insumos.map((d,subIndex)=>{
+                return (
+                  <Fragment key={index * 10 + subIndex}>
+                    <tr className={styles.view} >
+                      <td>
+                        {estan.estanteria}
+                      </td>
+                      <td>
+                      {estan.posicion}
+                      </td>
+                      <td>
+                        {estan.altura}
+                      </td>
+                      <td>
+                        {d.codigo}
+                      </td>
+                      <td>
+                        {d.cantidad || '-'}
+                      </td>
+                      <td>
+                        {piezas.find((pz)=>{return (pz.Articulo===d.codigo)
+                        })?.Detalle
+                        }
+                      </td>
+                      <td>
+                        {estan.observaciones}
+                      </td>
+                    </tr>
+                  </Fragment>
+                )
+              })
             )
           })}
           <Total
