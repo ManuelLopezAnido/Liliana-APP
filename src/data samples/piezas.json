@@ -32058,5 +32058,10 @@
   {
     "Articulo": "VT4997",
     "Detalle": "Capacitor 1,8uF 400V"
+  },
+  {
+    "Articulo": "",
+    "Detalle": "ArticuloVacio"
   }
+
 ]

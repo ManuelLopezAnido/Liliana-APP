@@ -24,8 +24,10 @@ const InputAbastecimiento = ()=>{
   }
   const handleCheckData = () => {
     let arr = []
-    const codigoPz = inputs?.codigo
-    const pzOk = piezas.find(pz =>pz.Articulo===(codigoPz))?.Articulo
+    const codigoPz = inputs?.codigo || ""
+    console.log(codigoPz)
+    const pzOk = piezas.find(pz => pz.Articulo===(codigoPz))?.Detalle
+    console.log('pz ok',pzOk)
     if (!pzOk) {
       arr.push('Codigo de pieza')
     }
@@ -68,9 +70,6 @@ const InputAbastecimiento = ()=>{
     const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
     inputs.time = time
     inputs.date = date
-    if (inputs.radio === "Baja") {
-      inputs.cantidad = inputs.cantidad * -1
-    }
     setInputs ({...inputs}) 
     const options = {
       method: 'PUT',
@@ -93,17 +92,32 @@ const InputAbastecimiento = ()=>{
         console.log(json)
         const fetchedInputs = {}
         if (inputs.radio === 'down'){
-          fetchedInputs.cantidad = inputs.cantidad
+          if (json.cantidad){
+            fetchedInputs.cantidad = json.cantidad
+          } else {
+            fetchedInputs.cantidad = inputs.cantidad    
+          }
           fetchedInputs.codigo = inputs.codigo
+        }
+        if (inputs.radio === 'add'){
+          fetchedInputs.estanteria = inputs.estanteria
+          fetchedInputs.posicion = inputs.posicion
+          fetchedInputs.altura = inputs.altura
         }
         setInputs({...fetchedInputs})
       })
       .catch(res => {
         console.log('res = ',res)
-        res.json().then(json=>{
-          console.log(json)
-          console.log('error es: ',res.statusText)
-          SetErrorMsg(json.message)})
+        try {
+          res.json()
+            .then(json=>{
+              console.log('JSON',json)
+              SetErrorMsg(json.message)
+            })
+        } 
+        catch {
+          SetErrorMsg('Error en el servidor')
+        }
       })    
     }
   const closeModal=()=>{
@@ -143,7 +157,7 @@ const InputAbastecimiento = ()=>{
             Codigo de pieza no válido
           </div>
           <input
-            required= {!(inputs.radio === 'clean')}
+            required = {!(inputs.radio === 'clean')}
             onFocus={clearErrMsg}
             type="text" 
             name="codigo"

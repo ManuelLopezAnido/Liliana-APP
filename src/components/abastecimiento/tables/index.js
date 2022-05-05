@@ -16,7 +16,7 @@ const TablasAbastecimiento =() =>{
       })
       .catch (err => console.log(err))
   },[])
-    
+  console.log(dataAbsFiltred)
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value.toUpperCase();
