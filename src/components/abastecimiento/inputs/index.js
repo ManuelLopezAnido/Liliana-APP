@@ -70,6 +70,7 @@ const InputAbastecimiento = ()=>{
     const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
     inputs.time = time
     inputs.date = date
+    inputs.operario = abasUser
     setInputs ({...inputs}) 
     const options = {
       method: 'PUT',

@@ -1,4 +1,4 @@
-import styles from './tablasInyeccion.module.css' 
+//import styles from './tablasInyeccion.module.css' 
 const TablasInyeccion = () =>{
 
   return(

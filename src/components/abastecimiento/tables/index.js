@@ -7,7 +7,7 @@ const TablasAbastecimiento =() =>{
   const [dataAbs, setDataAbs] = useState([])
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])
   const [inputs, setInputs] = useState([])
-  useEffect (()=>{
+  const fetchingTable = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/tables')
       .then((res)=>res.json())
       .then ((json)=>{
@@ -15,6 +15,9 @@ const TablasAbastecimiento =() =>{
         setDataAbsFiltred(json)
       })
       .catch (err => console.log(err))
+  }
+  useEffect (()=>{
+    fetchingTable()
   },[])
   console.log(dataAbsFiltred)
   const handleChange = (e) => {
@@ -22,17 +25,19 @@ const TablasAbastecimiento =() =>{
     const value = e.target.value.toUpperCase();
     let input = inputs
     input[name] = value
-    console.log('valores: ',input.codigo, input.estanteria)
+    console.log('valores: ',input.codigo, input.estanteria, input.posicion, input.altura)
     
     setInputs({...input})
     if(!input.codigo){
-      if(!input.estanteria){
+      if(!input.estanteria && !input.posicion && !input.altura){
         setDataAbsFiltred([...dataAbs])
       }
       else{
         let dataAbsFil = dataAbs.filter((pos)=>{
           return(
-            pos.estanteria===input.estanteria
+            (input.estanteria ? (input.estanteria === pos.estanteria) : true) &&
+            (input.posicion ? (input.posicion === pos.posicion) : true) &&
+            (input.altura ? (input.altura === pos.altura) : true)
           )    
         })
         setDataAbsFiltred([...dataAbsFil])
@@ -87,7 +92,6 @@ const TablasAbastecimiento =() =>{
         </label>
         <label>
           <input
-            required
             type="text" 
             name="codigo"
             value={inputs.codigo || ''}  
@@ -96,13 +100,35 @@ const TablasAbastecimiento =() =>{
         </label>
         <label>
           <input 
-            required
             type="text" 
             name='estanteria' 
             value={inputs.estanteria || ''}  
             onChange={handleChange} 
             placeholder="Estantería"/>
         </label>
+        <label>
+          <input 
+            hidden = {!inputs.estanteria || inputs.codigo}
+            type="text" 
+            name='posicion' 
+            value={inputs.posicion || ''}  
+            onChange={handleChange} 
+            placeholder="Posición"/>
+        </label>
+        <label>
+          <input 
+            hidden = {!inputs.estanteria || inputs.codigo}
+            type="text" 
+            name='altura' 
+            value={inputs.altura || ''}  
+            onChange={handleChange} 
+            placeholder="Altura"/>
+        </label>
+          <button 
+            className={styles.reloadButton}
+            onClick={()=>fetchingTable()}>
+            <span className={styles.reload}>&#x21bb;</span>
+          </button>
       </form>
     </div>
     <div>
