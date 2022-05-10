@@ -157,7 +157,7 @@ const TablasDeposito =() =>{
                   {d.date}
                 </td>
                 <td>
-                  {d.observaciones}
+                  {d.comentarios}
                 </td>
               </tr>
             </Fragment>

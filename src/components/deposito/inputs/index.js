@@ -203,6 +203,19 @@ const InputDeposito = ()=>{
             onChange={handleChange} 
             placeholder="Cantidad"/>
         </label>
+        <label>
+          <select 
+            className={`${styles.select} ${!inputs.comentarios ? styles.placeholder : ''}`}
+            type='text'
+            name='comentarios' 
+            value={inputs.comentarios || ''} 
+            onChange={handleChange}>
+              <option disabled value="" hidden> Comentarios </option>"
+              <option>
+                Serigrafiado
+              </option>
+          </select>
+        </label>
         <div className={styles.radioBox}>
           <label className={styles.container}>
             <input 

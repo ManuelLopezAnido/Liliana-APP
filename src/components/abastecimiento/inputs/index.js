@@ -115,9 +115,10 @@ const InputAbastecimiento = ()=>{
               console.log('JSON',json)
               SetErrorMsg(json.message)
             })
+            .catch(SetErrorMsg('Error en el servidor'))
         } 
         catch {
-          SetErrorMsg('Error en el servidor')
+          SetErrorMsg('Falla de conexión')
         }
       })    
     }
@@ -217,6 +218,19 @@ const InputAbastecimiento = ()=>{
             value={inputs.cantidad || ''} 
             onChange={handleChange} 
             placeholder="Cantidad"/>
+        </label>
+        <label>
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Cantidad')  ? styles.visible:''}`}>
+            Ingreso no válido:
+          </div>
+          <textarea
+            className={styles.textarea} 
+            onFocus={clearErrMsg}
+            type='text'
+            name='comentarios' 
+            value={inputs.comentarios || ''} 
+            onChange={handleChange} 
+            placeholder="Comentarios"/>
         </label>
         <div className={styles.radioBox}>
           <label className={styles.container}>

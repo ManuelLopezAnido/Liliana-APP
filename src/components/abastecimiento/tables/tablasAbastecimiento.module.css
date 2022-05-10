@@ -61,24 +61,10 @@
     align-items: center;
     width: 90%;
     margin-top: 10px;
+    flex-wrap: wrap;
   }
   .depositForm .filtros {
     min-width: fit-content;
-  }
-  .depositForm input {
-    border: 0;
-    font-size: 15px;
-    border-radius: 5px;
-    padding: 13px;
-    background-color: white;
-  }
-  .depositForm input {
-    box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
-    width: 90%;
-    box-sizing: border-box;
-    transition: all 0.2s ease-in-out;
-    appearance: none;
-    -webkit-appearance: none;
   }
   .depositForm  input:focus {
     box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
@@ -94,11 +80,16 @@
   .depositForm input {
     margin-right: 8px;
     box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
-    width: 100%;
     box-sizing: border-box;
-    transition: all 0.2s ease-in-out;
     appearance: none;
-    -webkit-appearance: none;
+    border: 0;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 13px;
+    background-color: white;
+    min-width: fit-content;
+    width: 90%;
+    transition: all 0.2s ease-in-out;
   }
   .depositForm  input:focus {
     box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
@@ -123,6 +114,11 @@
     background-color: white;
     color: black;
     font-family: 'Roboto', sans-serif;
+    min-width: 40px;
+  }
+  .reloadButton span {
+    display: block;
+    transform: rotate(90deg);
   }
   .depositForm button:hover{
     box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
