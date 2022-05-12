@@ -17,6 +17,7 @@ const MachineList = (props)=>{
               key={maq.Maquina} 
               className = {`
                 ${styles.machine}
+                ${index === 0 && !classMaq ? styles.maqSelected : ''}
                 ${maq.Maquina === classMaq ? styles.maqSelected : ''}`
                 } 
               onClick={() => handleClick(maq.Maquina)}>

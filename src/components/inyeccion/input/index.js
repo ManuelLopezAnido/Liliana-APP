@@ -1,9 +1,12 @@
 import styles from './inputForm.module.css';
 import MachineList from '../../common components/machine list';
 import maquinas from '../../../data samples/maquinas.json'
+import { useState } from 'react';
+
 const InputInyeccion =()=>{
+  const [selectedMaq,setSelectedMaq] = useState('A1')
   const selectMachine = (maq) =>{
-    console.log('click en: ', maq)
+    setSelectedMaq (maq)
   }
   return(
     <div className= {styles.deposit}>
@@ -16,7 +19,7 @@ const InputInyeccion =()=>{
           <h1>Carga producción</h1>
         </div>
         <div className={styles.machine}>
-          <span> A1 </span>
+          <span> {selectedMaq} </span>
         </div>
         <label>
           <input type="text" placeholder="Lider"/>
@@ -30,9 +33,17 @@ const InputInyeccion =()=>{
         <label>
           <input type="text" placeholder="Operario"/>
         </label>
-        <label>
-          <input type="text" placeholder="Cantidad"/>
-        </label>
+        <div className={styles.newProduct}>
+          <label>
+            <input type="text" placeholder="Pieza"/>
+          </label>
+          <label>
+            <input type="text" placeholder="Cantidad"/>
+          </label>
+          <label>
+            <input type="text" placeholder="Comentarios"/>
+          </label>
+          </div>
       </form>
     </div> 
   )

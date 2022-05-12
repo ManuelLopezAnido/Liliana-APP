@@ -1,7 +1,7 @@
 import styles from './tablasDeposito.module.css'
 import { useState, useEffect } from 'react'
-import { Fragment } from 'react'
-import Total from '../../common components/total'
+import { Fragment } from 'react' 
+import TotalDeposit from '../../common components/total deposit'
 import piezas from '../../../data samples/piezas.json'
 const TablasDeposito =() =>{
   const [dataAbs, setDataAbs] = useState([])
@@ -163,7 +163,7 @@ const TablasDeposito =() =>{
             </Fragment>
             )
           })}
-          <Total
+          <TotalDeposit
             codigo = {inputs.codigo}
             table = {dataAbsFiltred}
           /> 

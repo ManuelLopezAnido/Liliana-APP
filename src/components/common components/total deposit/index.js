@@ -1,16 +1,12 @@
-import styles from './total.module.css'
-const Total = (props) => {
+import styles from './totaldeposit.module.css'
+const TotalDeposit = (props) => {
   if (!props.codigo) {
     return null
   }
 
   const tot = props.table.reduce((prev,curr) => {
-    return (
-      prev + curr.insumos?.reduce((prev2,curr2)=>{
-        return(
-          prev2 + curr2.cantidad
-        )
-      },0)
+    return(
+      prev + curr.cantidad
     )
   },0)
   return ( 
@@ -30,4 +26,4 @@ const Total = (props) => {
     </tr>
   )
 }
-export default Total
+export default TotalDeposit
