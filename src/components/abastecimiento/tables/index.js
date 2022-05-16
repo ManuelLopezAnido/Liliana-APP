@@ -195,7 +195,7 @@ const TablasAbastecimiento =() =>{
                         }
                       </td>
                       <td>
-                        {estan.comentarios}
+                        {d.comentarios}
                       </td>
                     </tr>
                   </Fragment>
