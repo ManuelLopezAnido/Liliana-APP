@@ -33,11 +33,11 @@ const InputDeposito = ()=>{
     }
     
     const posicion = inputs?.posicion
-    if (posicion<1 || posicion>38) {
+    if (posicion<1 || posicion>56) {
       arr.push('Posicion')
     }
     
-    const altura = inputs?.altura || ''
+    const altura = (inputs?.altura || '')
     const rgexAltura = /^$|^[1-5\s]{1}$/
     if (!rgexAltura.test(altura)) {
       arr.push('Altura')
@@ -56,7 +56,7 @@ const InputDeposito = ()=>{
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const arr =handleCheckData()
+    const arr = handleCheckData()
     console.log ('resultado del arr', arr)
     setArrErrors(arr)
     if (arr.length !== 0){
@@ -183,7 +183,7 @@ const InputDeposito = ()=>{
           </div>
           <input
             hidden = {!/^[A-D]{1}$/.test(inputs.estanteria)}
-            required = {/^[A-D]{1}$/.test(inputs.estanteria)}
+            required = {/^[A-D]{1}$/.test(inputs.estanteria) && inputs.posicion < 39}
             onFocus={clearErrMsg}
             type="number" 
             name='altura' 

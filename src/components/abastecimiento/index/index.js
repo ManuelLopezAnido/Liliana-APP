@@ -129,6 +129,11 @@ const AbastecimientoHome = ()=>{
               Relevamiento
             </button>
           </Link>
+          <Link to = 'criticos'>
+            <button>
+              Criticos
+            </button>
+          </Link>
         </div>
         <div className={passOk ? styles.closeSession : styles.hidden} onClick={closeSession}>
           Cerrar sesión
