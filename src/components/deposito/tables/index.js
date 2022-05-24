@@ -1,58 +1,79 @@
 import styles from './tablasDeposito.module.css'
 import { useState, useEffect } from 'react'
-import { Fragment } from 'react' 
-import TotalDeposit from '../../common components/total deposit'
+import { Fragment } from 'react'
 import piezas from '../../../data samples/piezas.json'
+import Total from '../../common components/total'
 const TablasDeposito =() =>{
-  const [dataAbs, setDataAbs] = useState([])
-  const [dataAbsFiltred,setDataAbsFiltred] = useState([])
+  const [dataDepo, setDataDepo] = useState([])
+  const [dataDepoFiltred,setDataDepoFiltred] = useState([])
   const [inputs, setInputs] = useState([])
-  useEffect (()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/tablas')
+  const fetchingTable = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/tables')
       .then((res)=>res.json())
       .then ((json)=>{
-        setDataAbs (json)
-        setDataAbsFiltred(json)
+        setDataDepo (json)
+        setDataDepoFiltred(json)
       })
-      .catch ((err) => {
-        console.log('error table: ',err)
-      })
+      .catch (err => console.log(err))
+  }
+  useEffect (()=>{
+    fetchingTable()
   },[])
-  
+  console.log(dataDepoFiltred)
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value.toUpperCase();
     let input = inputs
     input[name] = value
-    console.log('valores: ',input.codigo, input.estanteria)
+    console.log('valores: ',input.codigo, input.estanteria, input.posicion, input.altura)
+    
     setInputs({...input})
     if(!input.codigo){
-      if(!input.estanteria){
-        setDataAbsFiltred([...dataAbs])
+      if(!input.estanteria && !input.posicion && !input.altura){
+        setDataDepoFiltred([...dataDepo])
       }
       else{
-        let dataAbsFil = dataAbs.filter((pos)=>{
+        let dataDepoFil = dataDepo.filter((pos)=>{
           return(
-            pos.estanteria===input.estanteria
+            (input.estanteria ? (input.estanteria === pos.estanteria) : true) &&
+            (input.posicion ? (+input.posicion === pos.posicion) : true) &&
+            (input.altura ? (+input.altura === pos.altura) : true)
           )    
         })
-        setDataAbsFiltred([...dataAbsFil])
+        setDataDepoFiltred([...dataDepoFil])
       }
-    } else {
+    } 
+    else {
       if(!input.estanteria){
-        let dataAbsFil = dataAbs.filter((pos)=>{
-          return(
-            pos.codigo===input.codigo
-          )    
-        })
-        setDataAbsFiltred([...dataAbsFil])
+        const dataDepoFil = dataDepo.map((estan)=>{
+          const insumosFiltred = estan.insumos.filter((pos)=>{
+            return(
+              pos.codigo===input.codigo
+            )    
+          })
+          if (!insumosFiltred.length){
+            return false
+          }
+          estan.insumos = [...insumosFiltred]
+          return(estan)
+        }).filter(est=>est)
+        console.log('DATA FILTRADA: ',dataDepoFil)
+        setDataDepoFiltred([...dataDepoFil])
       } else {
-        let dataAbsFil = dataAbs.filter((pos)=>{
-          return(
-            (pos.codigo===input.codigo) && (pos.estanteria===input.estanteria)
-          )    
-        })
-        setDataAbsFiltred([...dataAbsFil])
+        const dataDepoFil = dataDepo.map((estan)=>{
+          const insumosFiltred = estan.insumos.filter((pos)=>{
+            return(
+              pos.codigo===input.codigo
+            )    
+          })
+          if (!insumosFiltred.length || estan.estanteria!==input.estanteria){
+            return false
+          }
+          estan.insumos = [...insumosFiltred]
+          return(estan)
+        }).filter(est=>est)
+        console.log('DATA FILTRADA: ',dataDepoFil)
+        setDataDepoFiltred([...dataDepoFil])
       }
     }
   }
@@ -71,7 +92,6 @@ const TablasDeposito =() =>{
         </label>
         <label>
           <input
-            required
             type="text" 
             name="codigo"
             value={inputs.codigo || ''}  
@@ -80,13 +100,35 @@ const TablasDeposito =() =>{
         </label>
         <label>
           <input 
-            required
             type="text" 
             name='estanteria' 
             value={inputs.estanteria || ''}  
             onChange={handleChange} 
             placeholder="Estantería"/>
         </label>
+        <label>
+          <input 
+            hidden = {!inputs.estanteria || inputs.codigo}
+            type="text" 
+            name='posicion' 
+            value={inputs.posicion || ''}  
+            onChange={handleChange} 
+            placeholder="Posición"/>
+        </label>
+        <label>
+          <input 
+            hidden = {!inputs.estanteria || inputs.codigo}
+            type="text" 
+            name='altura' 
+            value={inputs.altura || ''}  
+            onChange={handleChange} 
+            placeholder="Altura"/>
+        </label>
+          <button 
+            className={styles.reloadButton}
+            onClick={()=>fetchingTable()}>
+            <span className={styles.reload}>&#x21bb;</span>
+          </button>
       </form>
     </div>
     <div>
@@ -121,52 +163,50 @@ const TablasDeposito =() =>{
               Descripción
             </th>
             <th>
-              Ultima actualización 
-            </th>
-            <th>
               Comentarios
             </th>
           </tr>
         </thead>
         <tbody>
-          {dataAbsFiltred?.map((d,index) => {
-          return (
-            <Fragment key={index}>
-              <tr className={styles.view} >
-                <td>
-                  {d.estanteria}
-                </td>
-                <td>
-                  {d.posicion}
-                </td>
-                <td>
-                  {d.altura}
-                </td>
-                <td>
-                  {d.codigo}
-                </td>
-                <td>
-                  {d.cantidad || (d.codigo ? 'Indefinido' : '-') }
-                </td>
-                <td>
-                  {piezas.find((pz)=>{return (pz.Articulo===d.codigo)
-                  })?.Detalle
-                  }
-                </td>
-                <td>
-                  {d.date}
-                </td>
-                <td>
-                  {d.comentarios}
-                </td>
-              </tr>
-            </Fragment>
+          {dataDepoFiltred?.map((estan,index) => {
+            return(
+              estan.insumos?.map((d,subIndex)=>{
+                return (
+                  <Fragment key={index * 10 + subIndex}>
+                    <tr className={styles.view} >
+                      <td>
+                        {estan.estanteria}
+                      </td>
+                      <td>
+                      {estan.posicion}
+                      </td>
+                      <td>
+                        {estan.altura}
+                      </td>
+                      <td>
+                        {d.codigo}
+                      </td>
+                      <td>
+                        {d.cantidad === '' ? 'indefinido' : d.cantidad}
+                      </td>
+                      <td>
+                        {piezas.find((pz)=>{return (pz.Articulo===d.codigo)
+                        })?.Detalle
+                        }
+                      </td>
+                      <td>
+                        {d.comentarios}
+                      </td>
+                    </tr>
+                  </Fragment>
+                )
+              })
             )
           })}
-          <TotalDeposit
+          <Total
             codigo = {inputs.codigo}
-            table = {dataAbsFiltred}
-          /> 
+            table = {dataDepoFiltred}
+          />
         </tbody> 
       </table>
     </div>

@@ -36,11 +36,12 @@ const TablasAbastecimiento =() =>{
         let dataAbsFil = dataAbs.filter((pos)=>{
           return(
             (input.estanteria ? (input.estanteria === pos.estanteria) : true) &&
-            (input.posicion ? (input.posicion === pos.posicion) : true) &&
-            (input.altura ? (input.altura === pos.altura) : true)
+            (input.posicion ? (+input.posicion === pos.posicion) : true) &&
+            (input.altura ? (+input.altura === pos.altura) : true)
           )    
         })
         setDataAbsFiltred([...dataAbsFil])
+        console.log('DATA FILTRADA2: ',dataAbsFil)
       }
     } 
     else {

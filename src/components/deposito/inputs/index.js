@@ -9,54 +9,56 @@ const InputDeposito = ()=>{
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
-  const depositoUser = sessionStorage.getItem('DepositoUser')
-  console.log (inputs)
+  const depoUser = sessionStorage.getItem('DepositoUser')
+  console.log ('Inputs: ',inputs)
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
     if (name === 'codigo' || name === 'estanteria') {
       value=e.target.value.toUpperCase()
     }
+    if (name ==='cantidad' || name ==='posicion' || name ==='altura'){
+      value = parseInt(e.target.value)
+    }
     setInputs (({...inputs, [name]: value}))
   }
   const handleCheckData = () => {
     let arr = []
-    const codigoPz = inputs?.codigo
-    const pzOk = piezas.find(pz =>pz.Articulo===(codigoPz))?.Articulo
+    const codigoPz = inputs?.codigo || ""
+    console.log(codigoPz)
+    const pzOk = piezas.find(pz => pz.Articulo===(codigoPz))?.Detalle
+    console.log('pz ok',pzOk)
     if (!pzOk) {
       arr.push('Codigo de pieza')
     }
     const estanteria = inputs?.estanteria
-    const rgexEstanteria = /^[A-EG-H]{1}$/
+    const rgexEstanteria = /^[A-TV-Z]{1}$/
     if (!rgexEstanteria.test(estanteria)) {
       arr.push('Estanteria')
     }
-    
     const posicion = inputs?.posicion
-    if (posicion<1 || posicion>56) {
+    
+    if (posicion<1 || posicion>53 ) {
       arr.push('Posicion')
     }
-    
-    const altura = (inputs?.altura || '')
-    const rgexAltura = /^$|^[1-5\s]{1}$/
+    const altura = inputs?.altura
+    const rgexAltura = /^[1-4]{1}$/
     if (!rgexAltura.test(altura)) {
       arr.push('Altura')
     }
-
-    const cantidad = parseInt(inputs?.cantidad)
-    if (cantidad<1) {
+    const cantidad = inputs?.cantidad
+    if (cantidad<0) {
       arr.push('Cantidad')
     }
     return arr
   }
-  console.log ('arrErrors: ', arrErrors)
-  const clearErrMsg = () =>{
+   const clearErrMsg = () =>{
     setArrErrors([])
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const arr = handleCheckData()
+    const arr =handleCheckData()
     console.log ('resultado del arr', arr)
     setArrErrors(arr)
     if (arr.length !== 0){
@@ -65,14 +67,10 @@ const InputDeposito = ()=>{
     } 
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
+    const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
     inputs.time = time
-    const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.date = date
-    inputs.cantidad = parseInt(inputs.cantidad)
-    if (inputs.radio === "Baja") {
-      inputs.cantidad = inputs.cantidad * -1
-    }
-    inputs['operario']=depositoUser
+    inputs.operario = depoUser
     setInputs ({...inputs}) 
     const options = {
       method: 'PUT',
@@ -93,18 +91,36 @@ const InputDeposito = ()=>{
       .then((json)=>{
         console.log('SEGUNDO THEN')
         console.log(json)
-        setInputs({})
+        const fetchedInputs = {}
+        if (inputs.radio === 'down'){
+          if (json.cantidad){
+            fetchedInputs.cantidad = json.cantidad
+          } else {
+            fetchedInputs.cantidad = inputs.cantidad    
+          }
+          fetchedInputs.codigo = inputs.codigo
+        }
+        if (inputs.radio === 'add'){
+          fetchedInputs.estanteria = inputs.estanteria
+          fetchedInputs.posicion = inputs.posicion
+          fetchedInputs.altura = inputs.altura
+        }
+        setInputs({...fetchedInputs})
       })
       .catch(res => {
         console.log('res = ',res)
-        res.json()
-        .then(json=>{
-          console.log(json)
-          console.log('error es: ',res.statusText)
-          SetErrorMsg(json.message)
-        })
-        .catch(SetErrorMsg(res.statusText))
-      })
+        try {
+          res.json()
+            .then(json=>{
+              console.log('JSON',json)
+              SetErrorMsg(json.message)
+            })
+            .catch(SetErrorMsg('Error en el servidor'))
+        } 
+        catch {
+          SetErrorMsg('Falla de conexión')
+        }
+      })    
     }
   const closeModal=()=>{
     SetErrorMsg('')
@@ -129,12 +145,12 @@ const InputDeposito = ()=>{
           <h1>Depósito Abastecimiento</h1>
         </div>
         <label>
-            <input
+          <input
             disabled
             onFocus={clearErrMsg}
             type="text" 
             name="operario"
-            value={depositoUser}  
+            value={depoUser}  
             onChange={handleChange} 
             placeholder="Operario"/>
         </label>
@@ -143,13 +159,13 @@ const InputDeposito = ()=>{
             Codigo de pieza no válido
           </div>
           <input
-            required
+            required = {!(inputs.radio === 'clean')}
             onFocus={clearErrMsg}
             type="text" 
             name="codigo"
             value={inputs.codigo || ''}  
             onChange={handleChange} 
-            placeholder="Codigo de pieza"/>
+            placeholder="Codigo de insumo"/>
         </label>
         <label>
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Estanteria')  ? styles.visible:''}`}>
@@ -182,8 +198,7 @@ const InputDeposito = ()=>{
             Ingreso no válido:
           </div>
           <input
-            hidden = {!/^[A-D]{1}$/.test(inputs.estanteria)}
-            required = {/^[A-D]{1}$/.test(inputs.estanteria) && inputs.posicion < 39}
+            required
             onFocus={clearErrMsg}
             type="number" 
             name='altura' 
@@ -196,6 +211,7 @@ const InputDeposito = ()=>{
             Ingreso no válido:
           </div>
           <input 
+            required = {(inputs.radio === 'add' || inputs.radio === 'replace')}
             onFocus={clearErrMsg}
             type='number'
             name='cantidad' 
@@ -204,38 +220,58 @@ const InputDeposito = ()=>{
             placeholder="Cantidad"/>
         </label>
         <label>
-          <select 
-            className={`${styles.select} ${!inputs.comentarios ? styles.placeholder : ''}`}
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Cantidad')  ? styles.visible:''}`}>
+            Ingreso no válido:
+          </div>
+          <textarea
+            className={styles.textarea} 
+            onFocus={clearErrMsg}
             type='text'
             name='comentarios' 
             value={inputs.comentarios || ''} 
-            onChange={handleChange}>
-              <option disabled value="" hidden> Comentarios </option>"
-              <option>
-                Serigrafiado
-              </option>
-          </select>
+            onChange={handleChange} 
+            placeholder="Comentarios"/>
         </label>
         <div className={styles.radioBox}>
           <label className={styles.container}>
             <input 
               type="radio" 
               name="radio"
-              value={'Alta'} 
-              checked = {inputs.radio==='Alta'?true:false}
+              value={'add'} 
+              checked = {inputs.radio==='add'?true:false}
               onChange={handleChange}
               />
-            <div>Alta</div>
+            <div>Suma</div>
           </label>
           <label className={styles.container}>
             <input 
               type="radio" 
               name="radio"
-              value={'Baja'} 
-              checked = {inputs.radio==='Baja'?true:false}
+              value={'replace'} 
+              checked = {inputs.radio==='replace'?true:false}
+              onChange={handleChange}
+              />
+            <div>Pisa</div>
+          </label>
+          <label className={styles.container}>
+            <input 
+              type="radio" 
+              name="radio"
+              value={'down'} 
+              checked = {inputs.radio==='down' ? true : false}
               onChange={handleChange}
               />
             <div>Baja</div>
+          </label>
+          <label className={styles.container}>
+            <input 
+              type="radio" 
+              name="radio"
+              value={'clean'} 
+              checked = {inputs.radio==='clean' ? true : false}
+              onChange={handleChange}
+              />
+            <div>Limpia</div>
           </label>
         </div>
         <button 

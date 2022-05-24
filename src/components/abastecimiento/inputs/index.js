@@ -17,7 +17,7 @@ const InputAbastecimiento = ()=>{
     if (name === 'codigo' || name === 'estanteria') {
       value=e.target.value.toUpperCase()
     }
-    if (name ==='cantidad'){
+    if (name ==='cantidad' || name ==='posicion' || name ==='altura'){
       value = parseInt(e.target.value)
     }
     setInputs (({...inputs, [name]: value}))
