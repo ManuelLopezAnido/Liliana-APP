@@ -134,6 +134,11 @@ const AbastecimientoHome = ()=>{
               Criticos
             </button>
           </Link>
+          <Link to = 'historial'>
+            <button>
+              Historial
+            </button>
+          </Link>
         </div>
         <div className={passOk ? styles.closeSession : styles.hidden} onClick={closeSession}>
           Cerrar sesión

@@ -32070,5 +32070,301 @@
   {
     "Articulo": "",
     "Detalle": "Estanteria vacía"
+  },
+  {
+    "Articulo": "AR1329",
+    "Detalle": "Ar. Pl. diam. 5/32\"x 10x 0.8mm Galv."
+  },
+  {
+    "Articulo": "MP5398",
+    "Detalle": "BOLSA Pe. 10 x 15 x 25"
+  },
+  {
+    "Articulo": "MP5408",
+    "Detalle": "BOLSA Pe. 45 x 100 x 25"
+  },
+  {
+    "Articulo": "CC4229",
+    "Detalle": "CABLE DE LINEA"
+  },
+  {
+    "Articulo": "CC1861",
+    "Detalle": "CAJA EMBALAJE TCH50"
+  },
+  {
+    "Articulo": "CC1864",
+    "Detalle": "JUEGO INTERIORES CAJA TCH50"
+  },
+  {
+    "Articulo": "CI5330",
+    "Detalle": "PLAQUETA POTENCIA"
+  },
+  {
+    "Articulo": "KP4336",
+    "Detalle": "TERMOCUPLA"
+  },
+  {
+    "Articulo": "RP4797",
+    "Detalle": "LED"
+  },
+  {
+    "Articulo": "CP4790",
+    "Detalle": "CHICOTES"
+  },
+  {
+    "Articulo": "CM4730",
+    "Detalle": "PLAQUETA COMANDO"
+  },
+  {
+    "Articulo": "CP5699",
+    "Detalle": "CONTROL REMOTO"
+  },
+  {
+    "Articulo": "VT4656",
+    "Detalle": "PLAQUETA DISPLAY"
+  },
+  {
+    "Articulo": "IM2671",
+    "Detalle": "ETIQUETA NO CUBRIR COLOR BLANCO"
+  },
+  {
+    "Articulo": "CC1863",
+    "Detalle": "ETIQUETA DE ARTICULO TCH50"
+  },
+  {
+    "Articulo": "IM2264",
+    "Detalle": "ETIQUETA DE TRAZABILIDAD 32X12mm (PAPEL OPP)"
+  },
+  {
+    "Articulo": "VP5401",
+    "Detalle": "TIP OVER"
+  },
+  {
+    "Articulo": "CM5132",
+    "Detalle": "LLAVE"
+  },
+  {
+    "Articulo": "CC1862",
+    "Detalle": "MANUAL DE INSTRUCCIONES TCH50"
+  },
+  {
+    "Articulo": "IM2258",
+    "Detalle": "MANUAL DE GARANTIA LILIANA"
+  },
+  {
+    "Articulo": "VB4505",
+    "Detalle": "MOTOR DE GIRO"
+  },
+  {
+    "Articulo": "VT4998",
+    "Detalle": "MOTOR"
+  },
+  {
+    "Articulo": "CC4101",
+    "Detalle": "MALLA"
+  },
+  {
+    "Articulo": "VT4289",
+    "Detalle": "TIRA"
+  },
+  {
+    "Articulo": "KP4701",
+    "Detalle": "BOLILLA"
+  },
+  {
+    "Articulo": "VP4156",
+    "Detalle": "FIJACIÓN TURBINA"
+  },
+  {
+    "Articulo": "CC4891",
+    "Detalle": "BIELA DE GIRO"
+  },
+  {
+    "Articulo": "CC4513",
+    "Detalle": "PANTALLA LEÑO"
+  },
+  {
+    "Articulo": "CH4438",
+    "Detalle": "BASE IZQUIERDA"
+  },
+  {
+    "Articulo": "CI4176",
+    "Detalle": "TAPA"
+  },
+  {
+    "Articulo": "CP4159",
+    "Detalle": "DECO TAPA"
+  },
+  {
+    "Articulo": "KP4899",
+    "Detalle": "TURBINA B"
+  },
+  {
+    "Articulo": "CH4624",
+    "Detalle": "SOPORTE LED"
+  },
+  {
+    "Articulo": "CH5139",
+    "Detalle": "BASE DE GIRO"
+  },
+  {
+    "Articulo": "CI4573",
+    "Detalle": "CONECTOR DE BIELA"
+  },
+  {
+    "Articulo": "CI4973",
+    "Detalle": "PLASTICO 2"
+  },
+  {
+    "Articulo": "CM4199",
+    "Detalle": "PLASTICO 7"
+  },
+  {
+    "Articulo": "CM4304",
+    "Detalle": "ARANDELA CHICA GIRO"
+  },
+  {
+    "Articulo": "CP5002",
+    "Detalle": "PLASTICO 1"
+  },
+  {
+    "Articulo": "KP4050",
+    "Detalle": "PLASTICO 6"
+  },
+  {
+    "Articulo": "KP5599",
+    "Detalle": "PLASTICO 9"
+  },
+  {
+    "Articulo": "RP4002",
+    "Detalle": "PLASTICO 5"
+  },
+  {
+    "Articulo": "VB5008",
+    "Detalle": "PLASTICO 8"
+  },
+  {
+    "Articulo": "VB5337",
+    "Detalle": "SOPORTE"
+  },
+  {
+    "Articulo": "CC4951",
+    "Detalle": "TRABA PTC"
+  },
+  {
+    "Articulo": "CH4047",
+    "Detalle": "PLASTICO 3"
+  },
+  {
+    "Articulo": "CI4267",
+    "Detalle": "PRENSACABLE"
+  },
+  {
+    "Articulo": "KP4912",
+    "Detalle": "CONECTOR DE GIRO"
+  },
+  {
+    "Articulo": "RP4987",
+    "Detalle": "BASE DERECHA"
+  },
+  {
+    "Articulo": "VB4084",
+    "Detalle": "PLASTICO 4"
+  },
+  {
+    "Articulo": "VP4903",
+    "Detalle": "PORTA PTC"
+  },
+  {
+    "Articulo": "VT4191",
+    "Detalle": "TAPA DE GIRO"
+  },
+  {
+    "Articulo": "CP4288",
+    "Detalle": "BUJE DE GIRO"
+  },
+  {
+    "Articulo": "KP4655",
+    "Detalle": "SOPORTE 2"
+  },
+  {
+    "Articulo": "RP4492",
+    "Detalle": "ARANDELA GRANDE GIRO"
+  },
+  {
+    "Articulo": "RP5122",
+    "Detalle": "LEÑO PLASTICO"
+  },
+  {
+    "Articulo": "VB4366",
+    "Detalle": "TURBINA A"
+  },
+  {
+    "Articulo": "CH5830",
+    "Detalle": "PTC 2000W"
+  },
+  {
+    "Articulo": "MP5399",
+    "Detalle": "SPAGHETTI FIBRA DE VIDRIO C/SILICONA 8mm."
+  },
+  {
+    "Articulo": "VP4436",
+    "Detalle": "MOTOR GIRO LEÑO"
+  },
+  {
+    "Articulo": "TO1160",
+    "Detalle": "To.C.Ph.Pkr. Nº 6 x 3/8\" 9,5 mm"
+  },
+  {
+    "Articulo": "TO3486",
+    "Detalle": "To.C/F.Pkr.Ph. Nº 4 x 1/4\" GALV."
+  },
+  {
+    "Articulo": "TO1695",
+    "Detalle": "To.C.Ph.Pkr. Nº 4 x 3/8\" 9,5mm"
+  },
+  {
+    "Articulo": "TO1981",
+    "Detalle": "Tornillo M 4 x 0,7 x 10mm Cab. Phillips Fresada Diám. Máx.7,2mm GALV"
+  },
+  {
+    "Articulo": "TO1419",
+    "Detalle": "To.C.Ph.Pkr. Nº 6 x 1/2\" 13mm"
+  },
+  {
+    "Articulo": "TO2742",
+    "Detalle": "To.C.Ph.Pkr. Nº 7 x 1/4\""
+  },
+  {
+    "Articulo": "TO3285",
+    "Detalle": "To.Pk.C/f.Ph. 7 x 3/8\" GALV."
+  },
+  {
+    "Articulo": "TO3702",
+    "Detalle": "To.Pk.C/F PH Nº 4 x 5/16\""
+  },
+  {
+    "Articulo": "TO3743",
+    "Detalle": "To.Pk.C/F PH Nº 4 x 5/16\" PTA. MOCHA"
+  },
+  {
+    "Articulo": "TO1524",
+    "Detalle": "To.C.Ph.Pkr. nº 4 x 3/8\" C/Arandela diam. max. 7,3mm"
+  },
+  {
+    "Articulo": "TO1696",
+    "Detalle": "To.Pk.C/f.Ph. 7 x 14 mm GALV"
+  },
+  {
+    "Articulo": "TO1903",
+    "Detalle": "To.C.Ph.Pkr. Nº 4 x 1/2\" 13mm"
+  },
+  {
+    "Articulo": "MP5274",
+    "Detalle": "PRECINTO 100 x 2.40 mm"
+  },
+  {
+    "Articulo": "RP1013",
+    "Detalle": "CONECTOR TERMINALES TRMC856"
   }
 ]

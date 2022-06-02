@@ -1,0 +1,135 @@
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+ .foldTable {
+	 box-sizing: border-box;
+   width: 100%;
+  }
+ .foldTable th {
+	 text-align: left;
+	 border-bottom: 3px solid #ccc;
+}
+ .foldTable th, table td {
+	 padding: 0.4em;
+}
+ .foldTable > tbody > tr.view td, table.foldTable > tbody > tr > .foldContent > table td {
+	 cursor: pointer;
+}
+ .foldTable > tbody > tr.view td:first-child, table.foldTable > tbody > tr.view th:first-child {
+	 position: relative;
+	 padding-left: 10px;
+}
+ 
+.foldTable tr.view:nth-child(2n-1) {
+	 background: rgb(241, 240, 240);
+}
+  .foldTable > tbody > tr.view:hover {
+    background: black;
+    color: #61dafb;
+}
+
+.foldContent{
+  display: table-cell;
+}
+ .foldContent {
+	 padding: 0.5em;
+}
+ .foldContent h3 {
+	 margin-top: 0;
+}
+ .foldContent > table {
+   width: 100%;
+	 border: 2px solid #ccc;
+}
+  .colEstanteria{
+    width: 20px;
+  }
+  .colCarga{
+    width: 20px;
+  }
+  .colCodigo{
+    width: 10%;
+  }
+  .colCantidad{
+    width: 20px;
+  }
+  .colDescripcion{
+    width: 30%;
+  }
+
+  .depositForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .depositForm .filtros {
+    min-width: fit-content;
+  }
+  .depositForm  input:focus {
+    box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  }
+  label.filtros{
+    padding: 10px;
+    width: 10%;
+    color: #282c34;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .depositForm input {
+    margin-right: 8px;
+    box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
+    box-sizing: border-box;
+    appearance: none;
+    border: 0;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 13px;
+    background-color: white;
+    min-width: fit-content;
+    width: 90%;
+    transition: all 0.2s ease-in-out;
+  }
+  .depositForm  input:focus {
+    box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  }
+  .reload {
+    font-family: Lucida Sans Unicode;
+    font-size:20px;
+    font-weight: bolder;
+    transform: rotate(45deg);
+  }
+  .reloadButton{
+    margin: 0px 15px;
+    width: 5%;
+    height: 43px;
+    box-shadow:  5px 5px 20px #BABECC;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    outline: 0;
+    border-radius: 320px;
+    border: 0;
+    padding: 0px;
+    background-color: white;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    min-width: 40px;
+  }
+  .reloadButton span {
+    display: block;
+    transform: rotate(90deg);
+  }
+  .depositForm button:hover{
+    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
+  }
+  .depositForm button:active{
+    box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px #393f4b;
+  }
+  .buttonDisable{
+    background-color: gray !important;
+  }
+  .buttonDisable:hover{
+    box-shadow:none !important;
+    cursor:not-allowed !important;
+  }

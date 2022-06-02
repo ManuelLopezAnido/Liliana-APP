@@ -42,7 +42,7 @@ const InputAbastecimiento = ()=>{
       arr.push('Posicion')
     }
     const altura = inputs?.altura
-    const rgexAltura = /^[1-4]{1}$/
+    const rgexAltura = /^[1-4]{2}$/
     if (!rgexAltura.test(altura)) {
       arr.push('Altura')
     }
@@ -194,6 +194,9 @@ const InputAbastecimiento = ()=>{
             placeholder="Posición"/>
         </label>
         <label>
+          <div className={`${styles.notValid} ${['W','Y','V','X','Z'].indexOf(inputs.estanteria) + 1  ? styles.visible:''}`}>
+            Ingresar altura y profunidad
+          </div>
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Altura')  ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
@@ -207,7 +210,7 @@ const InputAbastecimiento = ()=>{
             placeholder="Altura"/>
         </label>
         <label>
-          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Cantidad')  ? styles.visible:''}`}>
+          <div className={`${styles.notValid}  ${arrErrors.find(e=>e === 'Cantidad') ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
           <input 
@@ -220,7 +223,7 @@ const InputAbastecimiento = ()=>{
             placeholder="Cantidad"/>
         </label>
         <label>
-          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Cantidad')  ? styles.visible:''}`}>
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Comentarios')  ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
           <textarea

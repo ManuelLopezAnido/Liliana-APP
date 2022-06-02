@@ -19,13 +19,14 @@
 .pcpMenu{
   display: flex;
   justify-content:space-around;
-  width: 60vw;
+  width: 40vw;
   color: wheat;
   cursor: pointer;
+  flex-wrap: wrap;
 }
 .pcpMenu a{
-  width: 25%;
-  margin: 10px 0px;
+  width: 40%;
+  margin: 15px 15px;
   text-decoration: none;
 }
 .pcpMenu button{
