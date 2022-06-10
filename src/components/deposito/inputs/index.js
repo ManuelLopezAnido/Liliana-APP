@@ -42,7 +42,7 @@ const InputDeposito = ()=>{
       arr.push('Posicion')
     }
     const altura = inputs?.altura
-    const rgexAltura = /^[1-4]{1}$/
+    const rgexAltura = /^[1-5]{1}$/
     if (!rgexAltura.test(altura)) {
       arr.push('Altura')
     }
@@ -200,7 +200,7 @@ const InputDeposito = ()=>{
           <input
             required
             onFocus={clearErrMsg}
-            type="number" 
+            type={(['V','W','Y','X','Z'].indexOf(inputs?.estanteria) + 1 ) ? 'text' : 'number'}
             name='altura' 
             value={inputs.altura || ''} 
             onChange={handleChange} 
@@ -211,7 +211,8 @@ const InputDeposito = ()=>{
             Ingreso no válido:
           </div>
           <input 
-            required = {(inputs.radio === 'add' || inputs.radio === 'replace')}
+            // required = {(inputs.radio === 'add' || inputs.radio === 'replace')}
+            required = {false}
             onFocus={clearErrMsg}
             type='number'
             name='cantidad' 
@@ -241,7 +242,7 @@ const InputDeposito = ()=>{
               checked = {inputs.radio==='add'?true:false}
               onChange={handleChange}
               />
-            <div>Suma</div>
+            <div>Agregar</div>
           </label>
           <label className={styles.container}>
             <input 
@@ -251,7 +252,7 @@ const InputDeposito = ()=>{
               checked = {inputs.radio==='replace'?true:false}
               onChange={handleChange}
               />
-            <div>Pisa</div>
+            <div>Alta</div>
           </label>
           <label className={styles.container}>
             <input 
@@ -261,7 +262,7 @@ const InputDeposito = ()=>{
               checked = {inputs.radio==='down' ? true : false}
               onChange={handleChange}
               />
-            <div>Baja</div>
+            <div>Bajar</div>
           </label>
           <label className={styles.container}>
             <input 
@@ -271,7 +272,7 @@ const InputDeposito = ()=>{
               checked = {inputs.radio==='clean' ? true : false}
               onChange={handleChange}
               />
-            <div>Limpia</div>
+            <div>Vaciar</div>
           </label>
         </div>
         <button 

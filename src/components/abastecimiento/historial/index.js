@@ -6,7 +6,6 @@ const HistorialAbastecimiento = () =>{
  
   const [dataInputs, setDataInputs] = useState([])
   const [dataInputsFiltred,setDataInputsFiltred] = useState([])
-  const [inputs, setInputs] = useState([])
   const fetchingTable = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/inputs')
       .then((res)=>res.json())

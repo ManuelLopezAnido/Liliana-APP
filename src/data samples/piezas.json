@@ -1192,7 +1192,7 @@
     "Detalle": "MOTOR BATIDORA C/ ENGRANAJE, MICRO Y LLAVE DE VELOCIDADES"
   },
   {
-    "Articulo": "AB4657-D",
+    "Articulo": "AB4657",
     "Detalle": "MOTOR BATIDORA C/ ENGRANAJE, MICRO Y LLAVE DE VELOCIDADES"
   },
   {
@@ -1320,7 +1320,7 @@
     "Detalle": "COBERTOR ANTISALPICADURAS AB701"
   },
   {
-    "Articulo": "AB4700-D",
+    "Articulo": "AB4700",
     "Detalle": "MOTOR BATIDORA 450W"
   },
   {
@@ -4004,7 +4004,7 @@
     "Detalle": "MOTOR 800W CORRIENTE CONTINUA"
   },
   {
-    "Articulo": "AH4700-D",
+    "Articulo": "AH4700",
     "Detalle": "MOTOR 800W CORRIENTE CONTINUA"
   },
   {
@@ -4028,7 +4028,7 @@
     "Detalle": "CONJUNTO PLAQUETA"
   },
   {
-    "Articulo": "AH4705-D",
+    "Articulo": "AH4705",
     "Detalle": "CONJUNTO PLAQUETA"
   },
   {
@@ -4276,7 +4276,7 @@
     "Detalle": "ARANDELA VIBRACION DE MOTOR"
   },
   {
-    "Articulo": "AH4800-D",
+    "Articulo": "AH4800",
     "Detalle": "MOTOR PROCESADORA DE MANO 450W DC"
   },
   {
@@ -4292,7 +4292,7 @@
     "Detalle": "SISTEMA DE ACOPLE COLOR GRIS"
   },
   {
-    "Articulo": "AH4810-D",
+    "Articulo": "AH4810",
     "Detalle": "MOTOR PROCESADORA DE MANO 850W DC"
   },
   {
@@ -6496,7 +6496,7 @@
     "Detalle": "MOTOR 220V 50Hz 550W"
   },
   {
-    "Articulo": "AL4634-D",
+    "Articulo": "AL4634",
     "Detalle": "MOTOR 220V 50Hz 550W"
   },
   {
@@ -6840,7 +6840,7 @@
     "Detalle": "MOTOR MINI BLENDER"
   },
   {
-    "Articulo": "AL4942-D",
+    "Articulo": "AL4942",
     "Detalle": "MOTOR MINI BLENDER"
   },
   {
@@ -6912,7 +6912,7 @@
     "Detalle": "TAPA HERMETICA AL916"
   },
   {
-    "Articulo": "AL4965-D",
+    "Articulo": "AL4965",
     "Detalle": "MOTOR LICUADORA 400W"
   },
   {
@@ -8836,7 +8836,7 @@
     "Detalle": "MOTOR DE PROCESADORA DIGITAL 8830"
   },
   {
-    "Articulo": "AM4200-C",
+    "Articulo": "AM4200",
     "Detalle": "MOTOR DE PROCESADORA DIGITAL 8830 CCA"
   },
   {
@@ -8848,7 +8848,7 @@
     "Detalle": "MOTOR DE PROCESADORA 7625"
   },
   {
-    "Articulo": "AM4202-C",
+    "Articulo": "AM4202",
     "Detalle": "MOTOR DE PROCESADORA 7625 CCA"
   },
   {
@@ -9028,7 +9028,7 @@
     "Detalle": "MOTOR PROCESADORA 7625 CON DIODO"
   },
   {
-    "Articulo": "AM4248-C",
+    "Articulo": "AM4248",
     "Detalle": "MOTOR PROCESADORA 7625 CCA CON DIODO"
   },
   {
@@ -9048,7 +9048,7 @@
     "Detalle": "MOTOR DE PROCESADORA 3Vel. EJE LARGO"
   },
   {
-    "Articulo": "AM4347-D",
+    "Articulo": "AM4347",
     "Detalle": "MOTOR DE PROCESADORA 3Vel. EJE LARGO"
   },
   {
@@ -9332,7 +9332,7 @@
     "Detalle": "MOTOR 3 VELOCIDADES + REDUCTOR Y LLAVE DE VEL."
   },
   {
-    "Articulo": "AM4549-D",
+    "Articulo": "AM4549",
     "Detalle": "MOTOR 3 VELOCIDADES + REDUCTOR Y LLAVE DE VEL."
   },
   {
@@ -9392,7 +9392,7 @@
     "Detalle": "MOTOR DE PROCESADORA LBN3200 5425"
   },
   {
-    "Articulo": "AM4632-D",
+    "Articulo": "AM4632",
     "Detalle": "MOTOR DE PROCESADORA LBN3200 5425"
   },
   {
@@ -9408,7 +9408,7 @@
     "Detalle": "MOTOR COMPLETO 700W"
   },
   {
-    "Articulo": "AM4650-D",
+    "Articulo": "AM4650",
     "Detalle": "MOTOR COMPLETO 700W"
   },
   {
@@ -9488,7 +9488,7 @@
     "Detalle": "CONJUNTO ELECTRICO CON PLAQUETAS"
   },
   {
-    "Articulo": "AM4669-D",
+    "Articulo": "AM4669",
     "Detalle": "CONJUNTO ELECTRICO CON PLAQUETAS"
   },
   {
@@ -13424,7 +13424,7 @@
     "Detalle": "Cable de Linea 3 x 1,5 x 900 NEGRO 20 A - H05RR-F, AP MP TOJ"
   },
   {
-    "Articulo": "CC4630-H",
+    "Articulo": "CC4630",
     "Detalle": "CAPACITOR 630V 0,82uF"
   },
   {
@@ -15528,7 +15528,7 @@
     "Detalle": "LLAVE INTERRUPTORA 3 PUNTOS 2 VIAS KDC-A06-B41"
   },
   {
-    "Articulo": "CI4493-H",
+    "Articulo": "CI4493",
     "Detalle": "LLAVE INTERRUPTORA 3 PUNTOS 2 VIAS KDC-A06-B41"
   },
   {
@@ -15544,7 +15544,7 @@
     "Detalle": "CONJUNTO TIP OVER BOLILLA"
   },
   {
-    "Articulo": "CI4530-H",
+    "Articulo": "CI4530",
     "Detalle": "CONJUNTO TIP OVER BOLILLA"
   },
   {
@@ -16068,7 +16068,7 @@
     "Detalle": "CABLE DE LINEA BLANCO 3 x 1mm x 1650mm Ojal en Tierra + 2 Punteras"
   },
   {
-    "Articulo": "CM1129-Q",
+    "Articulo": "CM1129",
     "Detalle": "CABLE DE LINEA BLANCO 3 x 1mm x 1650mm Ojal en Tierra + 2 Punteras"
   },
   {
@@ -17416,7 +17416,7 @@
     "Detalle": "CABLE DE LINEA BLANCO 2 x 1mm x 1500mm S/Terminales"
   },
   {
-    "Articulo": "CP1047-Q",
+    "Articulo": "CP1047",
     "Detalle": "CABLE DE LINEA BLANCO 2 x 1mm x 1500mm S/Terminales"
   },
   {
@@ -18480,7 +18480,7 @@
     "Detalle": "CONJUNTO PLAQUETA DE COMANDOS CON DISPLAY"
   },
   {
-    "Articulo": "CP4910-K",
+    "Articulo": "CP4910",
     "Detalle": "CONJUNTO PLAQUETA DE COMANDOS CON DISPLAY"
   },
   {
@@ -18488,7 +18488,7 @@
     "Detalle": "PLAQUETA FUENTE PRINCIPAL"
   },
   {
-    "Articulo": "CP4911-K",
+    "Articulo": "CP4911",
     "Detalle": "PLAQUETA FUENTE PRINCIPAL"
   },
   {
@@ -18780,7 +18780,7 @@
     "Detalle": "PLAQUETA DE INFRARROJO"
   },
   {
-    "Articulo": "CP4992-K",
+    "Articulo": "CP4992",
     "Detalle": "PLAQUETA DE INFRARROJO"
   },
   {
@@ -18788,7 +18788,7 @@
     "Detalle": "PLAQUETA DE POTENCIA"
   },
   {
-    "Articulo": "CP4993-K",
+    "Articulo": "CP4993",
     "Detalle": "PLAQUETA DE POTENCIA"
   },
   {
@@ -22920,7 +22920,7 @@
     "Detalle": "MOTOR LUSTRASPIRADORA -A- 220V. - 50Hz"
   },
   {
-    "Articulo": "LL4496-D",
+    "Articulo": "LL4496",
     "Detalle": "MOTOR LUSTRASPIRADORA -A- 220V. - 50Hz"
   },
   {
@@ -22948,7 +22948,7 @@
     "Detalle": "BOLSA RECOLECTORA COLOR GRIS SIN LOGO"
   },
   {
-    "Articulo": "LL4690-D",
+    "Articulo": "LL4690",
     "Detalle": "MOTOR LUSTRASPIRADORA SIN LUZ 220V. - 50Hz"
   },
   {
@@ -24684,7 +24684,7 @@
     "Detalle": "CONECTOR PERILLA TERMOSTATO CORTO"
   },
   {
-    "Articulo": "RP1143-L",
+    "Articulo": "RP1143",
     "Detalle": "CONECTOR PERILLA TERMOSTATO LARGO"
   },
   {
@@ -27368,11 +27368,11 @@
     "Detalle": "MOTOR TURBOVENTILADOR 18\" EJE LARGO"
   },
   {
-    "Articulo": "VB306NL-C",
+    "Articulo": "VB306NL",
     "Detalle": "MOTOR TURBOVENTILADOR 18\" EJE LARGO"
   },
   {
-    "Articulo": "VB306NL-D",
+    "Articulo": "VB306NL",
     "Detalle": "MOTOR TURBOVENTILADOR 18\" EJE LARGO"
   },
   {
@@ -27384,15 +27384,15 @@
     "Detalle": "MOTOR TURBOVENTILADOR 20\" EJE LARGO"
   },
   {
-    "Articulo": "VB308L-C",
+    "Articulo": "VB308L",
     "Detalle": "MOTOR TURBOVENTILADOR 20\" EJE LARGO"
   },
   {
-    "Articulo": "VB308L-D",
+    "Articulo": "VB308L",
     "Detalle": "MOTOR TURBOVENTILADOR 20\" EJE LARGO"
   },
   {
-    "Articulo": "VB4010-K",
+    "Articulo": "VB4010",
     "Detalle": "CAÑO GRANDE"
   },
   {
@@ -27400,19 +27400,19 @@
     "Detalle": "CAÑO GRANDE"
   },
   {
-    "Articulo": "VB4020-K",
+    "Articulo": "VB4020",
     "Detalle": "CAÑO MEDIANO"
   },
   {
-    "Articulo": "VB4020-L",
+    "Articulo": "VB4020",
     "Detalle": "CAÑO MEDIANO"
   },
   {
-    "Articulo": "VB4030-K",
+    "Articulo": "VB4030",
     "Detalle": "CAÑO CHICO"
   },
   {
-    "Articulo": "VB4030-L",
+    "Articulo": "VB4030",
     "Detalle": "CAÑO CHICO"
   },
   {
@@ -30532,11 +30532,11 @@
     "Detalle": "MOTOR 18\" CON CAJA OSCILANTE ALTA"
   },
   {
-    "Articulo": "VP305N-C",
+    "Articulo": "VP305N",
     "Detalle": "MOTOR 18\" CON CAJA OSCILANTE ALTA"
   },
   {
-    "Articulo": "VP305N-D",
+    "Articulo": "VP305N",
     "Detalle": "MOTOR 18\" CON CAJA OSCILANTE ALTA"
   },
   {
@@ -30548,11 +30548,11 @@
     "Detalle": "MOTOR CON CAJA OSCILANTE 20\""
   },
   {
-    "Articulo": "VP307-C",
+    "Articulo": "VP307",
     "Detalle": "MOTOR CON CAJA OSCILANTE 20\""
   },
   {
-    "Articulo": "VP307-D",
+    "Articulo": "VP307",
     "Detalle": "MOTOR CON CAJA OSCILANTE 20\""
   },
   {
@@ -30584,7 +30584,7 @@
     "Detalle": "CABLE DE LINEA 2 x 0.5mm x 1.95 m NEGRO"
   },
   {
-    "Articulo": "VP4302B-Q",
+    "Articulo": "VP4302B",
     "Detalle": "CABLE DE LINEA 2 x 0.5mm x 1.95 m NEGRO"
   },
   {
@@ -30604,11 +30604,11 @@
     "Detalle": "MOTOR OSCILANTE 24\" 220-240VAC/50Hz, 120W"
   },
   {
-    "Articulo": "VP4310-D",
+    "Articulo": "VP4310",
     "Detalle": "MOTOR OSCILANTE 24\" 220-240VAC/50Hz, 120W"
   },
   {
-    "Articulo": "VP4310W-D",
+    "Articulo": "VP4310W",
     "Detalle": "MOTOR OSCILANTE 24\" 220-240VAC/50Hz, 120W"
   },
   {
@@ -30680,7 +30680,7 @@
     "Detalle": "PLAQUETA DE INTERCONEXION"
   },
   {
-    "Articulo": "VP4350-H",
+    "Articulo": "VP4350",
     "Detalle": "PLAQUETA DE INTERCONEXION"
   },
   {
@@ -30700,7 +30700,7 @@
     "Detalle": "BARRAL TELESCOPICO TCT-48-B"
   },
   {
-    "Articulo": "VP4380F-K",
+    "Articulo": "VP4380F",
     "Detalle": "PARRILLA ESPIRALADA 22\" FRONTAL CROMADA"
   },
   {
@@ -30708,7 +30708,7 @@
     "Detalle": "PARRILLA ESPIRALADA 22\" FRONTAL CROMADA"
   },
   {
-    "Articulo": "VP4380T-K",
+    "Articulo": "VP4380T",
     "Detalle": "PARRILLA ESPIRALADA 22\" TRASERA CROMADA"
   },
   {
@@ -30716,35 +30716,35 @@
     "Detalle": "PARRILLA ESPIRALADA 22\" TRASERA CROMADA"
   },
   {
-    "Articulo": "VP4382F-K",
+    "Articulo": "VP4382F",
     "Detalle": "PARRILLA ESPIRALADA 20\" FRONTAL CROMADA"
   },
   {
-    "Articulo": "VP4382F-L",
+    "Articulo": "VP4382F",
     "Detalle": "PARRILLA ESPIRALADA 20\" FRONTAL CROMADA"
   },
   {
-    "Articulo": "VP4382T-K",
+    "Articulo": "VP4382T",
     "Detalle": "PARRILLA ESPIRALADA 20\" TRASERA CROMADA"
   },
   {
-    "Articulo": "VP4382T-L",
+    "Articulo": "VP4382T",
     "Detalle": "PARRILLA ESPIRALADA 20\" TRASERA CROMADA"
   },
   {
-    "Articulo": "VP4384F-K",
+    "Articulo": "VP4384F",
     "Detalle": "PARRILLA ESPIRALADA 18\" FRONTAL CROMADA"
   },
   {
-    "Articulo": "VP4384F-L",
+    "Articulo": "VP4384F",
     "Detalle": "PARRILLA ESPIRALADA 18\" FRONTAL CROMADA"
   },
   {
-    "Articulo": "VP4384T-K",
+    "Articulo": "VP4384T",
     "Detalle": "PARRILLA ESPIRALADA 18\" TRASERA CROMADA"
   },
   {
-    "Articulo": "VP4384T-L",
+    "Articulo": "VP4384T",
     "Detalle": "PARRILLA ESPIRALADA 18\" TRASERA CROMADA"
   },
   {
@@ -31188,7 +31188,7 @@
     "Detalle": "MOTOR PARA VENTILADOR INDUSTRIAL"
   },
   {
-    "Articulo": "VP627-D",
+    "Articulo": "VP627",
     "Detalle": "MOTOR PARA VENTILADOR INDUSTRIAL"
   },
   {
@@ -31208,7 +31208,7 @@
     "Detalle": "SOPORTE DE MOTOR INDUSTRIAL SIN CUELLO"
   },
   {
-    "Articulo": "VP630-D",
+    "Articulo": "VP630",
     "Detalle": "SOPORTE DE MOTOR INDUSTRIAL SIN CUELLO"
   },
   {
@@ -31657,7 +31657,7 @@
   },
   {
     "Articulo": "VT4012",
-    "Detalle": "COBERTOR TECHO 300-K"
+    "Detalle": "COBERTOR TECHO 300"
   },
   {
     "Articulo": "VT4109",
@@ -31665,7 +31665,7 @@
   },
   {
     "Articulo": "VT4110",
-    "Detalle": "BARRAL 300-K"
+    "Detalle": "BARRAL 300"
   },
   {
     "Articulo": "VT4115",
@@ -31689,7 +31689,7 @@
   },
   {
     "Articulo": "VT4190",
-    "Detalle": "MOTOR 314-K"
+    "Detalle": "MOTOR 314"
   },
   {
     "Articulo": "VT4235",
@@ -31697,7 +31697,7 @@
   },
   {
     "Articulo": "VT4236",
-    "Detalle": "COBERTOR INF 300-K"
+    "Detalle": "COBERTOR INF 300"
   },
   {
     "Articulo": "VT4237",
@@ -31733,7 +31733,7 @@
   },
   {
     "Articulo": "VT4384",
-    "Detalle": "PORTA 314-K"
+    "Detalle": "PORTA 314"
   },
   {
     "Articulo": "VT4386",
@@ -31753,7 +31753,7 @@
   },
   {
     "Articulo": "VT4466",
-    "Detalle": "TULIPA 300-K"
+    "Detalle": "TULIPA 300"
   },
   {
     "Articulo": "VT4475",
@@ -31853,7 +31853,7 @@
   },
   {
     "Articulo": "VT4582",
-    "Detalle": "PIEZA U 300-K"
+    "Detalle": "PIEZA U 300"
   },
   {
     "Articulo": "VT4583",
@@ -31997,7 +31997,7 @@
   },
   {
     "Articulo": "VT4655",
-    "Detalle": "CHAPA 300-K"
+    "Detalle": "CHAPA 300"
   },
   {
     "Articulo": "VT4675",
@@ -32366,5 +32366,37 @@
   {
     "Articulo": "RP1013",
     "Detalle": "CONECTOR TERMINALES TRMC856"
+  },
+  {
+    "Articulo": "ZAL4860",
+    "Detalle": "MOTOR LICUADORA"
+  },
+  {
+    "Articulo": "ZAL4655",
+    "Detalle": "PERILLA CON DECORADOR"
+  },
+  {
+    "Articulo": "ZAL4723",
+    "Detalle": "BOTON PULSADOR"
+  },
+  {
+    "Articulo": "ZAL4780",
+    "Detalle": "PATITA DE GOMA"
+  },
+  {
+    "Articulo": "ZAL4832",
+    "Detalle": "PRENSACABLE"
+  },
+  {
+    "Articulo": "ZAL4973",
+    "Detalle": "FONDO LICUADORA"
+  },
+  {
+    "Articulo": "ZAL4974",
+    "Detalle": "CARDAN"
+  },
+  {
+    "Articulo": "ZAL4746",
+    "Detalle": "RESORTE BOTON"
   }
 ]

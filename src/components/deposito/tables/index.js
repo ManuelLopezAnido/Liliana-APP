@@ -187,7 +187,7 @@ const TablasDeposito =() =>{
                         {d.codigo}
                       </td>
                       <td>
-                        {d.cantidad === '' ? 'indefinido' : d.cantidad}
+                        {d.codigo === '' ? d.cantidad : 'indefinido'}
                       </td>
                       <td>
                         {piezas.find((pz)=>{return (pz.Articulo===d.codigo)

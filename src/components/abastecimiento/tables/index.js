@@ -37,7 +37,7 @@ const TablasAbastecimiento =() =>{
           return(
             (input.estanteria ? (input.estanteria === pos.estanteria) : true) &&
             (input.posicion ? (+input.posicion === pos.posicion) : true) &&
-            (input.altura ? (+input.altura === pos.altura) : true)
+            (input.altura ? (input.altura === pos.altura) : true)
           )    
         })
         setDataAbsFiltred([...dataAbsFil])
@@ -179,7 +179,7 @@ const TablasAbastecimiento =() =>{
                         {estan.estanteria}
                       </td>
                       <td>
-                      {estan.posicion}
+                        {estan.posicion}
                       </td>
                       <td>
                         {estan.altura}

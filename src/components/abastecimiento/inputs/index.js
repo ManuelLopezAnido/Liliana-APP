@@ -14,10 +14,10 @@ const InputAbastecimiento = ()=>{
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
-    if (name === 'codigo' || name === 'estanteria') {
+    if (name === 'codigo' || name === 'estanteria' || name === 'altura') {
       value=e.target.value.toUpperCase()
     }
-    if (name ==='cantidad' || name ==='posicion' || name ==='altura'){
+    if (name ==='cantidad' || name ==='posicion'){
       value = parseInt(e.target.value)
     }
     setInputs (({...inputs, [name]: value}))
@@ -42,7 +42,7 @@ const InputAbastecimiento = ()=>{
       arr.push('Posicion')
     }
     const altura = inputs?.altura
-    const rgexAltura = /^[1-4]{2}$/
+    const rgexAltura = /^[1-4A-D]{1,2}$/
     if (!rgexAltura.test(altura)) {
       arr.push('Altura')
     }
@@ -67,7 +67,7 @@ const InputAbastecimiento = ()=>{
     } 
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
-    const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
+    const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.time = time
     inputs.date = date
     inputs.operario = abasUser
@@ -203,7 +203,7 @@ const InputAbastecimiento = ()=>{
           <input
             required
             onFocus={clearErrMsg}
-            type="number" 
+            type={(['V','W','X','Y','Z'].indexOf(inputs?.estanteria) + 1 ) ? 'text' : 'number'}
             name='altura' 
             value={inputs.altura || ''} 
             onChange={handleChange} 
@@ -244,7 +244,7 @@ const InputAbastecimiento = ()=>{
               checked = {inputs.radio==='add'?true:false}
               onChange={handleChange}
               />
-            <div>Suma</div>
+            <div>Agregar</div>
           </label>
           <label className={styles.container}>
             <input 
@@ -254,7 +254,7 @@ const InputAbastecimiento = ()=>{
               checked = {inputs.radio==='replace'?true:false}
               onChange={handleChange}
               />
-            <div>Pisa</div>
+            <div>Reemplazar</div>
           </label>
           <label className={styles.container}>
             <input 
@@ -264,7 +264,7 @@ const InputAbastecimiento = ()=>{
               checked = {inputs.radio==='down' ? true : false}
               onChange={handleChange}
               />
-            <div>Baja</div>
+            <div>Bajar</div>
           </label>
           <label className={styles.container}>
             <input 
@@ -274,7 +274,7 @@ const InputAbastecimiento = ()=>{
               checked = {inputs.radio==='clean' ? true : false}
               onChange={handleChange}
               />
-            <div>Limpia</div>
+            <div>Vaciar</div>
           </label>
         </div>
         <button 
