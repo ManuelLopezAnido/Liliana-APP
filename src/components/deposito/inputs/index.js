@@ -2,7 +2,7 @@ import { useState } from "react"
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
 import styles from "./inputsDeposito.module.css"
-import piezas from "../../../data samples/piezas.json"
+import piezas from "../../../data samples/piezas deposito.json"
 
 const InputDeposito = ()=>{
   const [inputs, setInputs] = useState({});
@@ -42,7 +42,7 @@ const InputDeposito = ()=>{
       arr.push('Posicion')
     }
     const altura = inputs?.altura
-    const rgexAltura = /^[1-5]{1}$/
+    const rgexAltura = /^[1-8]{1}$/
     if (!rgexAltura.test(altura)) {
       arr.push('Altura')
     }
@@ -67,7 +67,7 @@ const InputDeposito = ()=>{
     } 
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
-    const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
+    const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.time = time
     inputs.date = date
     inputs.operario = depoUser
@@ -100,10 +100,15 @@ const InputDeposito = ()=>{
           }
           fetchedInputs.codigo = inputs.codigo
         }
-        if (inputs.radio === 'add'){
+        if (inputs.radio === 'add' || inputs.radio === 'replace' ){
           fetchedInputs.estanteria = inputs.estanteria
-          fetchedInputs.posicion = inputs.posicion
-          fetchedInputs.altura = inputs.altura
+          if (inputs.altura < 9){
+            fetchedInputs.posicion = inputs.posicion
+            fetchedInputs.altura = inputs.altura + 1
+          } else {
+            fetchedInputs.posicion = inputs.posicion + 1 
+            fetchedInputs.altura = 1
+          }
         }
         setInputs({...fetchedInputs})
       })

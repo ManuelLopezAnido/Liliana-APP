@@ -1,7 +1,7 @@
 import styles from './tablasDeposito.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
-import piezas from '../../../data samples/piezas.json'
+import piezas from '../../../data samples/piezas deposito.json'
 import Total from '../../common components/total'
 const TablasDeposito =() =>{
   const [dataDepo, setDataDepo] = useState([])
@@ -48,7 +48,7 @@ const TablasDeposito =() =>{
         const dataDepoFil = dataDepo.map((estan)=>{
           const insumosFiltred = estan.insumos.filter((pos)=>{
             return(
-              pos.codigo===input.codigo
+              pos.codigo.includes(input.codigo)
             )    
           })
           if (!insumosFiltred.length){
@@ -63,7 +63,7 @@ const TablasDeposito =() =>{
         const dataDepoFil = dataDepo.map((estan)=>{
           const insumosFiltred = estan.insumos.filter((pos)=>{
             return(
-              pos.codigo===input.codigo
+              pos.codigo.includes(input.codigo)
             )    
           })
           if (!insumosFiltred.length || estan.estanteria!==input.estanteria){
@@ -187,7 +187,7 @@ const TablasDeposito =() =>{
                         {d.codigo}
                       </td>
                       <td>
-                        {d.codigo === '' ? d.cantidad : 'indefinido'}
+                        {d.cantidad === '' ? 'indefinido' : d.cantidad  }
                       </td>
                       <td>
                         {piezas.find((pz)=>{return (pz.Articulo===d.codigo)

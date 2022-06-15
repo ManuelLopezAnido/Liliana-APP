@@ -41,7 +41,6 @@ const TablasAbastecimiento =() =>{
           )    
         })
         setDataAbsFiltred([...dataAbsFil])
-        console.log('DATA FILTRADA2: ',dataAbsFil)
       }
     } 
     else {
@@ -49,7 +48,7 @@ const TablasAbastecimiento =() =>{
         const dataAbsFil = dataAbs.map((estan)=>{
           const insumosFiltred = estan.insumos.filter((pos)=>{
             return(
-              pos.codigo===input.codigo
+              pos.codigo.includes(input.codigo)
             )    
           })
           if (!insumosFiltred.length){
@@ -64,7 +63,7 @@ const TablasAbastecimiento =() =>{
         const dataAbsFil = dataAbs.map((estan)=>{
           const insumosFiltred = estan.insumos.filter((pos)=>{
             return(
-              pos.codigo===input.codigo
+              pos.codigo.includes(input.codigo)
             )    
           })
           if (!insumosFiltred.length || estan.estanteria!==input.estanteria){
