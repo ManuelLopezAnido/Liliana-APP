@@ -1,16 +1,30 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
 import styles from "./inputAbastecimiento.module.css"
-import piezas from "../../../data samples/piezas.json"
+//import piezas from "../../../data samples/piezas.json"
 
 const InputAbastecimiento = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
+  const [piezas, setPiezas] = useState([])
   const abasUser = sessionStorage.getItem('AbastecimientoUser')
   console.log ('Inputs: ',inputs)
+
+  useEffect (()=>{
+    fetchingPiezas()
+  },[])
+  const fetchingPiezas = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setPiezas(json)
+      })
+      .catch (err => console.log(err))
+  }
+
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;

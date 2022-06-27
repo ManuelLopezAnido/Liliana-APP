@@ -1,16 +1,29 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
 import styles from "./inputsDeposito.module.css"
-import piezas from "../../../data samples/piezas deposito.json"
 
 const InputDeposito = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
+  const [piezas, setPiezas] = useState([])
   const depoUser = sessionStorage.getItem('DepositoUser')
   console.log ('Inputs: ',inputs)
+  console.log('piezas 1: ', piezas[0])
+  
+  useEffect(()=>{
+    fetchingPiezas()
+  },[])
+  const fetchingPiezas = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/piezas')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setPiezas(json)
+      })
+      .catch (err => console.log(err))
+  }
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
@@ -20,6 +33,9 @@ const InputDeposito = ()=>{
     if (name ==='cantidad' || name ==='posicion' || name ==='altura'){
       value = parseInt(e.target.value)
     }
+    if (['D','E','G','H'].indexOf(inputs.estanteria) + 1) {
+      inputs.altura=1
+    } 
     setInputs (({...inputs, [name]: value}))
   }
   const handleCheckData = () => {
@@ -38,7 +54,7 @@ const InputDeposito = ()=>{
     }
     const posicion = inputs?.posicion
     
-    if (posicion<1 || posicion>53 ) {
+    if (posicion<1 || posicion>56 ) {
       arr.push('Posicion')
     }
     const altura = inputs?.altura
@@ -52,10 +68,9 @@ const InputDeposito = ()=>{
     }
     return arr
   }
-   const clearErrMsg = () =>{
+  const clearErrMsg = () =>{
     setArrErrors([])
   }
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const arr =handleCheckData()
@@ -204,10 +219,12 @@ const InputDeposito = ()=>{
           </div>
           <input
             required
+            disabled = {(['D','E','G','H'].indexOf(inputs.estanteria) + 1) ? true : false}
             onFocus={clearErrMsg}
-            type={(['V','W','Y','X','Z'].indexOf(inputs?.estanteria) + 1 ) ? 'text' : 'number'}
+            type={'number'}
             name='altura' 
-            value={inputs.altura || ''} 
+            //Some racks have no height 
+            value={['D','E','G','H'].indexOf(inputs.estanteria) + 1 ? 1 : inputs.altura || ''} 
             onChange={handleChange} 
             placeholder="Altura"/>
         </label>
@@ -251,6 +268,7 @@ const InputDeposito = ()=>{
           </label>
           <label className={styles.container}>
             <input 
+              disabled={ (['D','E','G','H'].indexOf(inputs.estanteria) + 1) ? true : false}
               type="radio" 
               name="radio"
               value={'replace'} 

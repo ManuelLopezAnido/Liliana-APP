@@ -39,46 +39,65 @@
    width: 100%;
 	 border: 2px solid #ccc;
 }
-  .colEstanteria{
-    width: 20px;
+  /* .colEstanteria{
+   
   }
   .colPosicion{
-    width: 20px;
+
   }
   .colCodigo{
-    width: 10%;
+   
   }
   .colCantidad{
-    width: 20px;
+   
   }
   .colDescripcion{
-    width: 30%;
-  }
+   
+  } */
 
   .depositForm {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 90%;
-    margin-top: 10px;
+    width: 30%;
     flex-wrap: wrap;
+    min-width: 1800px;
   }
-  .depositForm .filtros {
-    min-width: fit-content;
+  .filter {
+   display: flex;
+   height: 20%;
+   align-items: center;
+   flex-direction: row;
+   flex-wrap: wrap;
   }
   .depositForm  input:focus {
     box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
   }
   label.filtros{
     padding: 10px;
-    width: 10%;
+    width: 25%;
     color: #282c34;
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
     font-weight: bold;
   }
+  .pallets {
+    display: flex;
+    margin-left: 10px;
+    color: #282c34;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+  }
+  .pallets span{
+    margin-left: 7px;
+  }
+  .pallets .act:hover{
+    color: #61dafb;
+    cursor: pointer;
+  }
   .depositForm input {
-    margin-right: 8px;
+    margin-left: 8px;
     box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
     box-sizing: border-box;
     appearance: none;
@@ -98,9 +117,19 @@
     font-family: Lucida Sans Unicode;
     font-size:20px;
     font-weight: bolder;
-    transform: rotate(45deg);
+    display: block;
+    transform: rotate(90deg);
+  }
+  .greaterZero {
+    font-family: Lucida Sans Unicode;
+    font-size:20px;
+    font-weight: bolder;
+  }
+  .zeroActive {
+    color: #61dafb;
   }
   .reloadButton{
+    display: block;
     margin: 0px 15px;
     width: 5%;
     height: 43px;
@@ -116,14 +145,11 @@
     font-family: 'Roboto', sans-serif;
     min-width: 40px;
   }
-  .reloadButton span {
-    display: block;
-    transform: rotate(90deg);
-  }
-  .depositForm button:hover{
+  
+  .reloadButton:hover{
     box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
   }
-  .depositForm button:active{
+  .reloadButton:active{
     box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px #393f4b;
   }
   .buttonDisable{

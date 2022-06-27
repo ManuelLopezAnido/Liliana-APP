@@ -6,7 +6,7 @@ import Total from '../../common components/total'
 const TablasAbastecimiento =() =>{
   const [dataAbs, setDataAbs] = useState([])
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])
-  const [inputs, setInputs] = useState([])
+  const [inputs, setInputs] = useState({})
   const fetchingTable = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/tables')
       .then((res)=>res.json())
@@ -25,7 +25,7 @@ const TablasAbastecimiento =() =>{
     const value = e.target.value.toUpperCase();
     let input = inputs
     input[name] = value
-    console.log('valores: ',input.codigo, input.estanteria, input.posicion, input.altura)
+    console.log('valores: ', input, input.codigo, input.estanteria, input.posicion, input.altura)
     
     setInputs({...input})
     if(!input.codigo){
@@ -187,7 +187,9 @@ const TablasAbastecimiento =() =>{
                         {d.codigo}
                       </td>
                       <td>
-                        {d.cantidad || '-'}
+                        { d.codigo ? 
+                          d.cantidad === 0 ? 'Indefinido' : d.cantidad :
+                          '-'}
                       </td>
                       <td>
                         {piezas.find((pz)=>{return (pz.Articulo===d.codigo)

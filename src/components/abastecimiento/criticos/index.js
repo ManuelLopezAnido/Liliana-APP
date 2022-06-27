@@ -1,82 +1,38 @@
 import styles from './criticosAbastecimiento.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
-import piezas from '../../../data samples/piezas.json'
-import Total from '../../common components/total'
 const TablasAbastecimiento =() =>{
   const [dataAbs, setDataAbs] = useState([])
-  const [dataAbsFiltred,setDataAbsFiltred] = useState([])
-  const [inputs, setInputs] = useState([])
+  const [piezas, setPiezas] = useState([])
+  const [piezasFiltred , setPiezasFiltred] = useState ([])
+  const [inputs, setInputs] = useState({})
+  const [pzGreaterZero, setPzGreaterZero] = useState ([])
+  const [greaterZero, setGreaterZero] = useState(false)
+  const [cantPallets, setCantPallets] = useState(0)
+  const fetchingPiezas = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setPiezas([...json])
+        setPiezasFiltred ([...json])
+      })
+      .catch (err => console.log(err))
+  }
+
   const fetchingTable = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/tables')
       .then((res)=>res.json())
       .then ((json)=>{
         setDataAbs (json)
-        setDataAbsFiltred(json)
       })
       .catch (err => console.log(err))
   }
+  console.log('piezas',piezasFiltred)
   useEffect (()=>{
     fetchingTable()
+    fetchingPiezas()
   },[])
-  console.log(dataAbsFiltred)
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value.toUpperCase();
-    let input = inputs
-    input[name] = value
-    console.log('valores: ',input.codigo)
-    
-    setInputs({...input})
-    if(!input.codigo){
-      if(!input.estanteria && !input.posicion && !input.altura){
-        setDataAbsFiltred([...dataAbs])
-      }
-      else{
-        let dataAbsFil = dataAbs.filter((pos)=>{
-          return(
-            (input.estanteria ? (input.estanteria === pos.estanteria) : true) &&
-            (input.posicion ? (input.posicion === pos.posicion) : true) &&
-            (input.altura ? (input.altura === pos.altura) : true)
-          )    
-        })
-        setDataAbsFiltred([...dataAbsFil])
-      }
-    } 
-    else {
-      if(!input.estanteria){
-        const dataAbsFil = dataAbs.map((estan)=>{
-          const insumosFiltred = estan.insumos.filter((pos)=>{
-            return(
-              pos.codigo===input.codigo
-            )    
-          })
-          if (!insumosFiltred.length){
-            return false
-          }
-          estan.insumos = [...insumosFiltred]
-          return(estan)
-        }).filter(est=>est)
-        console.log('DATA FILTRADA: ',dataAbsFil)
-        setDataAbsFiltred([...dataAbsFil])
-      } else {
-        const dataAbsFil = dataAbs.map((estan)=>{
-          const insumosFiltred = estan.insumos.filter((pos)=>{
-            return(
-              pos.codigo===input.codigo
-            )    
-          })
-          if (!insumosFiltred.length || estan.estanteria!==input.estanteria){
-            return false
-          }
-          estan.insumos = [...insumosFiltred]
-          return(estan)
-        }).filter(est=>est)
-        console.log('DATA FILTRADA: ',dataAbsFil)
-        setDataAbsFiltred([...dataAbsFil])
-      }
-    }
-  }
+ 
   const cantPz=(pz)=>{
     const tot = dataAbs.reduce((prev,curr) => {
       return (
@@ -93,11 +49,53 @@ const TablasAbastecimiento =() =>{
     },0)
     return(tot)
   }
-  
+  const cantidadPallets = ()=>{
+    let cantPallet = piezasFiltred.reduce((acc, curr)=>{
+      let pallets = Math.floor((cantPz(curr.articulo)-curr.stockM)/curr.cantxPallet)
+      if (pallets < 0){
+        return (acc - pallets) // is a rest cause pallets are negative
+      } else {
+        return acc
+      }
+    },0)
+    setCantPallets(cantPallet)
+    console.log(cantPallet)
+  }
+
+  const filterGreaterZero = () =>{
+    let bool = !greaterZero
+    setGreaterZero(bool)
+    if (bool){
+      let pzFiltred = piezas.filter((pz)=>{
+        return cantPz(pz.articulo)
+      })
+      setPzGreaterZero (pzFiltred)
+      setPiezasFiltred(pzFiltred)
+    } else {
+      setPiezasFiltred(piezas)
+    }
+  }
+  const handleFilters = (e) => {
+    const name = e.target.name
+    const value = e.target.value.toUpperCase()
+    setInputs({...inputs, [name]: value})
+    let pzFiltred
+    if (greaterZero){
+      pzFiltred = pzGreaterZero.filter((pz)=>{
+        return(pz.articulo.includes(value))
+      })
+    } else {
+      pzFiltred = piezas.filter((pz)=>{
+        return(pz.articulo.includes(value))
+      })
+    }
+    setPiezasFiltred(pzFiltred)
+  }
+ 
   return(
   <>
     <div className={styles.filter}>
-      <form autoComplete="off" className={styles.depositForm} >
+      <form className={styles.depositForm}>
         <label className={styles.filtros}>
           <div>
           Filtros: 
@@ -108,41 +106,38 @@ const TablasAbastecimiento =() =>{
             type="text" 
             name="codigo"
             value={inputs.codigo || ''}  
-            onChange={handleChange} 
+            onChange={handleFilters} 
             placeholder="Código de insumo"/>
         </label>
-        <label>
-          <input 
-            type="text" 
-            name='estanteria' 
-            value={inputs.estanteria || ''}  
-            onChange={handleChange} 
-            placeholder="Estantería"/>
-        </label>
-        <label>
-          <input 
-            hidden = {!inputs.estanteria || inputs.codigo}
-            type="text" 
-            name='posicion' 
-            value={inputs.posicion || ''}  
-            onChange={handleChange} 
-            placeholder="Posición"/>
-        </label>
-        <label>
-          <input 
-            hidden = {!inputs.estanteria || inputs.codigo}
-            type="text" 
-            name='altura' 
-            value={inputs.altura || ''}  
-            onChange={handleChange} 
-            placeholder="Altura"/>
-        </label>
-          <button 
-            className={styles.reloadButton}
-            onClick={()=>fetchingTable()}>
-            <span className={styles.reload}>&#x21bb;</span>
-          </button>
       </form>
+      <button
+        className={styles.reloadButton}
+        onClick={()=>filterGreaterZero()}>
+        <span className={`${styles.greaterZero} ${greaterZero ? styles.zeroActive : ''}`}>0+</span>
+      </button>
+      <button 
+        className={styles.reloadButton}
+        onClick={()=>{
+          fetchingTable()
+          setPiezasFiltred(piezas)
+          }
+        }>
+        <span className={styles.reload}>&#x21bb;</span>
+      </button>
+    </div>
+    <div className={styles.pallets}>
+      <div>
+        Pallets faltantes: 
+      </div>
+      <span>
+        {cantPallets + ' -'}
+      </span>
+      <span
+      className={styles.act}
+      onClick = {cantidadPallets}
+      >
+        Actualizar
+      </span>
     </div>
     <div>
       <table className={styles.foldTable}>
@@ -181,39 +176,36 @@ const TablasAbastecimiento =() =>{
           </tr>
         </thead>
         <tbody>
-          {piezas?.map((pz,index) => {
+          {piezasFiltred?.map((pz,index) => {
+            let cant=cantPz(pz.articulo)
             return(
               <Fragment key={index}>
                 <tr className={styles.view} >
                   <td>
-                    {pz.Articulo}
+                    {pz.articulo}
                   </td>
                   <td>
-                    {pz.Detalle}
+                    {pz.detalle}
                   </td>
                   <td>
-                    {'-'}
+                    {pz.familia}
                   </td>
                   <td>
-                    {cantPz(pz.Articulo)}
+                    {cant}
                   </td>
                   <td>
-                    {'-'}
+                    {pz.stockM}
                   </td>
                   <td>
-                    {'-'}
+                    {pz.stockM ? Math.round(cant*100/pz.stockM) + '%' : '-'}
                   </td>
                   <td>
-                    {'-'}
+                    {pz.cantxPallet ? Math.floor((cant-pz.stockM)/pz.cantxPallet) : '-'}
                   </td>
                 </tr>
               </Fragment>
             )
           })}
-          <Total
-            codigo = {inputs.codigo}
-            table = {dataAbsFiltred}
-          />
         </tbody> 
       </table>
     </div>
