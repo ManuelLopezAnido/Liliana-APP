@@ -133,3 +133,11 @@
     box-shadow:none !important;
     cursor:not-allowed !important;
   }
+  .enUso{
+    color:red;
+    font-weight: bold;
+  }
+  .contar{
+    color: rgb(17, 148, 230);
+    font-weight: bold;
+  }

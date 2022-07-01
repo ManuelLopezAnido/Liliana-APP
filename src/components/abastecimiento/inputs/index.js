@@ -12,7 +12,6 @@ const InputAbastecimiento = ()=>{
   const [piezas, setPiezas] = useState([])
   const abasUser = sessionStorage.getItem('AbastecimientoUser')
   console.log ('Inputs: ',inputs)
-
   useEffect (()=>{
     fetchingPiezas()
   },[])
@@ -40,7 +39,7 @@ const InputAbastecimiento = ()=>{
     let arr = []
     const codigoPz = inputs?.codigo || ""
     console.log(codigoPz)
-    const pzOk = piezas.find(pz => pz.Articulo===(codigoPz))?.Detalle
+    const pzOk = piezas.find(pz => pz.articulo===(codigoPz))?.detalle
     console.log('pz ok',pzOk)
     if (!pzOk) {
       arr.push('Codigo de pieza')

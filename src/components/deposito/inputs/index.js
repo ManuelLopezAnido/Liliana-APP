@@ -268,7 +268,7 @@ const InputDeposito = ()=>{
           </label>
           <label className={styles.container}>
             <input 
-              disabled={ (['D','E','G','H'].indexOf(inputs.estanteria) + 1) ? true : false}
+              disabled={(['D','E','G','H'].indexOf(inputs.estanteria) + 1) || (inputs.posicion > 38) ? true : false}
               type="radio" 
               name="radio"
               value={'replace'} 

@@ -1,12 +1,18 @@
 import styles from './tablasAbastecimiento.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
-import piezas from '../../../data samples/piezas.json'
 import Total from '../../common components/total'
 const TablasAbastecimiento =() =>{
   const [dataAbs, setDataAbs] = useState([])
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])
   const [inputs, setInputs] = useState({})
+  const [piezas, setPiezas] = useState([])
+
+  useEffect (()=>{
+    fetchingTable()
+    fetchingPiezas()
+  },[])
+
   const fetchingTable = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/tables')
       .then((res)=>res.json())
@@ -16,9 +22,15 @@ const TablasAbastecimiento =() =>{
       })
       .catch (err => console.log(err))
   }
-  useEffect (()=>{
-    fetchingTable()
-  },[])
+  const fetchingPiezas = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setPiezas(json)
+      })
+      .catch (err => console.log(err))
+  }
+
   console.log(dataAbsFiltred)
   const handleChange = (e) => {
     const name = e.target.name;
@@ -77,14 +89,21 @@ const TablasAbastecimiento =() =>{
       }
     }
   }
-  const handleSubmit=(e)=>{
-
+  const comentarios = (d)=>{
+    switch (d.comentarios) {
+      case "EN USO":
+        return styles.enUso;
+      case "CONTAR":
+        return styles.contar;
+      default:
+        return '';
+    }
   }
   
   return(
   <>
     <div className={styles.filter}>
-      <form onSubmit={handleSubmit} autoComplete="off" className={styles.depositForm} >
+      <form autoComplete="off" className={styles.depositForm} >
         <label className={styles.filtros}>
           <div>
           Filtros: 
@@ -186,14 +205,17 @@ const TablasAbastecimiento =() =>{
                       <td>
                         {d.codigo}
                       </td>
-                      <td>
+                      <td
+                        // className = {(estan.comentarios === 'EN USO') ? styles.enUso : '' }
+                        className = {comentarios(d)}
+                      >
                         { d.codigo ? 
                           d.cantidad === 0 ? 'Indefinido' : d.cantidad :
                           '-'}
                       </td>
                       <td>
-                        {piezas.find((pz)=>{return (pz.Articulo===d.codigo)
-                        })?.Detalle
+                        {piezas.find((pz)=>{return (pz.articulo === d.codigo)
+                        })?.detalle
                         }
                       </td>
                       <td>

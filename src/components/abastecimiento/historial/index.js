@@ -21,17 +21,20 @@ const HistorialAbastecimiento = () =>{
   },[])
 
   const SumaDown = (inp) => {
-    if (inp.radio === 'add')
-    { 
-      return ('Suma')
-    } else if (inp.radio === 'down')
-    {
-      return ('Baja')    
+    switch (inp.radio){
+      case 'add':
+        return('Sumar')
+      case 'down':
+        return('Bajar')
+      case 'replace':
+        return('Remplazar')
+      case 'clean':
+        return('Vaciar')
+      default: return ('??')
     }
   }
 
   console.log(dataInputsFiltred)
-
 
   return(
   <>
