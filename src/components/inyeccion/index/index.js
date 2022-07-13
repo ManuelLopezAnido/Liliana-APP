@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
-import usersInye from '../../../data samples/usuariosInyeccion.json'
 
 const InyeccionHome = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [passOk, setPassOk]=useState(sessionStorage.getItem('InyeccionUser'))
+
+  const usersInye = []
 
   const handleChange = (e) => {
     const name = e.target.name;

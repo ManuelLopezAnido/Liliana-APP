@@ -15,6 +15,7 @@ const InputAbastecimiento = ()=>{
   useEffect (()=>{
     fetchingPiezas()
   },[])
+
   const fetchingPiezas = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
       .then((res)=>res.json())
@@ -38,9 +39,7 @@ const InputAbastecimiento = ()=>{
   const handleCheckData = () => {
     let arr = []
     const codigoPz = inputs?.codigo || ""
-    console.log(codigoPz)
     const pzOk = piezas.find(pz => pz.articulo===(codigoPz))?.detalle
-    console.log('pz ok',pzOk)
     if (!pzOk) {
       arr.push('Codigo de pieza')
     }
@@ -102,7 +101,6 @@ const InputAbastecimiento = ()=>{
         return(res.json())
       })
       .then((json)=>{
-        console.log('SEGUNDO THEN')
         console.log(json)
         const fetchedInputs = {}
         if (inputs.radio === 'down'){

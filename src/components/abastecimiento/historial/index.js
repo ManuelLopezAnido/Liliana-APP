@@ -1,11 +1,26 @@
 import styles from './historialAbastecimiento.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
-import piezas from '../../../data samples/piezas.json'
+
 const HistorialAbastecimiento = () =>{
  
   const [dataInputs, setDataInputs] = useState([])
   const [dataInputsFiltred,setDataInputsFiltred] = useState([])
+  const [piezas, setPiezas] = useState([])
+
+  useEffect(()=>{
+    fetchingPiezas()
+    fetchingTable()
+  },[])
+
+  const fetchingPiezas = () => {
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setPiezas(json)
+      })
+      .catch (err => console.log(err))
+  }
   const fetchingTable = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/inputs')
       .then((res)=>res.json())
@@ -16,9 +31,6 @@ const HistorialAbastecimiento = () =>{
       })
       .catch (err => console.log(err))
   }
-  useEffect (()=>{
-    fetchingTable()
-  },[])
 
   const SumaDown = (inp) => {
     switch (inp.radio){
@@ -86,7 +98,7 @@ const HistorialAbastecimiento = () =>{
                   </td>
                   <td>
                     {piezas.find((pz)=>{
-                      return (pz.Articulo===inp.codigo)
+                      return (pz.articulo===inp.codigo)
                       })?.Detalle
                     }
                   </td>

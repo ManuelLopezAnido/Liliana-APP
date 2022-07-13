@@ -1,15 +1,30 @@
 import styles from './depositoHome.module.css'
-import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { useState , useEffect } from 'react';
+import { Link , useNavigate } from 'react-router-dom'
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
-import usersDeposito from '../../../data samples/usuariosDeposito.json'
 
 const DepositoHome = ()=>{
   const [inputs, setInputs] = useState({});
-  const[showModal,setShowModal]=useState(false)
-  const[errorMsg, SetErrorMsg] =useState('')
-  const [passOk, setPassOk]=useState(sessionStorage.getItem('DepositoUser'))
+  const[showModal,setShowModal] = useState(false)
+  const[errorMsg, SetErrorMsg] = useState('')
+  const [passOk, setPassOk] = useState(sessionStorage.getItem('DepositoUser'))
+  const [users, setUsers] = useState([{'user':'Mati'}])
+  const navigate = useNavigate()
+  console.log(users)
+  useEffect(()=>{
+    fetchingUsers()
+    // eslint-disable-next-line
+  },[])
+
+  const fetchingUsers = () => {
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/users')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setUsers(json)
+      })
+      .catch (err => console.log(err))
+  }
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -94,7 +109,7 @@ const DepositoHome = ()=>{
             onChange={handleChange} 
             >
               <option disabled value="" hidden> Operario </option>"
-              {usersDeposito.map(user=>{
+              {users.map(user=>{
                 return(
                   <option key={user.user}>
                     {user.user}
@@ -130,8 +145,17 @@ const DepositoHome = ()=>{
             </button>
           </Link>
         </div>
-        <div className={passOk ? styles.closeSession : styles.hidden} onClick={closeSession}>
-          Cerrar sesión
+        <div className = {styles.foot}>
+          <div className={
+            passOk === 'GONZALEZ, LUCAS' || passOk === 'CABRERA, GERARDO SEBASTIAN' ? 
+            styles.closeSession : styles.hidden} 
+            onClick={() => navigate('actualizar')}
+          >
+            Actualizar
+          </div>
+          <div className={passOk ? styles.closeSession : styles.hidden} onClick={closeSession}>
+            Cerrar sesión
+          </div>
         </div>
       </div>
     </div>

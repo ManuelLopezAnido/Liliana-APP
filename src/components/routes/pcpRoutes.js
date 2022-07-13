@@ -14,7 +14,6 @@ const PcpRoutes = () => {
       })
       .catch (err => console.log(err))
   },[])
-  console.log('data is: ', data)
   return (
     <Routes>
       <Route path = "/produccion" element = {<Produccion data={data}/>}/>

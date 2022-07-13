@@ -4,6 +4,7 @@ import AbastecimientoHome from "../abastecimiento/index"
 import TablasAbastecimiento from "../abastecimiento/tables"
 import CriticosAbastecimiento from "../abastecimiento/criticos"
 import HistorialAbastecimiento from "../abastecimiento/historial"
+import ActualizarAbastecimiento from "../abastecimiento/actualizar"
 const DepositoRoutes = () => {
   return(
     <>
@@ -12,6 +13,7 @@ const DepositoRoutes = () => {
         <Route path = "/tablas" element = {<TablasAbastecimiento/>}/>
         <Route path = "/criticos" element = {<CriticosAbastecimiento/>}/>
         <Route path = "/historial" element = {<HistorialAbastecimiento/>}/>
+        <Route path = "/actualizar" element = {<ActualizarAbastecimiento/>}/>
         <Route path = "/" element = {<AbastecimientoHome/>}/>
       </Routes>
     </>

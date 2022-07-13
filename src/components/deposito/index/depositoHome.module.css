@@ -20,8 +20,6 @@
   display: flex;
   justify-content:space-around;
   width: 60vw;
-  color: wheat;
-  cursor: pointer;
 }
 .pcpMenu a{
   width: 40%;
@@ -152,6 +150,11 @@
 .closeSession:hover{
   color: #61dafb;
   transition: 0.5s;
+}
+.foot{
+  display: flex;
+  justify-content: space-around;
+  width: 15vw;
 }
 
 @media only screen and (max-width: 768px) {

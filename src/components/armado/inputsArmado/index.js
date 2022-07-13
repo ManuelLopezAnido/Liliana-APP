@@ -1,18 +1,43 @@
 import styles from './inputsarmado.module.css'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
-import piezas from "../../../data samples/piezas.json"
 import productos from "../../../data samples/productos.json"
 
 const InputArmado = ()=>{
   
   const [inputs, setInputs] = useState({});
-  const[showModal,setShowModal]=useState(false)
-  const[errorMsg, SetErrorMsg] =useState('')
-  const [arrErrors, setArrErrors]= useState([])
+  const[showModal,setShowModal] = useState(false)
+  const[errorMsg, SetErrorMsg] = useState('')
+  const [arrErrors, setArrErrors] = useState([])
+  const [piezasAbas, setPiezasAbas] = useState([])
+  const [piezasDepo, setPiezasDepo] = useState([])
   const liderName = sessionStorage.getItem('LiderUser')
 
+  useEffect(()=>{
+    fetchingPiezasAbas()
+    fetchingPiezasDepo()
+  },[])
+  
+  const fetchingPiezasAbas = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setPiezasAbas(json)
+      })
+      .catch (err => console.log(err))
+  }
+  const fetchingPiezasDepo = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/piezas')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setPiezasDepo(json)
+      })
+      .catch (err => console.log(err))
+  }
+
+  const piezas = piezasAbas.concat(piezasDepo)
+  
   console.log(inputs)
   const handleChange = (e) => {
     const name = e.target.name;
@@ -22,10 +47,11 @@ const InputArmado = ()=>{
     }
     setInputs (({...inputs, [name]: value}))
   }
+  
   const handleCheckData = () => {
     let arr = []
     const ins = inputs?.insumo
-    const pzOk = piezas.find(pz =>pz.Articulo===('ZZ'+ins))?.Articulo
+    const pzOk = piezas.find(pz =>pz.articulo===('ZZ'+ins))?.articulo
     console.log('pzOk: ',pzOk)
     if (!pzOk) {
       arr.push('Insumo')
@@ -39,15 +65,14 @@ const InputArmado = ()=>{
       arr.push('Duracion')
     }
     const prod = inputs?.producto
-    const prodOk = productos.find(pr =>pr.Articulo===(prod))?.Articulo
+    const prodOk = productos.find(pr =>pr.articulo===(prod))?.articulo
     if (!prodOk) {
       arr.push('Producto')
     }
-    console.log('arr after chek: ',arr)
     return arr
   }
   console.log ('arrErrors: ', arrErrors)
-  const clearErrMsg = () =>{
+  const clearErrMsg = () => {
     setArrErrors([])
   }
 
@@ -92,12 +117,14 @@ const InputArmado = ()=>{
         console.log('error es: ',res.statusText)
         SetErrorMsg(res.statusText)
       })    
-    }
-  const closeModal=()=>{
+  }
+  
+  const closeModal = () => {
     SetErrorMsg('')
     setShowModal(false)
   }
-  const openModal=()=>{
+  
+  const openModal = () => {
     setShowModal(true)
   }
 

@@ -1,12 +1,17 @@
 import styles from './tablasDeposito.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
-import piezas from '../../../data samples/piezas deposito.json'
 import Total from '../../common components/total'
 const TablasDeposito =() =>{
   const [dataDepo, setDataDepo] = useState([])
   const [dataDepoFiltred,setDataDepoFiltred] = useState([])
   const [inputs, setInputs] = useState([])
+  const [piezas, setPiezas] = useState([]) 
+  useEffect (()=>{
+    fetchingTable()
+    fetchingPiezas()
+  },[])
+
   const fetchingTable = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/tables')
       .then((res)=>res.json())
@@ -16,9 +21,15 @@ const TablasDeposito =() =>{
       })
       .catch (err => console.log(err))
   }
-  useEffect (()=>{
-    fetchingTable()
-  },[])
+  const fetchingPiezas = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/piezas')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setPiezas(json)
+      })
+      .catch (err => console.log(err))
+  }
+
   console.log(dataDepoFiltred)
   const handleChange = (e) => {
     const name = e.target.name;
@@ -190,7 +201,7 @@ const TablasDeposito =() =>{
                         {d.cantidad === '' ? 'indefinido' : d.cantidad  }
                       </td>
                       <td>
-                        {piezas.find((pz)=>{return (pz.Articulo===d.codigo)
+                        {piezas.find((pz)=>{return (pz.articulo===d.codigo)
                         })?.Detalle
                         }
                       </td>

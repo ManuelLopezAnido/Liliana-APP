@@ -59,7 +59,6 @@ const TablasAbastecimiento =() =>{
       }
     },0)
     setCantPallets(cantPallet)
-    console.log(cantPallet)
   }
 
   const filterGreaterZero = () =>{

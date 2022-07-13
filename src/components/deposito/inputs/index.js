@@ -41,9 +41,7 @@ const InputDeposito = ()=>{
   const handleCheckData = () => {
     let arr = []
     const codigoPz = inputs?.codigo || ""
-    console.log(codigoPz)
-    const pzOk = piezas.find(pz => pz.Articulo===(codigoPz))?.Detalle
-    console.log('pz ok',pzOk)
+    const pzOk = piezas.find(pz => pz.articulo===(codigoPz))?.Detalle
     if (!pzOk) {
       arr.push('Codigo de pieza')
     }
@@ -104,7 +102,6 @@ const InputDeposito = ()=>{
         return(res.json())
       })
       .then((json)=>{
-        console.log('SEGUNDO THEN')
         console.log(json)
         const fetchedInputs = {}
         if (inputs.radio === 'down'){

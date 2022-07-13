@@ -37,7 +37,6 @@ const ArmadoHome = ()=>{
       })
       .then(res=>res.json())
       .then((json)=>{
-        console.log('respuesta de armdo:',json)
         sessionStorage.setItem("LiderUser",json.user)
         openModal()
         setPassOk(json.user)
