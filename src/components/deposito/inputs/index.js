@@ -11,8 +11,6 @@ const InputDeposito = ()=>{
   const [piezas, setPiezas] = useState([])
   const depoUser = sessionStorage.getItem('DepositoUser')
   console.log ('Inputs: ',inputs)
-  console.log('piezas 1: ', piezas[0])
-  
   useEffect(()=>{
     fetchingPiezas()
   },[])
@@ -41,7 +39,7 @@ const InputDeposito = ()=>{
   const handleCheckData = () => {
     let arr = []
     const codigoPz = inputs?.codigo || ""
-    const pzOk = piezas.find(pz => pz.articulo===(codigoPz))?.Detalle
+    const pzOk = piezas.find(pz => pz.articulo===(codigoPz))?.detalle
     if (!pzOk) {
       arr.push('Codigo de pieza')
     }
@@ -205,6 +203,7 @@ const InputDeposito = ()=>{
             required
             onFocus={clearErrMsg}
             type="number"
+            onWheelCapture={(e)=>e.target.blur()}
             name='posicion' 
             value={inputs.posicion || ''} 
             onChange={handleChange} 
@@ -219,6 +218,7 @@ const InputDeposito = ()=>{
             disabled = {(['D','E','G','H'].indexOf(inputs.estanteria) + 1) ? true : false}
             onFocus={clearErrMsg}
             type={'number'}
+            onWheelCapture={(e)=>e.target.blur()}
             name='altura' 
             //Some racks have no height 
             value={['D','E','G','H'].indexOf(inputs.estanteria) + 1 ? 1 : inputs.altura || ''} 
@@ -234,6 +234,7 @@ const InputDeposito = ()=>{
             required = {false}
             onFocus={clearErrMsg}
             type='number'
+            onWheelCapture={(e)=>e.target.blur()}
             name='cantidad' 
             value={inputs.cantidad || ''} 
             onChange={handleChange} 

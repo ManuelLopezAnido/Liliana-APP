@@ -199,6 +199,7 @@ const InputAbastecimiento = ()=>{
             required
             onFocus={clearErrMsg}
             type="number"
+            onWheelCapture={(e)=>e.target.blur()}
             name='posicion' 
             value={inputs.posicion || ''} 
             onChange={handleChange} 
@@ -216,6 +217,7 @@ const InputAbastecimiento = ()=>{
             onFocus={clearErrMsg}
             type={(['V','W','X','Y','Z'].indexOf(inputs?.estanteria) + 1 ) ? 'text' : 'number'}
             name='altura' 
+            onWheelCapture={(e)=>e.target.blur()}
             value={inputs.altura || ''} 
             onChange={handleChange} 
             placeholder="Altura"/>
@@ -228,6 +230,7 @@ const InputAbastecimiento = ()=>{
             required = {(inputs.radio === 'add' || inputs.radio === 'replace')}
             onFocus={clearErrMsg}
             type='number'
+            onWheelCapture={(e)=>e.target.blur()}
             name='cantidad' 
             value={inputs.cantidad || ''} 
             onChange={handleChange} 

@@ -1,14 +1,29 @@
 import styles from './armadoHome.module.css'
-import { useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom'
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
 
 const ArmadoHome = ()=>{
   const [inputs, setInputs] = useState({});
-  const[showModal,setShowModal]=useState(false)
-  const[errorMsg, SetErrorMsg] =useState('')
-  const [passOk, setPassOk]=useState(sessionStorage.getItem('LiderUser'))
+  const[showModal,setShowModal] = useState(false)
+  const[errorMsg, SetErrorMsg] = useState('')
+  const [passOk, setPassOk] = useState(sessionStorage.getItem('LiderUser'))
+  const [users, setUsers] = useState([])
+
+  useEffect(()=>{
+    fetchingUsers()
+  },[])
+  
+  const fetchingUsers = () => {
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/armado/users')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setUsers(json)
+      })
+      .catch (err => console.log(err))
+  }
+  console.log(users)
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -53,8 +68,27 @@ const ArmadoHome = ()=>{
         catch {
           SetErrorMsg('Error de conexion')
         }
-      })    
+      }
+    )    
+  }
+  const usersOptions = () => {
+    let options = []
+    for (let i=1; i<=4 ; i++){
+      options.push(
+      <Fragment key ={i}>
+      <optgroup label = {"Armado " + i} />
+      {
+        users.filter((user)=>(user.shift === i))
+        .map((user)=>{
+          return(<option key={user.user}>{user.user}</option>)
+        })
+      }
+      </Fragment>
+      )
     }
+    return options
+  }
+  
   const closeModal=()=>{
     SetErrorMsg('')
     setShowModal(false)
@@ -92,7 +126,10 @@ const ArmadoHome = ()=>{
             onChange={handleChange} 
             >
               <option disabled value="" hidden> Lider </option>"
-              <optgroup label="Armado 1"/>
+              {
+                usersOptions()
+              }
+              {/* <optgroup label="Armado 1"/>
               <option>AUYEROS, CRISTIAN LEONARDO</option>
               <option>BATTISTELLI, MARCOS</option>
               <option>CABRERA, MARIANO</option>
@@ -126,7 +163,7 @@ const ArmadoHome = ()=>{
               <option>LEDESMA, CLAUDIO ANDRES</option>
               <option>JAUME, LUCAS DARIO</option>
               <option>MENDOZA, CARLOS FERNANDO</option>
-              <option>ZALAZAR, JONATAN MATIAS</option>
+              <option>ZALAZAR, JONATAN MATIAS</option> */}
               </select>
           </label>
           <label>

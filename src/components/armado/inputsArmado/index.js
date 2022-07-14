@@ -2,23 +2,35 @@ import styles from './inputsarmado.module.css'
 import { useEffect, useState } from "react"
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
-import productos from "../../../data samples/productos.json"
 
 const InputArmado = ()=>{
   
   const [inputs, setInputs] = useState({});
-  const[showModal,setShowModal] = useState(false)
-  const[errorMsg, SetErrorMsg] = useState('')
+  const [showModal,setShowModal] = useState(false)
+  const [errorMsg, SetErrorMsg] = useState('')
   const [arrErrors, setArrErrors] = useState([])
+  const [productos, setProductos] = useState([])
   const [piezasAbas, setPiezasAbas] = useState([])
   const [piezasDepo, setPiezasDepo] = useState([])
+  const [piezas, setPiezas] = useState([])
   const liderName = sessionStorage.getItem('LiderUser')
 
   useEffect(()=>{
     fetchingPiezasAbas()
     fetchingPiezasDepo()
+    fetchingProductos()
+    setPiezas(piezasAbas.concat(piezasDepo))
+    // eslint-disable-next-line
   },[])
   
+  const fetchingProductos = ()=>{
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/armado/productos')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setProductos(json)
+      })
+      .catch (err => console.log(err))
+  }
   const fetchingPiezasAbas = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
       .then((res)=>res.json())
@@ -35,9 +47,7 @@ const InputArmado = ()=>{
       })
       .catch (err => console.log(err))
   }
-
-  const piezas = piezasAbas.concat(piezasDepo)
-  
+ 
   console.log(inputs)
   const handleChange = (e) => {
     const name = e.target.name;
@@ -45,17 +55,19 @@ const InputArmado = ()=>{
     if (name === 'producto'|| name ==='insumo') {
       value=e.target.value.toUpperCase()
     }
+    if (name === 'cantidad'|| name ==='duracion' || name ==='celda') {
+      value= +e.target.value
+    }
     setInputs (({...inputs, [name]: value}))
   }
   
   const handleCheckData = () => {
     let arr = []
-    const ins = inputs?.insumo
-    const pzOk = piezas.find(pz =>pz.articulo===('ZZ'+ins))?.articulo
-    console.log('pzOk: ',pzOk)
-    if (!pzOk) {
-      arr.push('Insumo')
+    const celda = inputs?.celda
+    if (celda < 0 || celda > 51){
+      arr.push('Celda')
     }
+
     const cant = inputs?.cantidad
     if (cant<1) {
       arr.push('Cantidad')
@@ -64,8 +76,13 @@ const InputArmado = ()=>{
     if (dur<1) {
       arr.push('Duracion')
     }
+    const ins = inputs?.insumo
+    const pzOk = piezas.find(pz =>pz.articulo===ins)?.articulo
+    if (!pzOk) {
+      arr.push('Insumo')
+    }
     const prod = inputs?.producto
-    const prodOk = productos.find(pr =>pr.articulo===(prod))?.articulo
+    const prodOk = productos.findIndex(pr => pr.producto===(prod)) + 1
     if (!prodOk) {
       arr.push('Producto')
     }
@@ -88,8 +105,9 @@ const InputArmado = ()=>{
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
     inputs.time = time
-    const date = (today.getDate() + "/" + (today.getMonth() + 1) + ":" + today.getFullYear());
+    const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.date = date
+    inputs.lider = liderName
     setInputs ({...inputs}) 
     const options = {
       method: 'PUT',
@@ -100,17 +118,21 @@ const InputArmado = ()=>{
     };
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/armado/upload',options)
       .then(res=>{
-        console.log('Respuetsa del servidor',res.ok)
+        console.log('Respuetsa del servidor',res)
         if(res.ok){
           return(res)
         }else{
           throw res ;
         }
       }).then(res=>{
+        const celd = inputs.celda
         const prod = inputs.producto
         openModal()
         setInputs({})
-        setInputs({'producto':prod})
+        setInputs({
+          'celda':celd,
+          'producto':prod
+        })
         }
       )
       .catch(res => {
@@ -143,6 +165,31 @@ const InputArmado = ()=>{
           <h1>Relevamiento</h1>
         </div>
         <label >
+          <input 
+          className={`${styles.select} ${!inputs.lider ? styles.placeholder : ''}`}
+          disabled
+          onFocus={clearErrMsg}
+          type="text" 
+          name='lider' 
+          value={liderName}  
+          />
+        </label>
+        <label >
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Celda')  ? styles.visible:''}`}>
+            Celda no válida
+          </div>
+          <input 
+          className={styles.select}
+          required
+          onFocus={clearErrMsg}
+          onWheelCapture={(e)=>e.target.blur()}
+          type="number"
+          name='celda' 
+          value={inputs.celda || ''}  
+          onChange={handleChange} 
+          placeholder={'Celda'}/>
+        </label>
+        <label >
           <select 
           className={`${styles.select} ${!inputs.motivo ? styles.placeholder : ''}`}
           required
@@ -156,6 +203,7 @@ const InputArmado = ()=>{
             <option value={'incompleto'}>Incompleto</option>
             <option value= {'defecto'}>Defecto</option>
             <option value={'faltante'}>Faltante</option>
+            <option value={'cambioCelda'}>Cambio de celda</option>
           </select>
         </label>
         <label >
@@ -164,15 +212,15 @@ const InputArmado = ()=>{
           </div>
           <input 
           className={styles.select}
-          hidden = {!(inputs.motivo === 'faltante')}
-          required = {inputs.motivo === 'faltante'}
+          hidden = {!(inputs.motivo === 'faltante'  ||  inputs.motivo === 'cambioCelda')}
+          required = {inputs.motivo === 'faltante'  ||  inputs.motivo === 'cambioCelda'}
           onFocus={clearErrMsg}
-          type="number" 
+          onWheelCapture={(e)=>e.target.blur()}
+          type="number"
           name='duracion' 
           value={inputs.duracion || ''}  
           onChange={handleChange} 
-          placeholder={'Duración (en minutos)'}>
-          </input>
+          placeholder={'Duración (en minutos)'}/>
         </label>
         <label >
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Cantidad')  ? styles.visible:''}`}>
@@ -183,23 +231,12 @@ const InputArmado = ()=>{
           hidden = {!(inputs.motivo === 'defecto' ||  inputs.motivo === 'incompleto')}
           required = {inputs.motivo === 'defecto' ||  inputs.motivo === 'incompleto'}
           onFocus={clearErrMsg}
-          type="number" 
+          type="number"
+          onWheelCapture={(e)=>e.target.blur()}
           name='cantidad' 
           value={inputs.cantidad || ''}  
           onChange={handleChange}
-          placeholder={'Cantidad'}>
-          </input>
-        </label>
-        <label >
-          <input 
-          className={`${styles.select} ${!inputs.lider ? styles.placeholder : ''}`}
-          disabled
-          onFocus={clearErrMsg}
-          type="text" 
-          name='lider' 
-          value={liderName}  
-          onChange={handleChange} 
-          />
+          placeholder={'Cantidad'}/>
         </label>
         <label>
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'Producto')  ? styles.visible:''}`}>
