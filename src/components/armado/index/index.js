@@ -193,6 +193,11 @@ const ArmadoHome = ()=>{
               Relevamiento
             </button>
           </Link>
+          <Link to = 'tablas'>
+            <button>
+              Tablas
+            </button>
+          </Link>
         </div>
         <div className={passOk ? styles.closeSession : styles.hidden} onClick={closeSession}>
           Cerrar sesión

@@ -22,7 +22,6 @@ const InputArmado = ()=>{
     setPiezas(piezasAbas.concat(piezasDepo))
     // eslint-disable-next-line
   },[])
-  
   const fetchingProductos = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/armado/productos')
       .then((res)=>res.json())
@@ -78,6 +77,7 @@ const InputArmado = ()=>{
     }
     const ins = inputs?.insumo
     const pzOk = piezas.find(pz =>pz.articulo===ins)?.articulo
+    console.log('PiezaOk',pzOk)
     if (!pzOk) {
       arr.push('Insumo')
     }
