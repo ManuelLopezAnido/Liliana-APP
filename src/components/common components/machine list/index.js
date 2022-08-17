@@ -8,6 +8,12 @@ const MachineList = (props)=>{
     setClassMaq (Maquina)
     props.selectMachine(Maquina)
   }
+  const handleChange = (e) =>{
+    const selectedMaq=e.target.value
+    console.log(selectedMaq)
+    setClassMaq (selectedMaq)
+    props.selectMachine(selectedMaq)
+  }
   return (
     <>
       <div className={styles.machineList}>
@@ -28,7 +34,11 @@ const MachineList = (props)=>{
       </div>
       <div className={styles.machineSelect}> 
       <label>Maquina: </label>
-      <select name='Maquina'>
+      <select 
+        name='Maquina'
+        onChange={handleChange}
+        value={classMaq}
+      >
         {maquinas.map(maq=>{
           return(
             <option key={maq.Maquina} value={maq.Maquina}>

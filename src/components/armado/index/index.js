@@ -129,41 +129,6 @@ const ArmadoHome = ()=>{
               {
                 usersOptions()
               }
-              {/* <optgroup label="Armado 1"/>
-              <option>AUYEROS, CRISTIAN LEONARDO</option>
-              <option>BATTISTELLI, MARCOS</option>
-              <option>CABRERA, MARIANO</option>
-              <option>DELGADO, RICARDO</option>
-              <option>GAMARRA, JONATAN</option>
-              <option>MEDINA BENITEZ, JOSE</option>
-              <option>MONZON, AYELEN MARIBEL</option>
-              <option>ARGAÑARAS, LEANDRO RODRIGO</option>
-              <option>ROBLEDO, PATRICIO</option>
-              <option>SARMIENTO, BRIAN EZEQUIEL</option>
-              <option>GONZALEZ, WALTER DAVID </option>
-              <optgroup label="Armado 2"/>
-              <option>ARGAÑARAS, LEANDRO RODRIGO</option>
-              <option>ROBLEDO, PATRICIO</option>
-              <option>SAUCEDO, NESTOR</option>
-              <option>SCHOENFELD, LUCIANO ADRIAN</option>
-              <option>SEGOVIA, ARIEL</option>
-              <option>SAUCEDO, HUGO HECTOR</option>
-              <option>SARMIENTO, BRIAN EZEQUIEL</option>
-              <option>MONZON, AYELEN MARIBEL</option>
-              <option>GAMARRA, JONATAN</option>
-              <optgroup label="Armado 3"/>
-              <option>CORREA, OSCAR NICOLAS</option>
-              <option>GOMEZ, ISAIAS MAXIMILIANO</option>
-              <option>LEZCANO, FABIAN GASTON</option>
-              <option>CARDOZO, VICTOR EMANUEL</option>
-              <option>PEDERNERA, LUIS OMAR</option>
-              <optgroup label="Armado 4"/>
-              <option>VICICH, FERNANDO MARTIN</option>
-              <option>GARCIA, FEDERICO</option>
-              <option>LEDESMA, CLAUDIO ANDRES</option>
-              <option>JAUME, LUCAS DARIO</option>
-              <option>MENDOZA, CARLOS FERNANDO</option>
-              <option>ZALAZAR, JONATAN MATIAS</option> */}
               </select>
           </label>
           <label>
@@ -183,7 +148,7 @@ const ArmadoHome = ()=>{
         </form>
         
         <div className={passOk ? styles.pcpMenu : styles.hidden }> 
-          <a href = 'https://www.liliana.com.ar/internodos/administracion/Dp.php'>
+          <a href = 'https://www.liliana.com.ar/internodos/administracion/Dp.php?KEY=4b494f53434f204445535049454345'>
             <button>
               Despiece
             </button>

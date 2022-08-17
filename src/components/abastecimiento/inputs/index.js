@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
 import styles from "./inputAbastecimiento.module.css"
-//import piezas from "../../../data samples/piezas.json"
+
 
 const InputAbastecimiento = ()=>{
   const [inputs, setInputs] = useState({});
@@ -11,6 +11,7 @@ const InputAbastecimiento = ()=>{
   const [arrErrors, setArrErrors]= useState([])
   const [piezas, setPiezas] = useState([])
   const abasUser = sessionStorage.getItem('AbastecimientoUser')
+
   console.log ('Inputs: ',inputs)
   useEffect (()=>{
     fetchingPiezas()
@@ -64,7 +65,7 @@ const InputAbastecimiento = ()=>{
     }
     return arr
   }
-   const clearErrMsg = () =>{
+  const clearErrMsg = () =>{
     setArrErrors([])
   }
 

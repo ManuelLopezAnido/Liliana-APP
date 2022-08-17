@@ -13,15 +13,25 @@ const InputArmado = ()=>{
   const [piezasAbas, setPiezasAbas] = useState([])
   const [piezasDepo, setPiezasDepo] = useState([])
   const [piezas, setPiezas] = useState([])
+  const [celdaData, setCeldaData] = useState({})
   const liderName = sessionStorage.getItem('LiderUser')
-
+    
+  const queryParams = new URLSearchParams(window.location.search);
+  const celda = queryParams.get('c')
+  console.log('celda: ',celdaData)
+   
   useEffect(()=>{
     fetchingPiezasAbas()
     fetchingPiezasDepo()
     fetchingProductos()
-    setPiezas(piezasAbas.concat(piezasDepo))
+    fetchingCelda()
     // eslint-disable-next-line
   },[])
+  useEffect (()=>{
+    setPiezas(piezasAbas.concat(piezasDepo)) 
+  },[piezasAbas,piezasDepo]) 
+
+  console.log('piezas totales: ',piezas)
   const fetchingProductos = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/armado/productos')
       .then((res)=>res.json())
@@ -46,7 +56,18 @@ const InputArmado = ()=>{
       })
       .catch (err => console.log(err))
   }
- 
+  const fetchingCelda = () => {
+    fetch('http://192.168.11.5/totemsApp/Public/api.php?c=' + celda)
+    .then((res)=>res.json())
+    .then((json)=>{
+      setCeldaData (json)
+    })
+    .catch(res => {
+      console.log('error es: ',res.statusText)
+      SetErrorMsg(res.statusText)
+    })    
+  }
+
   console.log(inputs)
   const handleChange = (e) => {
     const name = e.target.name;
@@ -76,7 +97,8 @@ const InputArmado = ()=>{
       arr.push('Duracion')
     }
     const ins = inputs?.insumo
-    const pzOk = piezas.find(pz =>pz.articulo===ins)?.articulo
+    console.log(ins)
+    const pzOk = piezas.findIndex(pz => pz.articulo===(ins)) + 1
     console.log('PiezaOk',pzOk)
     if (!pzOk) {
       arr.push('Insumo')
@@ -88,7 +110,7 @@ const InputArmado = ()=>{
     }
     return arr
   }
-  console.log ('arrErrors: ', arrErrors)
+  
   const clearErrMsg = () => {
     setArrErrors([])
   }
@@ -171,7 +193,8 @@ const InputArmado = ()=>{
           onFocus={clearErrMsg}
           type="text" 
           name='lider' 
-          value={liderName}  
+          value = {liderName}
+          //value = {celdaData?.equipo[0]?.apellido + ', ' + celdaData?.equipo[0]?.nombre} 
           />
         </label>
         <label >
@@ -185,7 +208,9 @@ const InputArmado = ()=>{
           onWheelCapture={(e)=>e.target.blur()}
           type="number"
           name='celda' 
-          value={inputs.celda || ''}  
+          //value={inputs.celda || ''}
+          value = {celda || ''} 
+          disabled
           onChange={handleChange} 
           placeholder={'Celda'}/>
         </label>
@@ -248,7 +273,9 @@ const InputArmado = ()=>{
             onFocus={clearErrMsg}
             type="text" 
             name='producto' 
-            value={inputs.producto || ''}
+            // value = {inputs.producto || ''}
+            value = {celdaData.nroProduccion  || ''}
+            disabled
             onChange={handleChange}
             placeholder="Producto"/>
         </label>

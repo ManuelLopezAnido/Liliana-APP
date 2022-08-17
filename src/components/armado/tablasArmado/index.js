@@ -30,25 +30,26 @@ const TablasArmado = () =>{
     let input = filters
     input[name] = value
 
-    const convertDate = (strDate, separator = "/") =>{
-      const [d,m,y] = strDate.split(separator)
+    const convertDate = (strDate, tipo = 1, separator = "/") =>{ 
+      //function to convert diferent date types in a real number (for futher comparaison)
+      let d, m, y
+      if (tipo) { 
+        [d,m,y] = strDate.split(separator)
+      } else {
+        [y,m,d] = strDate.split(separator)
+      }
       return new Date (y,  m - 1, d).getTime()
     }
-        
-    if (input.dates) {
-      let [y,m,d] = input.dates.split("-") 
-      input.dates = new Date (y,m-1,d).getTime()
-    }
-
+   
     setFilters({...input})
     console.log("filtros: ", filters)
     
-    let dataInputsFiltred = dataInputs.filter((dataf)=>{
+    let dataInputsFiltred = dataInputs.filter((d)=>{
       return(
-        (filters.celda ? (dataf.celda === +filters.celda) : true) &&
-        (filters.producto ? (dataf.producto.includes(filters.producto)) : true) &&
-        (filters.insumo ? (dataf.insumo.includes(filters.insumo)) : true) &&
-        (filters.dates ? (convertDate(dataf.date) === filters.dates) :  true)
+        (filters.celda ? (d.celda === +filters.celda) : true) &&
+        (filters.producto ? (d.producto.includes(filters.producto)) : true) &&
+        (filters.insumo ? (d.insumo.includes(filters.insumo)) : true) &&
+        (filters.dates ? (convertDate(d.date) === convertDate(filters.dates,0,'-')) :  true)
       )    
     })
     setDataInputsFiltred([...dataInputsFiltred])
@@ -72,6 +73,21 @@ const TablasArmado = () =>{
      dataInputsFiltred.sort((a,b)=>{return (a[column].localeCompare(b[column]))})
     }
     setDataInputsFiltred([...dataInputsFiltred])
+  }
+
+  const motivos = (m) =>{
+    switch (m) {
+      case 'cambioCelda':
+        return ('Cambio de celda')
+      case 'incompleto':
+        return ('Incompleto')
+      case 'faltante':
+        return ('Faltante')
+      case 'defecto':
+        return ('Defecto')
+      default:
+        return ('')
+    }
   }
   console.log(dataInputsFiltred)
 
@@ -112,7 +128,7 @@ const TablasArmado = () =>{
           <input 
             type="date" 
             name='dates' 
-            value={filters.date || ''}  
+            value={filters.dates || ''}  
             onChange={handleChange} 
             placeholder="Fecha"/>
         </label>
@@ -188,13 +204,13 @@ const TablasArmado = () =>{
                     {inp.producto}
                   </td>
                   <td>
-                    {inp.motivo}
+                    {motivos(inp.motivo)}
                   </td>
                   <td>
                     {inp.insumo}
                   </td>
                   <td>
-                    {inp.cantidad}
+                    {inp.cantidad ? inp.cantidad + ' pz' : inp.duracion + ' min'}
                   </td>
                   <td>
                     {inp.descripcion}

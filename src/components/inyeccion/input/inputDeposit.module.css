@@ -63,12 +63,19 @@
   align-items: center;
   justify-content: space-between;
  }
+ .dateShift select {
+  width: 47%;
+  margin: 0;
+}
 .dateShift input{
   width: 47%;
   margin: 0;
 }
 .newPz{
-  border: solid 1px black
+  border: solid 2px gainsboro;
+  border-radius: 15px ;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 .close{
   display: flex;
@@ -108,4 +115,42 @@
   font-size: 3rem;
   top: -4px;
   left:0.1px
+}
+.notValid{
+  margin-bottom: 5px;
+  padding-left: 20px;
+  font-weight:500;
+  color:red;
+  display: none;
+}
+.notValid.visible{
+  display: block;
+}
+.depositForm button{
+  margin: 10px 0px;
+  width: 100%;
+  box-shadow: -5px -5px 20px rgb(204, 203, 203), 5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: white;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+.depositForm button:hover{
+  box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
+}
+.depositForm button:active{
+  box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px #393f4b;
+}
+.buttonDisable{
+  background-color: gray !important;
+}
+.buttonDisable:hover{
+  box-shadow:none !important;
+  cursor:not-allowed !important;
 }

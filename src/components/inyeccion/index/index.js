@@ -1,16 +1,29 @@
 import styles from './inyeccionHome.module.css'
-import { useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom'
 import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
 
-const InyeccionHome = ()=>{
+const ArmadoHome = ()=>{
   const [inputs, setInputs] = useState({});
-  const[showModal,setShowModal]=useState(false)
-  const[errorMsg, SetErrorMsg] =useState('')
-  const [passOk, setPassOk]=useState(sessionStorage.getItem('InyeccionUser'))
+  const[showModal,setShowModal] = useState(false)
+  const[errorMsg, SetErrorMsg] = useState('')
+  const [passOk, setPassOk] = useState(sessionStorage.getItem('LiderUser'))
+  const [users, setUsers] = useState([])
 
-  const usersInye = []
+  useEffect(()=>{
+    fetchingUsers()
+  },[])
+  
+  const fetchingUsers = () => {
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/inyeccion/users')
+      .then((res)=>res.json())
+      .then ((json)=>{
+        setUsers(json)
+      })
+      .catch (err => console.log(err))
+  }
+  console.log(users)
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -39,14 +52,13 @@ const InyeccionHome = ()=>{
       })
       .then(res=>res.json())
       .then((json)=>{
-        console.log('respuesta de armdo:',json)
-        sessionStorage.setItem("InyeccionUser",json.user)
+        sessionStorage.setItem("LiderUserIny",json.user)
         openModal()
         setPassOk(json.user)
         setInputs({})
       })
       .catch(res => {
-        try {
+        try{
           res.json()
           .then(json=>{
             console.log(json)
@@ -56,8 +68,10 @@ const InyeccionHome = ()=>{
         catch {
           SetErrorMsg('Error de conexion')
         }
-      })    
-    }
+      }
+    )    
+  }
+
   const closeModal=()=>{
     SetErrorMsg('')
     setShowModal(false)
@@ -66,7 +80,7 @@ const InyeccionHome = ()=>{
     setShowModal(true)
   }
   const closeSession=()=>{
-    sessionStorage.setItem('InyeccionUser','')
+    sessionStorage.setItem('LiderUser','')
     setPassOk(false)
   }
   return(
@@ -94,14 +108,22 @@ const InyeccionHome = ()=>{
             value={inputs.lider || ''}  
             onChange={handleChange} 
             >
-              <option disabled value="" hidden> Operario </option>"
-              {usersInye.map(user=>{
+              <option disabled value="" hidden> Lider </option>"
+              {
+                ['Mañana','Tarde','Noche'].map((shifts)=>{
                 return(
-                  <option key={user.user}>
-                    {user.user}
-                  </option>
-                )
-              })}
+                  <Fragment key ={shifts}>
+                    <optgroup label = {"Turno " + shifts} />
+                    {
+                      users.filter((user)=>(user.shift === shifts))
+                      .map((user)=>{
+                        return(<option key={user.user}>{user.user}</option>)
+                      })
+                    }
+                  </Fragment>
+                  )  
+                })
+              }
               </select>
           </label>
           <label>
@@ -119,15 +141,16 @@ const InyeccionHome = ()=>{
           </label>
           <button type="submit" className={styles.button}>Ingresar</button>
         </form>
+        
         <div className={passOk ? styles.pcpMenu : styles.hidden }> 
-          <Link to = 'tablas'>
-            <button>
-              Tablas
-            </button>
-          </Link>
           <Link to = 'relevamiento'>
             <button>
               Relevamiento
+            </button>
+          </Link>
+          <Link to = 'tablas'>
+            <button>
+              Tablas
             </button>
           </Link>
         </div>
@@ -138,4 +161,4 @@ const InyeccionHome = ()=>{
     </div>
   )
 }
-export default InyeccionHome
+export default ArmadoHome
