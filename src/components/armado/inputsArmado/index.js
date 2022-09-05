@@ -9,17 +9,17 @@ const InputArmado = ()=>{
   const [showModal,setShowModal] = useState(false)
   const [errorMsg, SetErrorMsg] = useState('')
   const [arrErrors, setArrErrors] = useState([])
-  const [productos, setProductos] = useState([])
+  //const [productos, setProductos] = useState([])
   const [piezasAbas, setPiezasAbas] = useState([])
   const [piezasDepo, setPiezasDepo] = useState([])
   const [piezas, setPiezas] = useState([])
   const [celdaData, setCeldaData] = useState({})
-  const liderName = sessionStorage.getItem('LiderUser')
+  const [liderName, setLiderName] = useState ("-")
+  //const liderName = sessionStorage.getItem('LiderUser')
     
   const queryParams = new URLSearchParams(window.location.search);
   const celda = queryParams.get('c')
-  console.log('celda: ',celdaData)
-   
+     
   useEffect(()=>{
     fetchingPiezasAbas()
     fetchingPiezasDepo()
@@ -30,15 +30,14 @@ const InputArmado = ()=>{
   useEffect (()=>{
     setPiezas(piezasAbas.concat(piezasDepo)) 
   },[piezasAbas,piezasDepo]) 
-
-  console.log('piezas totales: ',piezas)
+ 
   const fetchingProductos = ()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/armado/productos')
-      .then((res)=>res.json())
-      .then ((json)=>{
-        setProductos(json)
-      })
-      .catch (err => console.log(err))
+    // fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/armado/productos')
+    //   .then((res)=>res.json())
+    //   .then ((json)=>{
+    //     setProductos(json)
+    //   })
+    //   .catch (err => console.log(err))
   }
   const fetchingPiezasAbas = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
@@ -61,14 +60,15 @@ const InputArmado = ()=>{
     .then((res)=>res.json())
     .then((json)=>{
       setCeldaData (json)
+      let lider = json?.equipo[0]?.apellido + ', ' + json?.equipo[0]?.nombre
+      setLiderName (lider)
     })
     .catch(res => {
-      console.log('error es: ',res.statusText)
+      console.log('error en fetching celda es: ',res.statusText)
       SetErrorMsg(res.statusText)
     })    
   }
 
-  console.log(inputs)
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
@@ -103,11 +103,11 @@ const InputArmado = ()=>{
     if (!pzOk) {
       arr.push('Insumo')
     }
-    const prod = inputs?.producto
-    const prodOk = productos.findIndex(pr => pr.producto===(prod)) + 1
-    if (!prodOk) {
-      arr.push('Producto')
-    }
+    // const prod = inputs?.producto
+    // const prodOk = productos.findIndex(pr => pr.producto===(prod)) + 1
+    // if (!prodOk) {
+    //   arr.push('Producto')
+    // }
     return arr
   }
   
@@ -130,6 +130,9 @@ const InputArmado = ()=>{
     const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.date = date
     inputs.lider = liderName
+    inputs.celda = +celda
+    inputs.producto = celdaData.nroProduccion
+    inputs.idTurno = +celdaData.idTurno
     setInputs ({...inputs}) 
     const options = {
       method: 'PUT',
@@ -194,7 +197,6 @@ const InputArmado = ()=>{
           type="text" 
           name='lider' 
           value = {liderName}
-          //value = {celdaData?.equipo[0]?.apellido + ', ' + celdaData?.equipo[0]?.nombre} 
           />
         </label>
         <label >

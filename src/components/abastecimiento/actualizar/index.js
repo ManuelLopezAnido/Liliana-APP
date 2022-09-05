@@ -34,7 +34,7 @@ const ActualizarAbastecimiento = ()=>{
   const handleCheckData = () => {
     let arr = []
     const codigoPz = inputs?.codigo || ""
-    if (codigoPz.length !== 6 && codigoPz.length !== 0 ){
+    if (codigoPz.length !== 6 && codigoPz.length !== 0 && codigoPz.length !== 7){
       arr.push('codigo')
     }
    
@@ -139,9 +139,7 @@ const ActualizarAbastecimiento = ()=>{
               </option>
           </select>
         </label>
-        <label
-        className = {inputs.tipo === 'pieza' ? styles.visible : styles.hidden }
-        >
+        <label className = {inputs.tipo === 'pieza' ? styles.visible : styles.hidden }>
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'codigo')  ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
@@ -152,7 +150,8 @@ const ActualizarAbastecimiento = ()=>{
             name='codigo' 
             value={inputs.codigo || ''}  
             onChange={handleChange} 
-            placeholder="Código"/>
+            placeholder="Código"
+          />
         </label>
         <label
         className = {inputs.tipo === 'pieza' ? styles.visible : styles.hidden }

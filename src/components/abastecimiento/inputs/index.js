@@ -3,16 +3,15 @@ import ModalOk from "../../common components/modal ok";
 import ModalError from "../../common components/modal error";
 import styles from "./inputAbastecimiento.module.css"
 
-
 const InputAbastecimiento = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
   const [piezas, setPiezas] = useState([])
+  const [to, setTo] = useState({to:false})
   const abasUser = sessionStorage.getItem('AbastecimientoUser')
-
-  console.log ('Inputs: ',inputs)
+  //console.log ('Inputs: ',inputs)
   useEffect (()=>{
     fetchingPiezas()
   },[])
@@ -25,15 +24,21 @@ const InputAbastecimiento = ()=>{
       })
       .catch (err => console.log(err))
   }
-
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
-    if (name === 'codigo' || name === 'estanteria' || name === 'altura') {
+    if (name === 'codigo' || name === 'estanteria' || name === 'altura'|| name === 'estanteriaTo' || name === 'alturaTo') {
       value=e.target.value.toUpperCase()
     }
-    if (name ==='cantidad' || name ==='posicion'){
+    if (name ==='cantidad' || name ==='posicion' || name ==='posicionTo'){
       value = parseInt(e.target.value)
+    }
+    if (name === 'radio'){
+      if (value === 'move'){
+        setTo({to:true})
+      } else {
+        setTo({to:false})
+      }
     }
     setInputs (({...inputs, [name]: value}))
   }
@@ -45,12 +50,11 @@ const InputAbastecimiento = ()=>{
       arr.push('Codigo de pieza')
     }
     const estanteria = inputs?.estanteria
-    const rgexEstanteria = /^[A-TV-Z]{1}$/
+    const rgexEstanteria = /^[A-TV-Z]{1}$|^A[A-B]$/
     if (!rgexEstanteria.test(estanteria)) {
       arr.push('Estanteria')
     }
     const posicion = inputs?.posicion
-    
     if (posicion<1 || posicion>53 ) {
       arr.push('Posicion')
     }
@@ -58,6 +62,20 @@ const InputAbastecimiento = ()=>{
     const rgexAltura = /^[1-4A-D]{1,2}$/
     if (!rgexAltura.test(altura)) {
       arr.push('Altura')
+    }
+    const estanteriaTo = inputs?.estanteriaTo
+    const rgexEstanteriaTo = /^[A-TV-Z]{1}$|^A[A-B]$/
+    if (!rgexEstanteriaTo.test(estanteriaTo) && estanteriaTo === '') {
+      arr.push('EstanteriaTo')
+    }
+    const posicionTo = inputs?.posicionTo
+    if (posicionTo<1 || posicionTo>53 ) {
+      arr.push('PosicionTo')
+    }
+    const alturaTo = inputs?.alturaTo
+    const rgexAlturaTo = /^[1-4A-D]{1,2}$/
+    if (!rgexAlturaTo.test(alturaTo)  && estanteriaTo === '') {
+      arr.push('AlturaTo')
     }
     const cantidad = inputs?.cantidad
     if (cantidad<0) {
@@ -68,7 +86,6 @@ const InputAbastecimiento = ()=>{
   const clearErrMsg = () =>{
     setArrErrors([])
   }
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const arr =handleCheckData()
@@ -84,6 +101,9 @@ const InputAbastecimiento = ()=>{
     inputs.time = time
     inputs.date = date
     inputs.operario = abasUser
+    if (to.to){ //move section
+      inputs.radio ='down'
+    }
     setInputs ({...inputs}) 
     const options = {
       method: 'PUT',
@@ -103,6 +123,10 @@ const InputAbastecimiento = ()=>{
       })
       .then((json)=>{
         console.log(json)
+        if (to.to){ //move section
+          fetchAdd()
+          return
+        }
         const fetchedInputs = {}
         if (inputs.radio === 'down'){
           if (json.cantidad){
@@ -133,13 +157,24 @@ const InputAbastecimiento = ()=>{
           SetErrorMsg('Falla de conexión')
         }
       })    
-    }
+  }
   const closeModal=()=>{
     SetErrorMsg('')
     setShowModal(false)
   }
   const openModal=()=>{
     setShowModal(true)
+  }
+  const fetchAdd = ()=>{
+    console.log('Intro Move')
+    inputs.radio ='add'
+    inputs.estanteria = inputs.estanteriaTo
+    inputs.posicion = inputs.posicionTo
+    inputs.altura = inputs.alturaTo
+    to.to=false
+    setTo({...to})
+    setInputs ({...inputs})
+    handleSubmit({preventDefault: function (){}})
   }
   return(
     <>
@@ -290,6 +325,73 @@ const InputAbastecimiento = ()=>{
               onChange={handleChange}
               />
             <div>Vaciar</div>
+          </label>
+          <label className={styles.container}>
+            <input 
+              type="radio" 
+              name="radio"
+              value={'move'} 
+              checked = {inputs.radio==='move' ? true : false}
+              onChange={handleChange}
+              />
+            <div>Mover</div>
+          </label>
+          <label className={styles.container}>
+            <input 
+              type="radio" 
+              name="radio"
+              value={'cleanRack'} 
+              checked = {inputs.radio==='cleanRack' ? true : false}
+              onChange={handleChange}
+              />
+            <div>Vaciar Estanteria</div>
+          </label>
+        </div>
+{/* ------------ */}
+        <div hidden={!to.to}>
+          <label>
+            <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'EstanteriaTo')  ? styles.visible:''}`}>
+              Ingreso no válido:
+            </div>
+            <input 
+              required = {inputs.radio === 'move' ? true : false }
+              onFocus={clearErrMsg}
+              type="text" 
+              name='estanteriaTo' 
+              value={inputs.estanteriaTo || ''}  
+              onChange={handleChange} 
+              placeholder="Estantería"/>
+          </label>
+          <label>
+            <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'PosicionTo')  ? styles.visible:''}`}>
+              Ingreso no válido:
+            </div>
+            <input
+              required = {inputs.radio === 'move' ? true : false}
+              onFocus={clearErrMsg}
+              type="number"
+              onWheelCapture={(e)=>e.target.blur()}
+              name='posicionTo' 
+              value={inputs.posicionTo || ''} 
+              onChange={handleChange} 
+              placeholder="Posición"/>
+          </label>
+          <label>
+            <div className={`${styles.notValid} ${['W','Y','V','X','Z'].indexOf(inputs.estanteriaTo) + 1  ? styles.visible:''}`}>
+              Ingresar altura y profunidad
+            </div>
+            <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'AlturaTo')  ? styles.visible:''}`}>
+              Ingreso no válido:
+            </div>
+            <input
+              required = {inputs.radio === 'move' ? true : false}
+              onFocus={clearErrMsg}
+              type={(['V','W','X','Y','Z'].indexOf(inputs?.estanteriaTo) + 1 ) ? 'text' : 'number'}
+              name='alturaTo' 
+              onWheelCapture={(e)=>e.target.blur()}
+              value={inputs.alturaTo || ''} 
+              onChange={handleChange} 
+              placeholder="Altura"/>
           </label>
         </div>
         <button 
