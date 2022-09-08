@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import ModalOk from "../../common components/modal ok/index.js";
-import ModalError from "../../common components/modal error";
+import ModalOk from "../../commonComponents/modal ok/index.js";
+import ModalError from "../../commonComponents/modal error";
 import styles from "./inputAbastecimiento.module.css"
 
 const InputAbastecimiento = ()=>{

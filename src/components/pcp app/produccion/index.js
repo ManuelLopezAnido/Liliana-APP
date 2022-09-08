@@ -1,7 +1,7 @@
 import styles from './produccion.module.css'
 import { useEffect, useState } from 'react'
 import {Fragment} from 'react'
-import MachineList from '../../common components/machine list'
+import MachineList from '../../commonComponents/machine list'
 const Produccion = (props) => {
 
   let dataTable=props.data

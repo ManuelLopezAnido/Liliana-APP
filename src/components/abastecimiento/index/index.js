@@ -1,8 +1,8 @@
 import styles from './abastecimientoHome.module.css'
 import { useState , useEffect } from 'react';
 import { Link , useNavigate } from 'react-router-dom'
-import ModalOk from "../../common components/modal ok/index.js";
-import ModalError from "../../common components/modal error";
+import ModalOk from "../../commonComponents/modal ok/index.js";
+import ModalError from "../../commonComponents/modal error";
 
 const AbastecimientoHome = ()=>{
   const [inputs, setInputs] = useState({});

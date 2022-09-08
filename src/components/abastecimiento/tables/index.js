@@ -1,7 +1,7 @@
 import styles from './tablasAbastecimiento.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
-import Total from '../../common components/total'
+import Total from '../../commonComponents/total'
 const TablasAbastecimiento =() =>{
   const [dataAbs, setDataAbs] = useState([])
   const [dataAbsFiltred,setDataAbsFiltred] = useState([])

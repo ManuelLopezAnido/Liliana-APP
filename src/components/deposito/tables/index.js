@@ -1,7 +1,7 @@
 import styles from './tablasDeposito.module.css'
 import { useState, useEffect } from 'react'
 import { Fragment } from 'react'
-import Total from '../../common components/total'
+import Total from '../../commonComponents/total'
 const TablasDeposito =() =>{
   const [dataDepo, setDataDepo] = useState([])
   const [dataDepoFiltred,setDataDepoFiltred] = useState([])
