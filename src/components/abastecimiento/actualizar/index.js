@@ -1,5 +1,5 @@
 import { useState } from "react"
-import ModalOk from "../../common components/modal ok";
+import ModalOk from "../../common components/modal ok/index.js";
 import ModalError from "../../common components/modal error";
 import styles from "./actualizarAbastecimiento.module.css"
 //import piezas from "../../../data samples/piezas.json"

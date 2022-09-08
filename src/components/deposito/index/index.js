@@ -1,7 +1,7 @@
 import styles from './depositoHome.module.css'
 import { useState , useEffect } from 'react';
 import { Link , useNavigate } from 'react-router-dom'
-import ModalOk from "../../common components/modal ok";
+import ModalOk from "../../common components/modal ok/index.js";
 import ModalError from "../../common components/modal error";
 
 const DepositoHome = ()=>{

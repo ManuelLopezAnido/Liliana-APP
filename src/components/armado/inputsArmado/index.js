@@ -1,6 +1,6 @@
 import styles from './inputsarmado.module.css'
 import { useEffect, useState } from "react"
-import ModalOk from "../../common components/modal ok";
+import ModalOk from "../../common components/modal ok/index.js";
 import ModalError from "../../common components/modal error";
 
 const InputArmado = ()=>{

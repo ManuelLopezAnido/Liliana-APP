@@ -1,5 +1,5 @@
 import styles from './inputDeposit.module.css';
-import ModalOk from "../../common components/modal ok";
+import ModalOk from "../../common components/modal ok/index.js";
 import ModalError from "../../common components/modal error";
 import MachineList from '../../common components/machine list';
 import maquinas from '../../../data samples/maquinas.json'
