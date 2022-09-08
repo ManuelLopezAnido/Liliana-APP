@@ -32,7 +32,7 @@ const AbastecimientoHome = ()=>{
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setInputs ({...inputs}) 
+    setInputs ({...inputs})
     const options = {
       method: 'PUT',
       headers: {
