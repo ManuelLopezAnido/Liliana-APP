@@ -1,11 +1,29 @@
 import styles from './produccion.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {Fragment} from 'react'
-import maquinas from '../../../data samples/maquinas.json'
 import MachineList from '../../common components/machine list'
 const Produccion = (props) => {
+
   let dataTable=props.data
   const [openRows,setOpenRows] = useState([])
+  const [maquinas, setMaquinas] = useState ([])
+
+  useEffect (()=>{
+    fetchMachines()
+  },[])
+
+  const fetchMachines = () => {
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/machines')
+      .then((res)=>res.json())
+      .then((json)=>{
+        setMaquinas(json)
+      })
+      .catch ((err) => {
+        console.log('Error fetching Maquinas')
+        console.log(err)
+      })
+  } 
+
   const selectMachine = (maq) =>{
     console.log('click en: ', maq)
   }

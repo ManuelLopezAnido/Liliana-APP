@@ -2,7 +2,6 @@ import styles from './inputDeposit.module.css';
 import ModalOk from "../../commonComponents/modalOk/index.js";
 import ModalError from "../../commonComponents/modal error";
 import MachineList from '../../commonComponents/machine list';
-import maquinas from '../../../data samples/maquinas.json'
 import { useState , useEffect } from 'react';
 
 const InputInyeccion =()=>{
@@ -13,11 +12,13 @@ const InputInyeccion =()=>{
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [piezasDeposito, setPiezasDeposito] = useState([])
+  const [maquinas, setMaquinas] = useState([])
   const liderNameIny = sessionStorage.getItem('LiderUserIny')
   
   console.log(inputs)
   useEffect (()=>{
     basicInputs()
+    fetchMachines()
     fetchingPiezas()
      // eslint-disable-next-line
   },[])
@@ -27,8 +28,22 @@ const InputInyeccion =()=>{
       .then ((json)=>{
         setPiezasDeposito(json)
       })
-      .catch (err => console.log(err))
+      .catch ((err) => {
+        console.log('Error fetching Piezas')
+        console.log(err)
+      })
   }
+  const fetchMachines = () => {
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/machines')
+      .then((res)=>res.json())
+      .then((json)=>{
+        setMaquinas(json)
+      })
+      .catch ((err) => {
+        console.log('Error fetching Maquinas')
+        console.log(err)
+      })
+  } 
   const basicInputs = () =>{
     const today = new Date();
     const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
