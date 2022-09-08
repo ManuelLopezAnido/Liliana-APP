@@ -1,7 +1,7 @@
 import styles from './abastecimientoHome.module.css'
 import { useState , useEffect } from 'react';
 import { Link , useNavigate } from 'react-router-dom'
-import ModalOk from "../../commonComponents/modal ok/index.js";
+import ModalOk from "../../commonComponents/modalOK/index.js";
 import ModalError from "../../commonComponents/modal error";
 
 const AbastecimientoHome = ()=>{
