@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import ModalOk from "../../commonComponents/modalOK/index.js";
+import ModalOk from "../../commonComponents/modalOK";
 import ModalError from "../../commonComponents/modal error";
 import styles from "./inputsDeposito.module.css"
 

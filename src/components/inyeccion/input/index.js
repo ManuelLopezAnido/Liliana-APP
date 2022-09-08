@@ -1,5 +1,5 @@
 import styles from './inputDeposit.module.css';
-import ModalOk from "../../commonComponents/modalOk/index.js";
+import ModalOk from "../../commonComponents/modalOk";
 import ModalError from "../../commonComponents/modal error";
 import MachineList from '../../commonComponents/machine list';
 import { useState , useEffect } from 'react';

@@ -1,7 +1,7 @@
 import styles from './armadoHome.module.css'
 import { useEffect, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import ModalOk from "../../commonComponents/modalOK/index.js";
+import ModalOk from "../../commonComponents/modalOK";
 import ModalError from "../../commonComponents/modal error";
 
 const ArmadoHome = ()=>{

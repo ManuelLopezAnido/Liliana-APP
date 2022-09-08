@@ -1,7 +1,7 @@
 import styles from './inyeccionHome.module.css'
 import { useEffect, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import ModalOk from "../../commonComponents/modalOk/index.js";
+import ModalOk from "../../commonComponents/modalOk";
 import ModalError from "../../commonComponents/modal error";
 
 const ArmadoHome = ()=>{
