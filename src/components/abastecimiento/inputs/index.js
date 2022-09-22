@@ -27,7 +27,7 @@ const InputAbastecimiento = ()=>{
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
-    if (name === 'codigo' || name === 'estanteria' || name === 'altura'|| name === 'estanteriaTo' || name === 'alturaTo') {
+    if (name === 'codigo' || name === 'comentarios' || name === 'estanteria' || name === 'altura'|| name === 'estanteriaTo' || name === 'alturaTo') {
       value=e.target.value.toUpperCase()
     }
     if (name ==='cantidad' || name ==='posicion' || name ==='posicionTo'){
