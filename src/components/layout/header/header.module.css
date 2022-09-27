@@ -9,6 +9,9 @@
   border-bottom: 1px solid white;
   font-family: 'Roboto', sans-serif;
 }
+.headerNoVisible{
+  display: none;
+}
 .logo  {  
 background: url(https://www.liliana.com.ar/wp-content/themes/liliana/img/logo.png) no-repeat !important;
 width: 142px;

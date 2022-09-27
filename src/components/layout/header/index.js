@@ -1,14 +1,23 @@
 import styles from './header.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 const Header = () => {
   const [isActive, setActive] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true)
+  const pathname = window.location.pathname.slice(0,7)
+  useEffect (()=>{
+    if (pathname === '/armado') {
+      setHeaderVisible(false)
+    }
+    // eslint-disable-next-line
+  },[])
+  
   const mobileMenu = (e) => {
     //e.preventDefault();
     setActive (!isActive);
   }
   return (
-    <div className={styles.header}>
+    <div className = {headerVisible ?  styles.header : styles.headerNoVisible} >
       <a href='https://www.liliana.com.ar/' className={styles.logo}> </a>
       <nav className={`${styles.menu} ${isActive? styles.active: ''}`}>
         <ul>

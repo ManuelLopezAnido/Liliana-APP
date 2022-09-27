@@ -1,5 +1,6 @@
 import styles from './inputsarmado.module.css'
 import { useEffect, useState } from "react"
+import { Link } from 'react-router-dom'
 import ModalOk from "../../commonComponents/modalOk/index";
 import ModalError from "../../commonComponents/modal error";
 
@@ -231,6 +232,8 @@ const InputArmado = ()=>{
             <option value= {'defecto'}>Defecto</option>
             <option value={'faltante'}>Faltante</option>
             <option value={'cambioCelda'}>Cambio de celda</option>
+            <option value={'ausentismo'}>Ausentismo</option>
+            <option value={'entrenamiento'}>Entrenamiento</option>
           </select>
         </label>
         <label >
@@ -287,7 +290,7 @@ const InputArmado = ()=>{
           </div>
           <input 
            className={styles.inputs}
-           required
+           required = {inputs.motivo !== 'cambioCelda'}
            onFocus={clearErrMsg}
            type="text" 
            name='insumo'
@@ -306,6 +309,14 @@ const InputArmado = ()=>{
           placeholder="Descripción"/>
         </label>
         <button type="submit" className={styles.button}>Relevar información</button>
+        <div className={styles.links}>
+          <Link  to = '/armado/tablas' className={styles.textLink} >
+            Inputs
+          </Link >
+          <a href='#'  className={styles.textLink} >
+            Despiece
+          </a >
+        </div>
       </form>
     </>
   )

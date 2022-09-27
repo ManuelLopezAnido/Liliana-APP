@@ -1,5 +1,7 @@
 section{
+  margin: -15%;
   background-color: white ;
+  height: 140vh;
 }
 
 .armadoForm {
@@ -153,6 +155,26 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none; 
 }
 
+.links{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+.textLink{
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  top: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+}
+.textLink:hover{
+  color: #61dafb;
+  transition: 0.5s;
+}
 /* Create the indicator (the dot/circle - hidden when not checked) */
 
 /* Show the indicator (dot/circle) when checked */
