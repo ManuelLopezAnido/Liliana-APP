@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 
 const hostname = '192.168.11.139';
-const portApp = 3001;
+const portApp = 3000;
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', function (req, res) {
