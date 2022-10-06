@@ -16,19 +16,16 @@
  color: #61dafb;
  top: -80px
 }
-
 .pcpMenu{
   display: flex;
   justify-content:space-around;
-  width: 40vw;
-  flex-wrap: wrap;
+  width: 60vw;
 }
 .pcpMenu a{
   width: 40%;
-  margin: 15px 15px;
+  margin: 10px 0px;
   text-decoration: none;
 }
-
 .pcpMenu button{
   width: 100%;
   box-shadow: -5px -5px 20px #393f4b, 5px 5px 20px black;
@@ -153,6 +150,11 @@
 .closeSession:hover{
   color: #61dafb;
   transition: 0.5s;
+}
+.foot{
+  display: flex;
+  justify-content: space-around;
+  width: 15vw;
 }
 
 @media only screen and (max-width: 768px) {

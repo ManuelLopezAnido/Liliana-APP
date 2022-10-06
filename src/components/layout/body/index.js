@@ -4,6 +4,7 @@ import InyeccionRoutes from '../../routes/inyeccionRoutes.js'
 import AbastecimientoRoutes from '../../routes/abastecimientoRoutes.js'
 import DepositoRoutes from '../../routes/depositoRoutes.js'
 import ArmadoRoutes from '../../routes/armadoRoutes.js'
+import MatriceriaRoutes from '../../routes/matriceriaRoutes.js'
 import {Routes,Route, Navigate } from 'react-router-dom'
 
 const Body = () => {
@@ -15,6 +16,7 @@ const Body = () => {
       <Route path='/abastecimiento/*' element = {<AbastecimientoRoutes/>}/>
       <Route path='/deposito/*' element = {<DepositoRoutes/>}/>
       <Route path='/armado/*' element={<ArmadoRoutes/>}/>
+      <Route path='/matriceria/*' element={<MatriceriaRoutes/>}/>
       <Route path="*" element={<Navigate replace to="/pcp" />}/>
     </Routes>
   </section>

@@ -33,7 +33,7 @@ const InputArmado = ()=>{
   },[piezasAbas,piezasDepo]) 
  
   const fetchingProductos = ()=>{
-    // fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/armado/productos')
+    // fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/productos')
     //   .then((res)=>res.json())
     //   .then ((json)=>{
     //     setProductos(json)
@@ -41,7 +41,7 @@ const InputArmado = ()=>{
     //   .catch (err => console.log(err))
   }
   const fetchingPiezasAbas = ()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/pzabas')
       .then((res)=>res.json())
       .then ((json)=>{
         setPiezasAbas(json)
@@ -49,7 +49,7 @@ const InputArmado = ()=>{
       .catch (err => console.log(err))
   }
   const fetchingPiezasDepo = ()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/piezas')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/pzdepo')
       .then((res)=>res.json())
       .then ((json)=>{
         setPiezasDepo(json)
@@ -177,7 +177,7 @@ const InputArmado = ()=>{
   }
 
   return(
-    <>
+    <div className={styles.armadoInputSection}>
       <ModalOk
         close={closeModal}
         show={showModal}
@@ -313,12 +313,15 @@ const InputArmado = ()=>{
           <Link  to = '/armado/tablas' className={styles.textLink} >
             Inputs
           </Link >
-          <a href='#'  className={styles.textLink} >
+          <a 
+            href='https://www.liliana.com.ar/internodos/administracion/Menu.php'  
+            className={styles.textLink} 
+          >
             Despiece
           </a >
         </div>
       </form>
-    </>
+    </div>
   )
 }
 export default InputArmado

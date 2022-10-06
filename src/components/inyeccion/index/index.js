@@ -8,7 +8,7 @@ const ArmadoHome = ()=>{
   const [inputs, setInputs] = useState({});
   const[showModal,setShowModal] = useState(false)
   const[errorMsg, SetErrorMsg] = useState('')
-  const [passOk, setPassOk] = useState(sessionStorage.getItem('LiderUser'))
+  const [passOk, setPassOk] = useState(sessionStorage.getItem('InyeccionUser'))
   const [users, setUsers] = useState([])
 
   useEffect(()=>{
@@ -52,7 +52,7 @@ const ArmadoHome = ()=>{
       })
       .then(res=>res.json())
       .then((json)=>{
-        sessionStorage.setItem("LiderUserIny",json.user)
+        sessionStorage.setItem("InyeccionUser",json.user)
         openModal()
         setPassOk(json.user)
         setInputs({})
@@ -151,6 +151,21 @@ const ArmadoHome = ()=>{
           <Link to = 'tablas'>
             <button>
               Tablas
+            </button>
+          </Link>
+          <Link to = 'inyecotras'>
+            <button>
+              Reparación Inyecotoras
+            </button>
+          </Link>
+          <Link to = 'moldes'>
+            <button>
+              Reparación Moldes
+            </button>
+          </Link>
+          <Link to = '/matriceria'>
+            <button>
+              Matricería
             </button>
           </Link>
         </div>
