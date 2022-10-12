@@ -65,7 +65,7 @@ const ActualizarAbastecimiento = ()=>{
     const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.time = time
     inputs.date = date
-    inputs.operario = abasUser
+    inputs.users = abasUser
     setInputs ({...inputs}) 
     const options = {
       method: 'POST',
@@ -74,7 +74,7 @@ const ActualizarAbastecimiento = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/' + area + '/actualizar/'+ inputs.tipo, options)
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/'+ inputs.tipo + '/' + area, options)
       .then((res)=>{
         if(!res.ok){
           throw (res)
@@ -130,20 +130,20 @@ const ActualizarAbastecimiento = ()=>{
             value={inputs.tipo || ''}
             onChange={handleChange}>
               <option disabled value= "" hidden> Tipo </option>
-              <option value = 'pieza'>
+              <option value = 'piezas'>
                 NUEVA PIEZA
               </option>
-              <option value = 'operario'>
+              <option value = 'users'>
                 NUEVO OPERARIO
               </option>
           </select>
         </label>
-        <label className = {inputs.tipo === 'pieza' ? styles.visible : styles.hidden }>
+        <label className = {inputs.tipo === 'piezas' ? styles.visible : styles.hidden }>
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'codigo')  ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
           <input 
-            required = {inputs.tipo === 'pieza' ? true : false}
+            required = {inputs.tipo === 'piezas' ? true : false}
             onFocus={clearErrMsg}
             type="text" 
             name='codigo' 
@@ -153,10 +153,10 @@ const ActualizarAbastecimiento = ()=>{
           />
         </label>
         <label
-        className = {inputs.tipo === 'pieza' ? styles.visible : styles.hidden }
+        className = {inputs.tipo === 'piezas' ? styles.visible : styles.hidden }
         >
           <input
-            required = {inputs.tipo === 'pieza' ? true : false}
+            required = {inputs.tipo === 'piezas' ? true : false}
             onFocus={clearErrMsg}
             type="text"
             name='detalle' 
@@ -165,7 +165,7 @@ const ActualizarAbastecimiento = ()=>{
             placeholder="Detalle"/>
         </label>
         <label
-        className = {inputs.tipo === 'pieza' ? styles.visible : styles.hidden }
+        className = {inputs.tipo === 'piezas' ? styles.visible : styles.hidden }
         >
           <input
             onFocus={clearErrMsg}
@@ -176,7 +176,7 @@ const ActualizarAbastecimiento = ()=>{
             placeholder="Familia"/>
         </label>
         <label
-        className = {inputs.tipo === 'pieza' ? styles.visible : styles.hidden }
+        className = {inputs.tipo === 'piezas' ? styles.visible : styles.hidden }
         >
           <div className={`${styles.notValid}  ${arrErrors.find(e=>e === 'cantxPallet') ? styles.visible:''}`}>
             Ingreso no válido:
@@ -191,7 +191,7 @@ const ActualizarAbastecimiento = ()=>{
             placeholder="Cantidad por pallets"/>
         </label>
         <label
-        className = {inputs.tipo === 'pieza' ? styles.visible : styles.hidden }
+        className = {inputs.tipo === 'piezas' ? styles.visible : styles.hidden }
         >
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'stockM')  ? styles.visible:''}`}>
             Ingreso no válido:
@@ -207,13 +207,13 @@ const ActualizarAbastecimiento = ()=>{
         </label>
         {/* ---- OPERARIO ----  */}
         <label
-        className = {inputs.tipo === 'operario' ? styles.visible : styles.hidden }
+        className = {inputs.tipo === 'users' ? styles.visible : styles.hidden }
         >
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'stockM')  ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
           <input
-            required = {inputs.tipo === 'operario' ? true : false}
+            required = {inputs.tipo === 'users' ? true : false}
             onFocus={clearErrMsg}
             type='text'
             name='nombreOpe' 
@@ -222,13 +222,13 @@ const ActualizarAbastecimiento = ()=>{
             placeholder="Nombre"/>
         </label>
         <label
-        className = {inputs.tipo === 'operario' ? styles.visible : styles.hidden }
+        className = {inputs.tipo === 'users' ? styles.visible : styles.hidden }
         >
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'stockM')  ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
           <select
-            required = {inputs.tipo === 'operario' ? true : false}
+            required = {inputs.tipo === 'users' ? true : false}
             className={`${styles.select} ${!inputs.lider ? styles.placeholder : ''}`}
             type='text'
             name='turno' 

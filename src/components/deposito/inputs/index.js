@@ -15,7 +15,7 @@ const InputDeposito = ()=>{
     fetchingPiezas()
   },[])
   const fetchingPiezas = ()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/piezas')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/deposito')
       .then((res)=>res.json())
       .then ((json)=>{
         setPiezas(json)

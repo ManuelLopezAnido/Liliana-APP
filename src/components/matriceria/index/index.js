@@ -1,5 +1,5 @@
 import styles from './depositoHome.module.css'
-import { useState , useEffect } from 'react';
+import { useState } from 'react';
 import { Link , useNavigate } from 'react-router-dom'
 import ModalOk from "../../commonComponents/modalOk/index";
 import ModalError from "../../commonComponents/modal error";
@@ -8,22 +8,7 @@ const MatriceriaHome = ()=>{
   const[showModal,setShowModal] = useState(false)
   const[errorMsg, SetErrorMsg] = useState('')
   const [passOk, setPassOk] = useState(sessionStorage.getItem('InyeccionUser'))
-  const [users, setUsers] = useState([{'user':'Mati'}])
   const navigate = useNavigate()
-  console.log(users)
-  useEffect(()=>{
-    fetchingUsers()
-    // eslint-disable-next-line
-  },[])
-
-  const fetchingUsers = () => {
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/users')
-      .then((res)=>res.json())
-      .then ((json)=>{
-        setUsers(json)
-      })
-      .catch (err => console.log(err))
-  }
 
   const closeModal=()=>{
     SetErrorMsg('')

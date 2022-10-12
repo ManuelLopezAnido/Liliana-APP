@@ -17,7 +17,7 @@ const AbastecimientoHome = ()=>{
   },[])
 
   const fetchingUsers = () => {
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/users')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/users/abastecimiento')
       .then((res)=>res.json())
       .then ((json)=>{
         setUsers(json)

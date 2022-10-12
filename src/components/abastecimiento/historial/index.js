@@ -14,7 +14,7 @@ const HistorialAbastecimiento = () =>{
   },[])
 
   const fetchingPiezas = () => {
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/piezas')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/abastecimiento')
       .then((res)=>res.json())
       .then ((json)=>{
         setPiezas(json)

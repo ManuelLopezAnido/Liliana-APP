@@ -18,7 +18,7 @@ const DepositoHome = ()=>{
   },[])
 
   const fetchingUsers = () => {
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/deposito/users')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/users/deposito')
       .then((res)=>res.json())
       .then ((json)=>{
         setUsers(json)
