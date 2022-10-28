@@ -41,7 +41,7 @@ const InputArmado = ()=>{
     //   .catch (err => console.log(err))
   }
   const fetchingPiezasAbas = ()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/pzabas')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/abastecimiento')
       .then((res)=>res.json())
       .then ((json)=>{
         setPiezasAbas(json)
@@ -49,7 +49,7 @@ const InputArmado = ()=>{
       .catch (err => console.log(err))
   }
   const fetchingPiezasDepo = ()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/pzdepo')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/deposito')
       .then((res)=>res.json())
       .then ((json)=>{
         setPiezasDepo(json)
@@ -97,11 +97,12 @@ const InputArmado = ()=>{
     if (dur<1) {
       arr.push('Duracion')
     }
+
     const ins = inputs?.insumo
     console.log(ins)
     const pzOk = piezas.findIndex(pz => pz.articulo===(ins)) + 1
     console.log('PiezaOk',pzOk)
-    if (!pzOk) {
+    if (pzOk===0 && ins !== '' && ins !== undefined ) { //if pieza not found and input different to empty
       arr.push('Insumo')
     }
     // const prod = inputs?.producto
@@ -290,7 +291,7 @@ const InputArmado = ()=>{
           </div>
           <input 
            className={styles.inputs}
-           required = {inputs.motivo !== 'cambioCelda'}
+           required = {inputs.motivo === 'faltante' || inputs.motivo === 'incompleto' ? true : false}
            onFocus={clearErrMsg}
            type="text" 
            name='insumo'

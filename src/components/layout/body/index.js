@@ -17,7 +17,7 @@ const Body = () => {
       <Route path='/deposito/*' element = {<DepositoRoutes/>}/>
       <Route path='/armado/*' element={<ArmadoRoutes/>}/>
       <Route path='/matriceria/*' element={<MatriceriaRoutes/>}/>
-      <Route path="*" element={<Navigate replace to="/pcp" />}/>
+      {/* <Route path="*" element={<Navigate replace to="/pcp" />}/> */}
     </Routes>
   </section>
   )

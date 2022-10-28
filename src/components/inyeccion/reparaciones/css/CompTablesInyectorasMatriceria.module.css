@@ -1,0 +1,14 @@
+.noStyle {
+  text-decoration: none;
+  border: none;
+  background: none;
+  color: #000;
+}
+.noStyleDiv {
+  margin: auto;
+  width: 310px;
+}
+.titleTop {
+  margin: 0px 0px 25px 0;
+  text-align: center;
+}

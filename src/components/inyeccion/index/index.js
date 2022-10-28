@@ -163,7 +163,17 @@ const ArmadoHome = ()=>{
               Reparación Moldes
             </button>
           </Link>
-          <Link to = '/matriceria'>
+          <Link to = 'maquinas'>
+            <button>
+              Ordenes maquinas
+            </button>
+          </Link>
+          <Link to = 'moldes'>
+            <button>
+              Ordenes moldes
+            </button>
+          </Link>
+          <Link to = 'matriceria'>
             <button>
               Matricería
             </button>

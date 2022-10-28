@@ -1,0 +1,33 @@
+.sectionh3h5 {
+  text-align: center;
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 7px;
+  padding: 30px;
+}
+
+.sectionh3h5 h5 {
+  font-size: 14px;
+  margin: 0 30px 5px 30px;
+  border-radius: 5px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.sectionh3h5 h3 {
+  font-size: 14px;
+  margin: 12px 0 3px 0;
+}
+
+.GRID {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+}
+
+.contentGrid {
+  margin-bottom: 40px;
+}
+
+.contentGrid h5 {
+  background: rgba(128, 128, 128, 0.4);
+}

@@ -1,0 +1,73 @@
+.txtColors {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 100px 200px;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  margin-left: 5%;
+  pointer-events: none;
+  color: #474747;
+}
+
+.txtOptions {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 100px 200px;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  margin-left: 70vw;
+  pointer-events: none;
+  color: #474747;
+}
+
+.colores {
+  display: grid;
+  grid-template-rows: 20px 20px;
+  grid-template-columns: 120px 120px;
+  gap: 15px;
+}
+.coloresTable {
+  display: grid;
+  grid-template-columns: 15px 100px;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 10px;
+}
+
+.colores p {
+  margin: 0;
+}
+.rojo,
+.amarillo,
+.azul,
+.verde {
+  margin: 0;
+  width: 15px;
+  height: 15px;
+}
+.rojo {
+  background: red;
+}
+.amarillo {
+  background: yellow;
+}
+.verde {
+  background: green;
+}
+.azul {
+  background: blue;
+}
+
+.linkMedia {
+  transition: all 0.4s;
+}
+
+.linkMedia:hover {
+  color: #fff;
+}
+
+.linkMediaDisable {
+  margin: auto;
+}
