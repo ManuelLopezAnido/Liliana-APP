@@ -11,7 +11,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../hooks';
 import { CompDate, CompInput, CompMessage } from './';
-import styles from '../css/FormEdit.module.css'
+import styles from '../css/FormEdit.module.css';
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormVisualizar = () => {
@@ -20,7 +20,6 @@ export const FormVisualizar = () => {
   const { tabla, id } = useParams();
   const { date, hour } = useDate();
   const LiderUser = sessionStorage.getItem('InyeccionUser');
-  console.log(LiderUser)
   useEffect(() => {
     getData();
     // eslint-disable-next-line
@@ -74,7 +73,7 @@ export const FormVisualizar = () => {
     if (dataRes.molde) {
       window.location.replace('/inyeccion/moldes');
     } else {
-      window.location.replace('/inyeccion/inyectoras');
+      window.location.replace('/inyeccion/maquinas');
     }
   };
 
@@ -132,11 +131,11 @@ export const FormVisualizar = () => {
 
           <ContenedorBotonCentrado>
             {dataRes.molde ? (
-              <Link to='/CompTableMatriceria'>
+              <Link to='/inyeccion/moldes'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             ) : (
-              <Link to='/CompTableInyectoras'>
+              <Link to='/inyeccion/maquinas'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             )}

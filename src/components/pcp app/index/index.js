@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import styles from './pcpApp.module.css';
 import { Link } from 'react-router-dom';
-function PcpApp() {
+function Procesos() {
   return (
     <div className={styles.App}>
       <header className={styles.Appheader}>
@@ -38,4 +38,4 @@ function PcpApp() {
   );
 }
 
-export default PcpApp;
+export default Procesos;

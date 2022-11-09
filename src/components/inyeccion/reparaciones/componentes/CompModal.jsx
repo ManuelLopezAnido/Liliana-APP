@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import styles from '../css/CompModal.module.css'
+import styles from '../css/CompModal.module.css';
 export const CompModal = ({ dataTable, state, setState }) => {
   return (
     <>
@@ -23,14 +23,14 @@ export const CompModal = ({ dataTable, state, setState }) => {
                     {dataTable.molde ? (
                       <>
                         <span>Orden denegada </span>
-                        <Link to={`/OrdenDetallada/moldes/${dataTable.id}`}>
+                        <Link to={`detalle/${dataTable.id}`}>
                           (Ver orden detallada)
                         </Link>
                       </>
                     ) : (
                       <>
                         <span>Orden denegada </span>
-                        <Link to={`/OrdenDetallada/maquinas/${dataTable.id}`}>
+                        <Link to={`detalle/${dataTable.id}`}>
                           (Ver orden detallada)
                         </Link>
                       </>

@@ -1,5 +1,8 @@
 .h5 {
-  width: 20% !important;
-  font-size: 15px;
+  width: 27% !important;
+  font-size: 18px;
   background: rgba(128, 128, 128, 0.3) !important;
+}
+.spanConfirm {
+  color: red;
 }

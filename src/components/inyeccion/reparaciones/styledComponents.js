@@ -10,7 +10,9 @@ const colores = {
   black: '#000',
   white: '#fff',
 };
-
+const DivContainer = styled.div`
+  box-sizing: border-box;
+`;
 const DivTable = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 250px);
@@ -18,6 +20,7 @@ const DivTable = styled.div`
   align-items: center;
   justify-content: center;
   height: 50vh;
+  box-sizing: border-box;
   @media (max-width: 1600px) {
     grid-template-columns: 230px 230px;
   }
@@ -36,6 +39,7 @@ const Table = styled.div`
   align-items: center;
   margin-top: 30px;
   font-size: 16px;
+  box-sizing: border-box;
 `;
 
 const Formulario = styled.form`
@@ -43,6 +47,7 @@ const Formulario = styled.form`
   grid-template-columns: 1fr;
   margin: auto;
   width: 80%;
+  box-sizing: border-box;
   @media (max-width: 1300px) {
     width: 100%;
   }
@@ -52,6 +57,7 @@ const GroupInputDate = styled.div`
   justify-content: center;
   grid-template-columns: 200px 200px;
   text-align: center;
+  box-sizing: border-box;
 `;
 
 const Label = styled.label`
@@ -61,6 +67,7 @@ const Label = styled.label`
   min-height: 40px;
   cursor: pointer;
   color: ${colores.black};
+  box-sizing: border-box;
   ${(props) =>
     props.validate === 'false' &&
     css`
@@ -76,6 +83,7 @@ const Label = styled.label`
 const GroupInput = styled.div`
   position: relative;
   z-index: 60;
+  box-sizing: border-box;
   h4 {
     margin: 0;
   }
@@ -92,6 +100,7 @@ const InputDate = styled.input`
   transition: all 0.2s ease-in-out;
   width: 70%;
   text-align: center;
+  box-sizing: border-box;
 `;
 
 const Input = styled.input`
@@ -105,7 +114,7 @@ const Input = styled.input`
   transition: all 0.2s ease-in-out;
   width: 100%;
   border: 2px solid ${colores.white};
-
+  box-sizing: border-box;
   &:focus {
     border: 2px solid ${colores.borde};
     outline: none;
@@ -125,12 +134,12 @@ const Input = styled.input`
 `;
 
 const LeyendaError = styled.p`
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 0;
   margin-left: 6px;
   color: ${colores.error};
   display: none;
-
+  box-sizing: border-box;
   ${(props) =>
     props.validate === 'true' &&
     css`
@@ -151,7 +160,7 @@ const IconoValidacion = styled(FontAwesomeIcon)`
   z-index: 50;
   font-size: 16px;
   opacity: 0;
-
+  box-sizing: border-box;
   ${(props) =>
     props.validate === 'false' &&
     css`
@@ -180,7 +189,7 @@ const ContenedorBotonInicio = styled.div`
   align-items: center;
   width: 100%;
   margin: auto;
-  margin-top: 15px;
+  box-sizing: border-box;
 `;
 
 const BotonInicio = styled.button`
@@ -195,7 +204,7 @@ const BotonInicio = styled.button`
   outline: 0;
   padding: 16px;
   transition: all 0.2s ease-in-out;
-
+  box-sizing: border-box;
   &:hover {
     box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px ${colores.black};
   }
@@ -235,7 +244,7 @@ const BotonInicioTabla = styled.button`
   outline: 0;
   padding: 16px;
   transition: all 0.2s ease-in-out;
-
+  box-sizing: border-box;
   &:hover {
     box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px ${colores.black};
   }
@@ -271,8 +280,13 @@ const ContenedorBotonCentrado = styled.div`
   justify-content: center;
   margin: auto;
   margin-top: 15px;
-  gap: 60px;
+  gap: 30px;
   width: 50%;
+  box-sizing: border-box;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    flex-direction: column;
+  }
 `;
 
 const Boton = styled.button`
@@ -288,7 +302,7 @@ const Boton = styled.button`
   padding: 16px;
   transition: all 0.2s ease-in-out;
   width: 40%;
-
+  box-sizing: border-box;
   &:hover {
     box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px ${colores.black};
   }
@@ -377,10 +391,9 @@ const TR = styled.tr`
     `}
 `;
 const DivOpciones = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 80px);
+  display: flex;
   justify-content: space-between;
-  font-size: 40px;
+  font-size: 30px;
   a {
     color: ${colores.black} !important;
   }
@@ -421,11 +434,6 @@ const DivOpciones = styled.div`
         pointer-events: none;
       }
     `}
-
-    @media (min-width: 480px) and (max-width: 1400px) {
-    grid-template-columns: repeat(5, 50px);
-    font-size: 30px;
-  }
 `;
 const Overlay = styled.div`
   width: 100vw;
@@ -439,36 +447,39 @@ const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 100;
+  box-sizing: border-box;
 `;
 
 const ContenedorModal = styled.div`
-  width: 80%;
   min-height: 100px;
   background: ${colores.white};
   position: relative;
   border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 20px;
-
-  @media (min-width: 480px) and (max-width: 1400px) {
-    width: 90%;
+  box-sizing: border-box;
+  @media screen and (max-width: 1400px) {
+    width: 100%;
     height: 96vh;
     padding: 15px;
   }
 `;
 const ContenedorModalConfirmar = styled.div`
   width: 50%;
-  min-height: 500px;
   background: ${colores.white};
   position: relative;
   border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 30px;
-
-  @media (min-width: 480px) and (max-width: 1400px) {
+  box-sizing: border-box;
+  @media screen and (max-width: 1400px) {
     width: 50%;
     height: 85vh;
     padding: 20px;
+  }
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    padding: 15px;
   }
 `;
 const ContenedorModalDenegar = styled.div`
@@ -479,9 +490,26 @@ const ContenedorModalDenegar = styled.div`
   border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 30px;
-  @media (min-width: 480px) and (max-width: 1400px) {
-    width: 50%;
-    height: 60vh;
+  box-sizing: border-box;
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+    height: 70vh;
+    padding: 20px;
+  }
+`;
+
+const ContenedorModalBorrar = styled.div`
+  width: 50%;
+  min-height: 180px;
+  background: ${colores.white};
+  position: relative;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 30px;
+  box-sizing: border-box;
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+    height: 30vh;
     padding: 20px;
   }
 `;
@@ -492,8 +520,9 @@ const EncabezadoModal = styled.div`
   justify-content: space-between;
   flex-direction: column;
   margin-bottom: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #e8e8e8;
+  box-sizing: border-box;
   margin: auto;
   h1 {
     margin: auto;
@@ -503,9 +532,19 @@ const EncabezadoModal = styled.div`
     font-size: 16px;
     color: #1766dc;
   }
-  @media (min-width: 480px) and (max-width: 1400px) {
+  @media screen and (max-width: 1400px) {
     margin-bottom: 0px;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
+    h1 {
+      font-size: 35px;
+    }
+  }
+  @media screen and (max-width: 545px) {
+    padding-top: 10px;
+    h1 {
+      margin-left: 0;
+      font-size: 25px;
+    }
   }
 `;
 const BotonCerrar = styled.button`
@@ -513,14 +552,14 @@ const BotonCerrar = styled.button`
   background: ${colores.black};
   right: 20px;
   top: 10px;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background: none;
   border: none;
   cursor: pointer;
   transition: 0.3s ease all;
   border-radius: 5px;
-
+  box-sizing: border-box;
   &:hover {
     background: #f2f2f2;
   }
@@ -534,20 +573,22 @@ const OrdenReparacion = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
-  font-size: 15px;
-
+  font-size: 16px;
+  box-sizing: border-box;
   h4,
   h5 {
     margin: 5px;
+    box-sizing: border-box;
   }
 
   h5 {
     border-radius: 5px;
-    min-height: 40px;
+    min-height: 35px;
     padding: 10px;
     background: #f2f2f2;
     inline-size: 240px;
     overflow-wrap: break-word;
+    box-sizing: border-box;
   }
   & > div {
     overflow-wrap: break-word;
@@ -614,10 +655,31 @@ const OrdenReparacion = styled.div`
         border-right: 7px solid black;
       }
     `}
+    @media (max-width: 550px) {
+    overflow: auto;
+    grid-template-columns: 1fr;
+    height: 70vh;
+  }
+  @media (min-width: 550px) and (max-width: 820px) {
+    overflow: auto;
+    grid-template-columns: 1fr 1fr;
+    height: 70vh;
+  }
+  @media (min-width: 815px) and (max-width: 1280px) {
+    overflow: auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    height: 70vh;
+    h5:nth-child(6) {
+      margin: 0;
+      height: 50px;
+    }
+  }
 `;
 const OrdenReparacionConfirmar = styled.div`
-  font-size: 15px;
+  font-size: 16px;
   text-align: center;
+  box-sizing: border-box;
   h5 {
     margin: auto;
     border-radius: 5px;
@@ -625,6 +687,7 @@ const OrdenReparacionConfirmar = styled.div`
     padding: 10px;
     background: #f2f2f2;
     width: 70%;
+    box-sizing: border-box;
   }
   h4 {
     margin: 10px;
@@ -646,7 +709,10 @@ const Grid = styled.div`
   grid-template-columns: 0.8fr 1fr;
   align-items: center;
   height: 90vh;
-  padding: 5px;
+  box-sizing: border-box;
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const H5 = styled.h5`
@@ -684,6 +750,7 @@ const DivOrdenDetallada = styled.div`
   }
 `;
 export {
+  DivContainer,
   DivTable,
   Table,
   Formulario,
@@ -710,6 +777,7 @@ export {
   BotonCerrar,
   OrdenReparacion,
   ContenedorModalConfirmar,
+  ContenedorModalBorrar,
   OrdenReparacionConfirmar,
   H5,
   Grid,

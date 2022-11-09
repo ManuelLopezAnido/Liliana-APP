@@ -33,8 +33,8 @@ const Header = () => {
           <Link to = '/deposito' onClick={mobileMenu} className={styles.textlink}>
             DEPOSITO
           </Link>
-          <Link  to = '/pcp' onClick={mobileMenu} className={styles.textlink} >
-            PCP
+          <Link  to = '/procesos' onClick={mobileMenu} className={styles.textlink} >
+            PROCESOS
           </Link >
         </ul>
       </nav>

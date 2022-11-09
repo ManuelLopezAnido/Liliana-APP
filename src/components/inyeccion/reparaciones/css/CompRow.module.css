@@ -1,33 +1,27 @@
+.linkMedia {
+  width: 40px;
+}
 .btnTable {
   background: none;
   border: none;
-  font-size: 40px;
+  font-size: 28px;
   cursor: pointer;
   padding: 0;
   transition: all 0.4s;
+  color: #000;
 }
 .btnTable:hover {
   color: #fff;
 }
-hr {
+
+.hr {
   border: none;
   width: 60%;
-  margin: auto;
+  margin: 5px auto;
   padding: 0.2px;
   background-color: #000;
 }
-
-@media (min-width: 480px) and (max-width: 1400px) {
-  .linkMedia {
-    width: 40px;
-  }
-  .btnTable {
-    background: none;
-    border: none;
-    font-size: 35px;
-    cursor: pointer;
-    padding: 0;
-    margin-right: 15px;
-    transition: all 0.4s;
-  }
+.p {
+  margin: 0;
+  padding: 0;
 }

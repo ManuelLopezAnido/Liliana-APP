@@ -11,7 +11,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate, useInputs } from '../hooks';
 import { CompDate, CompInput, CompMessage } from './index';
-import styles from '../css/FormEdit.module.css'
+import styles from '../css/FormEdit.module.css';
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
@@ -70,39 +70,39 @@ export const FormReparar = () => {
         data.molde = dataRes.molde;
         axios.put(URI + '/' + tabla, data);
 
-        await axios.post(URIEmails + '/' + tabla, {
-          message:
-            'El dia' +
-            date +
-            'a las ' +
-            hour +
-            ' la orden ' +
-            id +
-            ' con el molde ' +
-            dataRes.molde +
-            ' fue reparada por ' +
-            repara.campo +
-            ' y se tuvo en cuenta lo siguiente:' +
-            obserRepara.campo,
-        });
+        // await axios.post(URIEmails + '/' + tabla, {
+        //   message:
+        //     'El dia' +
+        //     date +
+        //     'a las ' +
+        //     hour +
+        //     ' la orden ' +
+        //     id +
+        //     ' con el molde ' +
+        //     dataRes.molde +
+        //     ' fue reparada por ' +
+        //     repara.campo +
+        //     ' y se tuvo en cuenta lo siguiente:' +
+        //     obserRepara.campo,
+        // });
       } else {
         data.maquina = dataRes.maquina;
         await axios.put(URI + '/' + tabla, data);
-        await axios.post(URIEmails + '/' + tabla, {
-          message:
-            'El dia' +
-            date +
-            'a las ' +
-            hour +
-            ' la orden ' +
-            id +
-            ' con la maquina u otro periferico ' +
-            dataRes.maquina +
-            ' fue reparada por ' +
-            repara.campo +
-            ' y se tuvo en cuenta lo siguiente:' +
-            obserRepara.campo,
-        });
+        // await axios.post(URIEmails + '/' + tabla, {
+        //   message:
+        //     'El dia' +
+        //     date +
+        //     'a las ' +
+        //     hour +
+        //     ' la orden ' +
+        //     id +
+        //     ' con la maquina u otro periferico ' +
+        //     dataRes.maquina +
+        //     ' fue reparada por ' +
+        //     repara.campo +
+        //     ' y se tuvo en cuenta lo siguiente:' +
+        //     obserRepara.campo,
+        // });
       }
 
       setRepara({ campo: '', valido: null });
@@ -111,11 +111,14 @@ export const FormReparar = () => {
       await timeout(1500);
 
       if (dataRes.molde) {
-        window.location.replace('inyeccion/moldes');
+        window.location.replace('/inyeccion/moldes');
       } else {
-        window.location.replace('inyeccion/maquinas');
+        window.location.replace('/inyeccion/maquinas');
       }
     } else {
+      setTimeout(() => {
+        setFormValidate(null);
+      }, 2000);
       setFormValidate(false);
     }
   };
@@ -175,7 +178,7 @@ export const FormReparar = () => {
             inputType='text'
             inputLabel='Quien repara'
             inputPlaceholder='Nombre de quien repara'
-            inputName='repara'
+            inputName='mayus'
             inputError='El nombre tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
             inputExp={expresiones.repara}
           />
@@ -186,7 +189,7 @@ export const FormReparar = () => {
             inputType='text'
             inputLabel='Observaciones (REPARADO)'
             inputPlaceholder='Observacion a tener en cuenta'
-            inputName='recibe'
+            inputName='mayus'
             inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
             inputExp={expresiones.obserRepara}
           />
@@ -195,11 +198,11 @@ export const FormReparar = () => {
 
           <ContenedorBotonCentrado>
             {dataRes.molde ? (
-              <Link to='/CompTableMatriceria'>
+              <Link to='/inyeccion/moldes'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             ) : (
-              <Link to='/CompTableInyectoras'>
+              <Link to='/inyeccion/maquinas'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             )}

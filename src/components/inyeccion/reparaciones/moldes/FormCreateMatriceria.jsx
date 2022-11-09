@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 import { useDate, useInputs } from '../hooks';
 import { CompDate, CompMessage, CompInput, CompConfirm } from '../componentes';
-
+import styles from '../css/FormCreate.module.css'
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/moldes';
 
@@ -54,7 +54,10 @@ export const FormCreateMatriceria = () => {
         categoria: radio.checked,
       });
     } else {
-      setFormValidate(false);
+      setTimeout(() => {
+        setFormValidate(null)
+      }, 2000)
+      setFormValidate(false)
     }
   };
 
@@ -97,30 +100,30 @@ export const FormCreateMatriceria = () => {
       categoria: radio.checked,
     });
 
-    await axios.post(URIEmails, {
-      message:
-        'El dia ' +
-        date +
-        ' a las ' +
-        hour +
-        'se genero una orden de reparacion para el molde ' +
-        molde.campo +
-        ' con el siguiente problema ' +
-        messageMolde.campo +
-        '. Fue creada por ' +
-        LiderUser +
-        ' y es de caracter ' +
-        radio.checked +
-        '. El ID de la orden es ' +
-        id +
-        '.',
-    });
+    // await axios.post(URIEmails, {
+    //   message:
+    //     'El dia ' +
+    //     date +
+    //     ' a las ' +
+    //     hour +
+    //     ' se genero una orden de reparacion para el molde ' +
+    //     molde.campo +
+    //     ' con el siguiente problema ' +
+    //     messageMolde.campo +
+    //     '. Fue creada por ' +
+    //     LiderUser +
+    //     ' y es de caracter ' +
+    //     radio.checked +
+    //     '. El ID de la orden es ' +
+    //     id +
+    //     '.',
+    // });
 
     setMolde({ campo: '', valido: '' });
     setMessageMolde({ campo: '', valido: null });
 
     await timeout(1500);
-    window.location.replace('/CompTableMatriceria');
+    window.location.replace('/inyeccion/moldes');
   };
 
   return (
@@ -161,7 +164,7 @@ export const FormCreateMatriceria = () => {
           inputType='text'
           inputLabel='F0-07-02-32 - Sector Matriceria - Descripcion de rotura/problema:'
           inputPlaceholder='Descripcion de rotura/problema'
-          inputName='message'
+          inputName='mayus'
           inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
           inputExp={expresiones.problemaMoldes}
         />
@@ -170,11 +173,11 @@ export const FormCreateMatriceria = () => {
 
         <Label>Seleccionar categoria:</Label>
 
-        <div className='divRadio'>
+        <div className={styles.divRadio}>
           <div>
             <input
               id='Mejora'
-              className='option-input radio'
+              className={styles.optionInput}
               value='Mejora'
               type='radio'
               checked={radio.checked === 'Mejora'}
@@ -186,7 +189,7 @@ export const FormCreateMatriceria = () => {
           <div>
             <input
               id='Programada'
-              className='option-input radio'
+              className={styles.optionInput}
               value='Programada'
               type='radio'
               checked={radio.checked === 'Programada'}
@@ -200,7 +203,7 @@ export const FormCreateMatriceria = () => {
           <div>
             <input
               id='Urgencia'
-              className='option-input radio'
+              className={styles.optionInput}
               value='Urgencia'
               type='radio'
               checked={radio.checked === 'Urgencia'}
@@ -212,7 +215,7 @@ export const FormCreateMatriceria = () => {
           </div>
         </div>
         <ContenedorBotonCentrado>
-          <Link to='/CompTableMatriceria'>
+          <Link to='/inyeccion/moldes'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
           <Boton type='submit' validate='valid'>

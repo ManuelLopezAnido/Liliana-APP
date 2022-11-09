@@ -4,6 +4,7 @@
   gap: 15%;
   text-align: center;
   margin-bottom: 2%;
+  flex-wrap: wrap;
 }
 
 .divRadio div {

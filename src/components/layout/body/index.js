@@ -1,5 +1,5 @@
 import styles from './body.module.css'
-import PcpRoutes from '../../routes/pcpRoutes.js'
+import ProcesosRoutes from '../../routes/procesosRoutes.js'
 import InyeccionRoutes from '../../routes/inyeccionRoutes.js'
 import AbastecimientoRoutes from '../../routes/abastecimientoRoutes.js'
 import DepositoRoutes from '../../routes/depositoRoutes.js'
@@ -11,13 +11,13 @@ const Body = () => {
   return (
   <section className={styles.content}>
     <Routes>
-      <Route path='/pcp/*' element = {<PcpRoutes/>}/>
+      <Route path='/procesos/*' element = {<ProcesosRoutes/>}/>
       <Route path='/inyeccion/*' element = {<InyeccionRoutes/>}/>
       <Route path='/abastecimiento/*' element = {<AbastecimientoRoutes/>}/>
       <Route path='/deposito/*' element = {<DepositoRoutes/>}/>
       <Route path='/armado/*' element={<ArmadoRoutes/>}/>
       <Route path='/matriceria/*' element={<MatriceriaRoutes/>}/>
-      {/* <Route path="*" element={<Navigate replace to="/pcp" />}/> */}
+      <Route path="*" element={<Navigate replace to="/pcp" />}/>
     </Routes>
   </section>
   )

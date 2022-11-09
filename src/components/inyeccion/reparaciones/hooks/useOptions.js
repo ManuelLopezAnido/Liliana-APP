@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 export const useOptions = () => {
   const [stateModal, setStateModal] = useState(false);
+  const [stateModalDelete, setStateModalDelete] = useState(false);
 
   let datos = {
     id: '',
@@ -23,6 +24,7 @@ export const useOptions = () => {
   };
 
   const [dataModal, setDataModal] = useState(datos);
+  const [dataModalDelete, setDataModalDelete] = useState('');
 
   const modal = (dataTable) => {
     setStateModal(!stateModal);
@@ -35,7 +37,10 @@ export const useOptions = () => {
 
     setDataModal(dataTable);
   };
-
+  const modalDelete = (dataTable) => {
+    setDataModalDelete(dataTable);
+    setStateModalDelete(!stateModalDelete);
+  };
   const deleteSession = () => {
     sessionStorage.removeItem('InyeccionUser');
   };
@@ -46,5 +51,9 @@ export const useOptions = () => {
     stateModal,
     setStateModal,
     deleteSession,
+    stateModalDelete,
+    setStateModalDelete,
+    modalDelete,
+    dataModalDelete,
   };
 };

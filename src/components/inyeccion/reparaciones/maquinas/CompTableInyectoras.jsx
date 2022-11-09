@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
-import {
-  BotonInicioTabla,
-  ContenedorBotonInicio,
-} from '../styledComponents';
 import axios from 'axios';
 import { CompModal, Options, Table, ButtonSesion } from '../componentes';
 import { useOptions } from '../hooks';
-import styles from '../css/CompTablesInyectorasMatriceria.module.css'
+import styles from '../css/CompTablesInyectorasMatriceria.module.css';
+import { CompConfirmDelete } from '../componentes/CompConfirmDelete';
+import { DivContainer } from '../styledComponents';
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 
 export const CompTableInyectoras = () => {
   const [data, setData] = useState([]);
-  const { dataModal, modal, stateModal, setStateModal, deleteSession } =
-    useOptions();
+  const {
+    dataModal,
+    modal,
+    stateModal,
+    setStateModal,
+    deleteSession,
+    stateModalDelete,
+    setStateModalDelete,
+    modalDelete,
+    dataModalDelete,
+  } = useOptions();
   useEffect(() => {
     getData();
   }, []);
@@ -33,9 +40,9 @@ export const CompTableInyectoras = () => {
     }, 600000);
   };
 
-  const deleteRow = async (dataTable) => {
+  const deleteRow = async () => {
     try {
-      await axios.delete(URI + '/' + dataTable.id);
+      await axios.delete(URI + '/' + dataModalDelete.id);
       window.location.reload();
     } catch (error) {
       alert('No se pudo eliminar la orden');
@@ -54,10 +61,10 @@ export const CompTableInyectoras = () => {
     if (verificadoA) {
       return 1;
     }
-    if (creadoA > creadoB) {
+    if (categoriaA > categoriaB) {
       return -1;
     } else {
-      if (categoriaA > categoriaB) {
+      if (creadoA > creadoB) {
         return -1;
       }
     }
@@ -66,11 +73,17 @@ export const CompTableInyectoras = () => {
   });
 
   return (
-    <>
+    <DivContainer>
       <CompModal
         state={stateModal}
         setState={setStateModal}
         dataTable={dataModal}
+      />
+
+      <CompConfirmDelete
+        stateModalDelete={stateModalDelete}
+        setStateModalDelete={setStateModalDelete}
+        deleteRow={deleteRow}
       />
 
       <h1 className={styles.titleTop}>
@@ -79,26 +92,20 @@ export const CompTableInyectoras = () => {
 
       <Options liderUser={liderUser} />
 
-      <ButtonSesion liderUser={liderUser} deleteSession={deleteSession} />
+      <ButtonSesion
+        liderUser={liderUser}
+        deleteSession={deleteSession}
+        data={data}
+        table='maquinas'
+      />
 
       <Table
         data={data}
         liderUser={liderUser}
-        deleteRow={deleteRow}
+        modalDelete={modalDelete}
         modal={modal}
+        table='maquinas'
       />
-
-      <div className={styles.noStyleDiv}>
-        {liderUser !== null && (
-          <a className={styles.noStyle} href='/FormCreateInyectoras'>
-            <ContenedorBotonInicio>
-              <BotonInicioTabla type='submit' validate='valid'>
-                Crear orden de reparacion: Mantenimiento Inyectoras
-              </BotonInicioTabla>
-            </ContenedorBotonInicio>
-          </a>
-        )}
-      </div>
-    </>
+    </DivContainer>
   );
 };

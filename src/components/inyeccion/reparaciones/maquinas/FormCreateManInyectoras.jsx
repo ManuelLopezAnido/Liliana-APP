@@ -9,8 +9,8 @@ import {
 } from '../styledComponents';
 import axios from 'axios';
 import { useDate, useInputs } from '../hooks';
-import { CompDate, CompMessage, CompInput, CompConfirm } from '../componentes';
-
+import { CompMessage, CompInput, CompDate, CompConfirm } from '../componentes';
+import styles from '../css/FormCreate.module.css';
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/maquinas';
 
@@ -29,7 +29,7 @@ export const FormCreateInyectoras = () => {
 
   const [formValidate, setFormValidate] = useState(null);
   const { date, hour, dia, mes, year, hora, min } = useDate();
-  const LiderUser = sessionStorage.getItem('LiderUser');
+  const LiderUser = sessionStorage.getItem('InyeccionUser');
   const [stateModal, setStateModal] = useState(false);
   const [radio, setRadio] = useState({
     checked: 'Mejora',
@@ -59,7 +59,10 @@ export const FormCreateInyectoras = () => {
         categoria: radio.checked,
       });
     } else {
-      setFormValidate(false);
+      setTimeout(() => {
+        setFormValidate(null)
+      }, 2000)
+      setFormValidate(false)
     }
   };
   const sendData = async () => {
@@ -93,30 +96,30 @@ export const FormCreateInyectoras = () => {
       categoria: radio.checked,
     });
 
-    await axios.post(URIEmails, {
-      message:
-        'El dia ' +
-        date +
-        ' a las ' +
-        hour +
-        'se genero una orden de reparacion para el molde ' +
-        maquinas +
-        ' con el siguiente problema ' +
-        maquinas.campo +
-        '. Fue creada por ' +
-        LiderUser +
-        ' y es de caracter ' +
-        radio.checked +
-        '. El ID de la orden es ' +
-        id +
-        '.',
-    });
+    // await axios.post(URIEmails, {
+    //   message:
+    //     'El dia ' +
+    //     date +
+    //     ' a las ' +
+    //     hour +
+    //     ' se genero una orden de reparacion para la maquina u periferico ' +
+    //     maquinas.campo +
+    //     ' con el siguiente problema ' +
+    //     messageMaquinas.campo +
+    //     '. Fue creada por ' +
+    //     LiderUser +
+    //     ' y es de caracter ' +
+    //     radio.checked +
+    //     '. El ID de la orden es ' +
+    //     id +
+    //     '.',
+    // });
 
     setMaquinas({ campo: '', valido: '' });
     setMessageMaquinas({ campo: '', valido: null });
 
     await timeout(1500);
-    window.location.replace('/CompTableInyectoras');
+    window.location.replace('/inyeccion/maquinas');
   };
 
   return (
@@ -157,7 +160,7 @@ export const FormCreateInyectoras = () => {
           inputType='text'
           inputLabel='F0-07-02-32 - Sector Mantenimiento de Inyectoras - Descripcion de rotura/problema:'
           inputPlaceholder='Descripcion de rotura/problema'
-          inputName='message'
+          inputName='mayus'
           inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
           inputExp={expresiones.problemaMaquinas}
         />
@@ -166,11 +169,11 @@ export const FormCreateInyectoras = () => {
 
         <Label>Seleccionar categoria:</Label>
 
-        <div className='divRadio'>
+        <div className={styles.divRadio}>
           <div>
             <input
               id='Mejora'
-              className='option-input radio'
+              className={styles.optionInput}
               value='Mejora'
               type='radio'
               checked={radio.checked === 'Mejora'}
@@ -182,7 +185,7 @@ export const FormCreateInyectoras = () => {
           <div>
             <input
               id='Programada'
-              className='option-input radio'
+              className={styles.optionInput}
               value='Programada'
               type='radio'
               checked={radio.checked === 'Programada'}
@@ -194,7 +197,7 @@ export const FormCreateInyectoras = () => {
           <div>
             <input
               id='Urgencia'
-              className='option-input radio'
+              className={styles.optionInput}
               value='Urgencia'
               type='radio'
               checked={radio.checked === 'Urgencia'}
@@ -205,7 +208,7 @@ export const FormCreateInyectoras = () => {
         </div>
 
         <ContenedorBotonCentrado>
-          <Link to='/CompTableInyectoras'>
+          <Link to='/inyeccion/maquinas'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
           <Boton type='submit' validate='valid'>

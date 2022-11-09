@@ -8,53 +8,56 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { DivOpciones, TR } from '../styledComponents';
-import styles from '../css/CompRow.module.css'
-export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
+import styles from '../css/CompRow.module.css';
+export const CompRow = ({ dataTable, liderSesion, modal, modalDelete }) => {
   return (
-    <TR validate={dataTable.estado}>
-      <td>
+    <TR className={styles.tr} validate={dataTable.estado}>
+      <td data-label='Fecha y hora creado'>
         {dataTable.fechaCreado}
-        <hr />
+        <hr className={styles.hr} />
         {dataTable.horaCreado}
       </td>
       {dataTable.maquina ? (
-        <td>{dataTable.maquina}</td>
+        <td data-label='Maquinas'>{dataTable.maquina}</td>
       ) : (
-        <td>{dataTable.molde}</td>
+        <td data-label='Moldes'>{dataTable.molde}</td>
       )}
 
-      <td>{dataTable.lider}</td>
-      <td>{dataTable.problema}</td>
-      <td>
+      <td data-label='Lider que creo la orden'>{dataTable.lider}</td>
+      <td data-label='Problema'>{dataTable.problema}</td>
+      <td data-label='Fecha y hora notificado'>
         {dataTable.fechaNotificado}
-        <hr />
+        <hr className={styles.hr} />
         {dataTable.horaNotificado}
       </td>
-      <td>
+      <td data-label='Fecha y hora reparado'>
         {dataTable.fechaReparado}
-        <hr />
+        <hr className={styles.hr} />
         {dataTable.horaReparado}
       </td>
-      <td>
+      <td data-label='Fecha y hora verificacion'>
         {dataTable.fechaVerificado}
-        <hr />
+        <hr className={styles.hr} />
         {dataTable.horaVerificado}
       </td>
-      <td>
+      <td data-label='Opciones'>
         <DivOpciones validate={dataTable.estado}>
           {dataTable.molde ? (
             <>
               {liderSesion !== null ? (
                 <>
                   <Link
-                    to={`notificar/${dataTable.id}`}
+                    to={`/inyeccion/moldes/notificar/${dataTable.id}`}
                     title='Notificar'
                   >
-                    <FontAwesomeIcon className={styles.linkMedia} icon={faEye} />
+                    <FontAwesomeIcon
+                      className={styles.linkMedia}
+                      icon={faEye}
+                    />
                   </Link>
 
                   <Link
-                    to={`/FormReparar/moldes/${dataTable.id}`}
+                    to={`/inyeccion/moldes/reparar/${dataTable.id}`}
                     title='Reparar'
                   >
                     <FontAwesomeIcon
@@ -63,7 +66,7 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
                     />
                   </Link>
                   <Link
-                    to={`/FormVerificado/moldes/${dataTable.id}`}
+                    to={`/inyeccion/moldes/verificar/${dataTable.id}`}
                     title='Verificar'
                   >
                     <FontAwesomeIcon
@@ -74,7 +77,6 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
                 </>
               ) : (
                 <>
-                  <div></div>
                   <div></div>
                 </>
               )}
@@ -84,14 +86,17 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
               {liderSesion !== null ? (
                 <>
                   <Link
-                    to={`${dataTable.id}`}
+                    to={`/inyeccion/maquinas/notificar/${dataTable.id}`}
                     title='Notificar'
                   >
-                    <FontAwesomeIcon className={styles.linkMedia} icon={faEye} />
+                    <FontAwesomeIcon
+                      className={styles.linkMedia}
+                      icon={faEye}
+                    />
                   </Link>
 
                   <Link
-                    to={`/FormReparar/maquinas/${dataTable.id}`}
+                    to={`/inyeccion/maquinas/reparar/${dataTable.id}`}
                     title='Reparar'
                   >
                     <FontAwesomeIcon
@@ -100,7 +105,7 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
                     />
                   </Link>
                   <Link
-                    to={`/FormVerificado/maquinas/${dataTable.id}`}
+                    to={`/inyeccion/maquinas/verificar/${dataTable.id}`}
                     title='Verificar'
                   >
                     <FontAwesomeIcon
@@ -112,19 +117,18 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
               ) : (
                 <>
                   <div></div>
-                  <div></div>
                 </>
               )}
             </>
           )}
 
           {dataTable.estado !== 'creado' ||
-            dataTable.primerMotivoDenegado ||
-            dataTable.segundoMotivoDenegado ? (
+          dataTable.primerMotivoDenegado ||
+          dataTable.segundoMotivoDenegado ? (
             <></>
           ) : liderSesion === dataTable.lider ? (
             <button
-              onClick={() => deleteRow(dataTable)}
+              onClick={() => modalDelete(dataTable)}
               className={styles.btnTable}
               title='Borrar orden'
             >
@@ -141,10 +145,21 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
           >
             <FontAwesomeIcon className={styles.linkMedia} icon={faPlus} />
           </button>
+          {liderSesion === null && <div></div>}
         </DivOpciones>
       </td>
-      <td>{dataTable.estado.toUpperCase()}</td>
-      <td>{dataTable.categoria}</td>
+      <td data-label='Estado'>
+        <>
+          {dataTable.estado.toUpperCase()}
+          {dataTable.primerMotivoDenegado && (
+            <>
+              <hr className={styles.hr} />
+              <p className={styles.p}>(Denegada)</p>
+            </>
+          )}
+        </>
+      </td>
+      <td data-label='Categoria'>{dataTable.categoria}</td>
     </TR>
   );
 };

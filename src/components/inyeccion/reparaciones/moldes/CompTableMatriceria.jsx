@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
-import {
-  BotonInicioTabla,
-  ContenedorBotonInicio,
-} from '../styledComponents';
 import axios from 'axios';
 import { CompModal, Options, Table, ButtonSesion } from '../componentes';
 import { useOptions } from '../hooks';
-import styles from '../css/CompTablesInyectorasMatriceria.module.css'
+import styles from '../css/CompTablesInyectorasMatriceria.module.css';
+import { CompConfirmDelete } from '../componentes/CompConfirmDelete';
+import { DivContainer } from '../styledComponents';
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
 export const CompTableMatriceria = () => {
   const [data, setData] = useState([]);
-  const { dataModal, modal, stateModal, setStateModal, deleteSession } =
-    useOptions();
+  const {
+    dataModal,
+    modal,
+    stateModal,
+    setStateModal,
+    deleteSession,
+    stateModalDelete,
+    setStateModalDelete,
+    modalDelete,
+    dataModalDelete,
+  } = useOptions();
   useEffect(() => {
     getData();
   }, []);
@@ -35,7 +42,7 @@ export const CompTableMatriceria = () => {
 
   const deleteRow = async (dataTable) => {
     try {
-      await axios.delete(URI + '/' + dataTable.id);
+      await axios.delete(URI + '/' + dataModalDelete.id);
       window.location.reload();
     } catch (error) {
       alert('No se pudo eliminar la orden');
@@ -66,36 +73,37 @@ export const CompTableMatriceria = () => {
   });
 
   return (
-    <>
+    <DivContainer>
       <CompModal
         state={stateModal}
         setState={setStateModal}
         dataTable={dataModal}
       />
-      <h1 className={styles.titleTop}>TABLA DE ORDENES DE REPARACION (MATRICERIA)</h1>
+      <CompConfirmDelete
+        stateModalDelete={stateModalDelete}
+        setStateModalDelete={setStateModalDelete}
+        deleteRow={deleteRow}
+      />
+      <h1 className={styles.titleTop}>
+        TABLA DE ORDENES DE REPARACION (MATRICERIA)
+      </h1>
 
       <Options liderUser={liderUser} />
 
-      <ButtonSesion liderUser={liderUser} deleteSession={deleteSession} />
+      <ButtonSesion
+        liderUser={liderUser}
+        deleteSession={deleteSession}
+        data={data}
+        table='moldes'
+      />
 
       <Table
         data={data}
         liderUser={liderUser}
-        deleteRow={deleteRow}
+        modalDelete={modalDelete}
         modal={modal}
+        table='moldes'
       />
-
-      <div className={styles.noStyleDiv}>
-        {liderUser !== null && (
-          <a className={styles.noStyle} href='/inyeccion/moldes/create'>
-            <ContenedorBotonInicio>
-              <BotonInicioTabla type='submit' validate='valid'>
-                Crear orden de reparacion: Matriceria
-              </BotonInicioTabla>
-            </ContenedorBotonInicio>
-          </a>
-        )}
-      </div>
-    </>
+    </DivContainer>
   );
 };

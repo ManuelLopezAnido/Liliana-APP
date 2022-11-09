@@ -6,7 +6,7 @@ import {
   OrdenReparacionConfirmar,
   Overlay,
 } from '../styledComponents';
-
+import styles from '../css/CompConfirm.module.css';
 export const CompConfirm = ({ dataTable, state, setState, send }) => {
   return (
     <>
@@ -15,14 +15,14 @@ export const CompConfirm = ({ dataTable, state, setState, send }) => {
           <ContenedorModalConfirmar>
             <EncabezadoModal>
               <h1>Confirmar datos:</h1>
-              <span className='spanConfirm'>
+              <span className={styles.spanConfirm}>
                 (ATENCION: Se enviara un correo a los respectivos lideres y
                 supervisores)
               </span>
             </EncabezadoModal>
             <OrdenReparacionConfirmar>
               <h4>Categoria:</h4>
-              <h5 className='h5'>{dataTable.categoria}</h5>
+              <h5 className={styles.h5}>{dataTable.categoria}</h5>
               <div>
                 <section>
                   <h4>Fecha Creacion:</h4>

@@ -3,4 +3,5 @@
   color: tomato;
   text-align: center;
   margin-top: 5px;
+  box-sizing: border-box;
 }
