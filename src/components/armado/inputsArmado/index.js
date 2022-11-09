@@ -312,7 +312,7 @@ const InputArmado = ()=>{
         <button type="submit" className={styles.button}>Relevar información</button>
         <div className={styles.links}>
           <Link  to = '/armado/tablas' className={styles.textLink} >
-            Inputs
+            Historial
           </Link >
           <a 
             href='https://www.liliana.com.ar/internodos/administracion/Menu.php'  

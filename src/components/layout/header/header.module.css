@@ -10,7 +10,7 @@
   font-family: 'Roboto', sans-serif;
 }
 .headerNoVisible{
-  display: none;
+  display: none !important;
 }
 .logo  {  
 background: url(https://www.liliana.com.ar/wp-content/themes/liliana/img/logo.png) no-repeat !important;

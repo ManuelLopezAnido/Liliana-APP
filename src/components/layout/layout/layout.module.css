@@ -1,6 +1,6 @@
 @media only screen and (max-width: 768px) {
-  .content{
+  .body{
     position: relative;
-    top:14.10vh; 
+    top:14.10vh;
   }
 }

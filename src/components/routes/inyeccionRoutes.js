@@ -7,6 +7,7 @@ import { CompTableMatriceria } from "../inyeccion/reparaciones/moldes/CompTableM
 import { FormReparar, FormVerificado, FormVisualizar, OrdenDetallada } from "../inyeccion/reparaciones/componentes"
 import { FormCreateMatriceria } from "../inyeccion/reparaciones/moldes/FormCreateMatriceria"
 import { FormCreateInyectoras } from "../inyeccion/reparaciones/maquinas/FormCreateManInyectoras"
+import MatriceriaRoutes from './matriceriaRoutes.js'
 
 const InyeccionRoutes = () => {
   return(
@@ -16,7 +17,6 @@ const InyeccionRoutes = () => {
         <Route path = "/maquinas" element = {<CompTableInyectoras/>}/>
         <Route path = "/moldes" element = {<CompTableMatriceria/>}/>
 
-
         <Route path = "/moldes/crear" element = {< FormCreateMatriceria/>}/>
         <Route path = "/maquinas/crear" element = {< FormCreateInyectoras/>}/>
         
@@ -25,8 +25,7 @@ const InyeccionRoutes = () => {
         <Route path = "/:tabla/verificar/:id" element = {<FormVerificado/>}/>
         <Route path = "/:tabla/detalle/:id" element = {<OrdenDetallada/>}/>
 
-        
-
+        <Route path='/matriceria/*' element={<MatriceriaRoutes/>}/>
         <Route path = "/" element = {<InyeccionHome/>}/>
     </Routes>
   )

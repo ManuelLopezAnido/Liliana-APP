@@ -143,7 +143,7 @@ const ArmadoHome = ()=>{
         </form>
         
         <div className={passOk ? styles.pcpMenu : styles.hidden }> 
-          <Link to = 'relevamiento'>
+          {/* <Link to = 'relevamiento'>
             <button>
               Relevamiento
             </button>
@@ -152,17 +152,7 @@ const ArmadoHome = ()=>{
             <button>
               Tablas
             </button>
-          </Link>
-          <Link to = 'inyecotras'>
-            <button>
-              Reparación Inyecotoras
-            </button>
-          </Link>
-          <Link to = 'moldes'>
-            <button>
-              Reparación Moldes
-            </button>
-          </Link>
+          </Link> */}
           <Link to = 'maquinas'>
             <button>
               Ordenes maquinas

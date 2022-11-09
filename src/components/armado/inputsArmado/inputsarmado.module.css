@@ -1,6 +1,9 @@
 section{
   background-color: white ;
 }
+section::-webkit-scrollbar {
+  display: none;
+}
 
 .armadoInputSection{
   margin: -17%;

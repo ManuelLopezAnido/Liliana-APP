@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import './reset.css';
 import './index.css';
-import Routes from './routes'
 import {BrowserRouter} from "react-router-dom"
+import AppRoutes from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes/>
+      <AppRoutes/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
