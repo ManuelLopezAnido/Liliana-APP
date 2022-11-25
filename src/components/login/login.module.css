@@ -1,0 +1,200 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.title{
+ position: relative;
+ font-family: 'Roboto', sans-serif;
+ font-size:calc(2px + 7vmin);
+ color: #61dafb;
+ top: 0px
+}
+.pcpMenu{
+  display: flex;
+  justify-content:space-around;
+  width: 60vw;
+}
+.pcpMenu a{
+  width: 40%;
+  margin: 10px 0px;
+  text-decoration: none;
+}
+.pcpMenu button{
+  width: 100%;
+  box-shadow: -5px -5px 20px #393f4b, 5px 5px 20px black;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: #282c34;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+.pcpMenu button:hover{
+  box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
+}
+.pcpMenu button:active{
+  box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px #393f4b;
+}
+.Applink {
+  color: #61dafb;
+  font-size: calc(2px + 2vmin);;
+}
+.hidden {
+  display: none;
+}
+
+.armadoForm {
+  margin-top: 50px;
+  padding: 16px;
+  width: 320px;
+}
+.segment {
+  color: black;
+  padding: 32px 0;
+  text-align: center;
+}
+.inputs, .select {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: white;
+  margin-right: 8px;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px  #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.placeholder{
+  color: gray;  
+}
+.select{
+  appearance: none;
+  cursor: pointer;
+}
+.armadoForm .select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: var(--select-arrow);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+.armadoForm label {
+  display: block;
+  margin-bottom: 24px;
+  width: 100%;
+}
+.notValid{
+  margin-bottom: 5px;
+  padding-left: 20px;
+  font-weight:500;
+  color:red;
+  display: none;
+}
+.notValid.visible{
+  display: block;
+}
+.armadoForm  input:focus , select:focus, textarea:focus{
+  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+.armadoForm button{
+  margin: 10px 0px;
+  width: 100%;
+  box-shadow: -5px -5px 20px #393f4b, 5px 5px 20px black;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: white;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+.armadoForm button:hover{
+  box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px black;
+}
+.armadoForm button:active{
+  box-shadow: inset 1px 1px 2px black, inset -1px -1px 2px #393f4b;
+}
+.buttonDisable{
+  background-color: gray !important;
+}
+.buttonDisable:hover{
+  box-shadow:none !important;
+  cursor:not-allowed !important;
+}
+.closeSession{
+  position: relative;
+  top: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+.closeSession:hover{
+  color: #61dafb;
+  transition: 0.5s;
+}
+.foot{
+  display: flex;
+  justify-content: space-around;
+  width: 15vw;
+}
+
+.mdcard{
+  width: 270px;
+  height: 50vh;
+  background-color: rgb(255,255,255,0.85);
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 20px;
+  margin-top: 50px;
+}
+.mdcardcontent h2, p{
+  margin: 0;
+}
+.areaTitle{
+  margin-top: 10px;
+}
+.permisosTitle{
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+  text-decoration: underline;
+
+}
+
+.infobox{
+  color: black;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+
+@media only screen and (max-width: 768px) {
+  .pcpMenu{
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .pcpMenu a{
+    width: 100%;
+  }
+  .pcpMenu button{
+    width:60% ;
+  }
+}

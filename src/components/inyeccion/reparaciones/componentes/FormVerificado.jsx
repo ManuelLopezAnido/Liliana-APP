@@ -14,7 +14,7 @@ import { CompDate, CompInput, CompMessage, CompDenegado } from './';
 import styles from '../css/FormEdit.module.css';
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
-const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
+//const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
 
 export const FormVerificado = () => {
   const {

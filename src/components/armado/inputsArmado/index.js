@@ -24,7 +24,7 @@ const InputArmado = ()=>{
   useEffect(()=>{
     fetchingPiezasAbas()
     fetchingPiezasDepo()
-    fetchingProductos()
+    //fetchingProductos()
     fetchingCelda()
     // eslint-disable-next-line
   },[])
@@ -32,14 +32,14 @@ const InputArmado = ()=>{
     setPiezas(piezasAbas.concat(piezasDepo)) 
   },[piezasAbas,piezasDepo]) 
  
-  const fetchingProductos = ()=>{
+  // const fetchingProductos = ()=>{
     // fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/productos')
     //   .then((res)=>res.json())
     //   .then ((json)=>{
     //     setProductos(json)
     //   })
     //   .catch (err => console.log(err))
-  }
+  //}
   const fetchingPiezasAbas = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/abastecimiento')
       .then((res)=>res.json())
@@ -84,10 +84,10 @@ const InputArmado = ()=>{
   
   const handleCheckData = () => {
     let arr = []
-    const celda = inputs?.celda
-    if (celda < 0 || celda > 51){
-      arr.push('Celda')
-    }
+    // const celda = inputs?.celda
+    // if (celda < 0 || celda > 51){
+    //   arr.push('Celda')
+    // }
 
     const cant = inputs?.cantidad
     if (cant<1) {

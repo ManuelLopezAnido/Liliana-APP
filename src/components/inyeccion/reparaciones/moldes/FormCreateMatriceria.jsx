@@ -12,7 +12,7 @@ import { useDate, useInputs } from '../hooks';
 import { CompDate, CompMessage, CompInput, CompConfirm } from '../componentes';
 import styles from '../css/FormCreate.module.css'
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
-const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/moldes';
+//const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/moldes';
 
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));

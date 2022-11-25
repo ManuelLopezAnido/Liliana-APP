@@ -28,7 +28,7 @@ overflow: hidden;
   overflow: hidden;
 }
 
-.textlink{
+.textlink {
   text-decoration: none;
   color: white; 
   float: left;
@@ -38,6 +38,7 @@ overflow: hidden;
   text-decoration: none;
   cursor: pointer;
 }
+
 .textlink:hover{
 color: #61dafb;
 transition: 0.3s;
