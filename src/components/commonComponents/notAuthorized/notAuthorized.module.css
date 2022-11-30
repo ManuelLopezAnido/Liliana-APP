@@ -1,0 +1,52 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.title{
+ position: relative;
+ font-family: 'Roboto', sans-serif;
+ font-size:calc(2px + 7vmin);
+ color: #61dafb;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Bungee");
+
+.wrapper {
+  color: white;
+  font-family: "Bungee", cursive;
+  margin-top: 50px;
+  text-align: center;
+}
+.text{
+  font-family: "Bungee";
+  font-size: larger;
+}
+svg {
+  width: 30vw;
+}
+.lightblue {
+  fill: #000000;
+}
+
+.eyewrap {
+  overflow: hidden;
+}
+.errorText {
+  font-size: 120px;
+}
+.alarm {
+  animation: alarmOn 0.5s infinite;
+}
+
+@keyframes alarmOn {
+  to {
+    fill: darkred;
+  }
+}

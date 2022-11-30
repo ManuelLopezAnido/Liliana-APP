@@ -235,6 +235,7 @@ const InputArmado = ()=>{
             <option value={'cambioCelda'}>Cambio de celda</option>
             <option value={'ausentismo'}>Ausentismo</option>
             <option value={'entrenamiento'}>Entrenamiento</option>
+            <option value={'reproceso'}>Reproceso</option>
           </select>
         </label>
         <label >
@@ -243,7 +244,11 @@ const InputArmado = ()=>{
           </div>
           <input 
           className={styles.select}
-          hidden = {!(inputs.motivo === 'faltante'  ||  inputs.motivo === 'cambioCelda')}
+          hidden = {!(
+            inputs.motivo === 'faltante'  ||  
+            inputs.motivo === 'cambioCelda'
+            )
+          }
           required = {inputs.motivo === 'faltante'  ||  inputs.motivo === 'cambioCelda'}
           onFocus={clearErrMsg}
           onWheelCapture={(e)=>e.target.blur()}
@@ -259,8 +264,13 @@ const InputArmado = ()=>{
           </div>
           <input 
           className={styles.select}
-          hidden = {!(inputs.motivo === 'defecto' ||  inputs.motivo === 'incompleto')}
-          required = {inputs.motivo === 'defecto' ||  inputs.motivo === 'incompleto'}
+          hidden = {!(
+            inputs.motivo === 'defecto' ||  
+            inputs.motivo === 'incompleto' ||
+            inputs.motivo === 'reproceso'
+            )
+          }
+          required = {inputs.motivo === 'defecto' ||  inputs.motivo === 'incompleto' || inputs.motivo === 'reproceso'}
           onFocus={clearErrMsg}
           type="number"
           onWheelCapture={(e)=>e.target.blur()}

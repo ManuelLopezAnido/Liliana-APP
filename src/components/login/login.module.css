@@ -152,9 +152,14 @@
   transition: 0.5s;
 }
 .foot{
-  display: flex;
-  justify-content: space-around;
   width: 15vw;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.foot div{
+  margin: 2px;
 }
 
 .mdcard{

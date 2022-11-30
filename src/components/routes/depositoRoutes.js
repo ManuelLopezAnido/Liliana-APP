@@ -12,7 +12,6 @@ const DepositoRoutes = () => {
         <Route path = "/tablas" element = {<TablasDeposito/>}/>
         <Route path = "/actualizar" element = {<ActualizarAbastecimiento/>}/>
         <Route path = "/" element = {<DepositoHome/>}/>
-
       </Routes>
     </>
   )

@@ -6,7 +6,8 @@ import DepositoRoutes from './components/routes/depositoRoutes.js'
 import ArmadoRoutes from './components/routes/armadoRoutes.js'
 import Layout from './components/layout/layout'
 import Login from './components/login/login'
-import {Routes,Route, Navigate } from 'react-router-dom'
+import NotAuthorized from './components/commonComponents/notAuthorized'
+import {Routes, Route, Navigate} from 'react-router-dom'
 
 
 const AppRoutes = () => {
@@ -19,8 +20,8 @@ const AppRoutes = () => {
         <Route path='/deposito/*' element = {<DepositoRoutes/>}/>
         <Route path='/armado/*' element={<ArmadoRoutes/>}/>
         <Route path='/login' element={<Login/>}/>
-      
-        {/* <Route path="*" element={<Navigate replace to="/pcp" />}/> */}
+        <Route path='/notAuthorized' element={<NotAuthorized/>}/>
+        <Route path="*" element={<Navigate replace to="/login" />}/>
       </Route>
     </Routes>
   )

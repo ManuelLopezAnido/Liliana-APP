@@ -8,8 +8,7 @@ const ActualizarAbastecimiento = ()=>{
   const[showModal,setShowModal]=useState(false)
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
-  
-  const abasUser = sessionStorage.getItem('AbastecimientoUser')
+
   const uri = window.location.pathname.substring(1)
   const area = uri.substring(0,uri.indexOf('/'))
   
@@ -18,7 +17,7 @@ const ActualizarAbastecimiento = ()=>{
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
-    if (name === 'codigo' || name === 'detalle' || name === 'familia' || name === 'nombreOpe' ) {
+    if (name === 'codigo' || name === 'detalle' || name === 'familia' || name === 'name' || name === 'lastname') {
       value=e.target.value.toUpperCase()
     }
     if (name === 'cantxPallet' ){
@@ -60,12 +59,6 @@ const ActualizarAbastecimiento = ()=>{
       console.log('exit')
       return
     } 
-    const today = new Date();
-    const time = (today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
-    const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
-    inputs.time = time
-    inputs.date = date
-    inputs.users = abasUser
     setInputs ({...inputs}) 
     const options = {
       method: 'POST',
@@ -74,7 +67,7 @@ const ActualizarAbastecimiento = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/'+ inputs.tipo + '/' + area, options)
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/home/'+ inputs.tipo + '/' + area, options)
       .then((res)=>{
         if(!res.ok){
           throw (res)
@@ -99,12 +92,19 @@ const ActualizarAbastecimiento = ()=>{
         }
       })    
   }
-  const closeModal= () => {
+  const closeModal = () => {
     SetErrorMsg('')
     setShowModal(false)
   }
-  const openModal= () => {
+  const openModal = () => {
     setShowModal(true)
+  }
+  const tipo = () => {
+    if (inputs.tipo === "newuser"){
+      return "Usuarios"
+    } else if ( inputs.tipo === "piezas"){
+      return "Piezas"
+    }
   }
   return(
     <>
@@ -119,7 +119,7 @@ const ActualizarAbastecimiento = ()=>{
       />
       <form onSubmit={handleSubmit} autoComplete="off" className={styles.depositForm} >
         <div className={styles.segment}>
-          <h1>Actualizar Piezas</h1>
+          <h1>Actualizar {tipo()}</h1>
         </div>
         <label>
             <select
@@ -133,7 +133,7 @@ const ActualizarAbastecimiento = ()=>{
               <option value = 'piezas'>
                 NUEVA PIEZA
               </option>
-              <option value = 'users'>
+              <option value = 'newuser'>
                 NUEVO OPERARIO
               </option>
           </select>
@@ -207,32 +207,47 @@ const ActualizarAbastecimiento = ()=>{
         </label>
         {/* ---- OPERARIO ----  */}
         <label
-        className = {inputs.tipo === 'users' ? styles.visible : styles.hidden }
+          className = {inputs.tipo === 'newuser' ? styles.visible : styles.hidden }
         >
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'stockM')  ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
           <input
-            required = {inputs.tipo === 'users' ? true : false}
+            required = {inputs.tipo === 'newuser' ? true : false}
             onFocus={clearErrMsg}
             type='text'
-            name='nombreOpe' 
-            value={inputs.nombreOpe || ''} 
+            name='name' 
+            value={inputs.name || ''} 
             onChange={handleChange} 
             placeholder="Nombre"/>
         </label>
         <label
-        className = {inputs.tipo === 'users' ? styles.visible : styles.hidden }
+          className = {inputs.tipo === 'newuser' ? styles.visible : styles.hidden }
+        >
+          <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'stockM')  ? styles.visible:''}`}>
+            Ingreso no válido:
+          </div>
+          <input
+            required = {inputs.tipo === 'newuser' ? true : false}
+            onFocus={clearErrMsg}
+            type='text'
+            name='lastname' 
+            value={inputs.lastname || ''} 
+            onChange={handleChange} 
+            placeholder="Apellido"/>
+        </label>
+        <label
+        className = {inputs.tipo === 'newuser' ? styles.visible : styles.hidden }
         >
           <div className={`${styles.notValid} ${arrErrors.find(e=>e === 'stockM')  ? styles.visible:''}`}>
             Ingreso no válido:
           </div>
           <select
-            required = {inputs.tipo === 'users' ? true : false}
+            required = {inputs.tipo === 'newuser' ? true : false}
             className={`${styles.select} ${!inputs.lider ? styles.placeholder : ''}`}
             type='text'
-            name='turno' 
-            value={inputs.turno || ''} 
+            name='shift' 
+            value={inputs.shift || ''} 
             onChange={handleChange} 
             placeholder="Turno">
               <option disabled value = "" hidden >
@@ -250,8 +265,8 @@ const ActualizarAbastecimiento = ()=>{
             </select>
         </label>
         <button 
-          className = {inputs.codigo || inputs.nombreOpe ? '' : styles.buttonDisable } 
-          disabled={inputs.codigo || inputs.nombreOpe|| inputs.nombreOpe ? false : true }  
+          className = {(inputs.codigo || inputs.name) ? '' : styles.buttonDisable } 
+          disabled={!(inputs.codigo || inputs.name)}  
           type="submit">
             Cargar
         </button>

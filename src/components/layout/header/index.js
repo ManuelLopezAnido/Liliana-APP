@@ -9,8 +9,7 @@ const Header = () => {
   const [logged, setLogged] = useState(false)
   const [userContext,]= useContext(userContextProvider)
   const [pathname, ] = useState(window.location.pathname.slice(0,7))
-  console.log('Header: ',userContext)
-  console.log(pathname)
+  console.log('header')
   useEffect (()=>{
     if (pathname === '/armado') {
       setHeaderVisible(false)

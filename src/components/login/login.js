@@ -12,13 +12,10 @@ const Login = ()=>{
   const [users, setUsers] = useState([{}])
   const [user, setUser] = useContext(userContextProvider)
   //const navigate = useNavigate()
-  console.log(inputs)
+  
   useEffect(()=>{
-    //if there is not sessionData then 
-    const sessionData = sessionStorage.userData ? JSON.parse(sessionStorage.userData) : ""
-    setUser(sessionData)
     fetchingUsers()
-    // eslint-disable-next-line
+    console.log('login')
   },[])
 
   const fetchingUsers = () => {
@@ -57,7 +54,7 @@ const Login = ()=>{
       })
       .then(res=>res.json())
       .then((json)=>{
-        sessionStorage.setItem('userData',JSON.stringify( json.userData))
+        sessionStorage.setItem('userData',JSON.stringify(json.userData))
         openModal(json)
         setUser(json.userData)
         setInputs({})
@@ -84,7 +81,7 @@ const Login = ()=>{
   }
   const closeSession=()=>{
     sessionStorage.removeItem('userData')
-    setUser(false)
+    setUser("")
   }
   const totalAreas = () => {
     const areas = users.map(user=>{
@@ -193,13 +190,6 @@ const Login = ()=>{
           </div>
         </div>
         <div className = {styles.foot}>
-          {/* <div className={
-            passOk === 'GONZALEZ, LUCAS' || passOk === 'CABRERA, GERARDO SEBASTIAN' ? 
-            styles.closeSession : styles.hidden} 
-            onClick={() => navigate('actualizar')}
-          >
-            Actualizar
-          </div> */}
           <div className={user ? styles.closeSession : styles.hidden} onClick={closeSession}>
             Cerrar sesión
           </div>

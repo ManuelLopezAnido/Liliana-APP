@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 const Layout = () => {
   return (
   <>
-    <UserContextComponent >
+    <UserContextComponent>
       <Header/>
       <section className={styles.body}>
         <Outlet/>
