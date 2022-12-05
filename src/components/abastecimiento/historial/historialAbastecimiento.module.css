@@ -133,3 +133,7 @@
     box-shadow:none !important;
     cursor:not-allowed !important;
   }
+  .select {
+    width: 30vw;
+    margin: 15px;
+  }

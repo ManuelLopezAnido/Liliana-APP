@@ -47,41 +47,42 @@ const TablasAbastecimiento =() =>{
       else{
         let dataAbsFil = dataAbs.filter((pos)=>{
           return(
-            (input.estanteria ? (input.estanteria === pos.estanteria) : true) &&
-            (input.posicion ? (+input.posicion === pos.posicion) : true) &&
-            (input.altura ? (input.altura === pos.altura) : true)
+            (input.estanteria ? (input.estanteria === pos.rack) : true) &&
+            (input.posicion ? (input.posicion === pos.position) : true) &&
+            (input.altura ? (input.altura === pos.height) : true)
           )    
         })
         setDataAbsFiltred([...dataAbsFil])
       }
     } 
-    else {
-      if(!input.estanteria){
+    else { //if there is code
+      if(!input.estanteria){//there is just code to filter
         const dataAbsFil = dataAbs.map((estan)=>{
-          const insumosFiltred = estan.insumos.filter((pos)=>{
+          //for each estan I filtred  the supplis correlative with code 
+          const insumosFiltred = estan.supplies.filter((pos)=>{
             return(
-              pos.codigo.includes(input.codigo)
+              pos.code?.includes(input.codigo)
             )    
           })
-          if (!insumosFiltred.length){
-            return false
+          if (!insumosFiltred.length){ //returned false for no coincidence
+            return false 
           }
-          estan.insumos = [...insumosFiltred]
+          estan.supplies = [...insumosFiltred] //modify the supplies with the filtred ones 
           return(estan)
-        }).filter(est=>est)
+        }).filter(est=>est) // show every estan that has some supplies
         console.log('DATA FILTRADA: ',dataAbsFil)
         setDataAbsFiltred([...dataAbsFil])
       } else {
         const dataAbsFil = dataAbs.map((estan)=>{
-          const insumosFiltred = estan.insumos.filter((pos)=>{
+          const insumosFiltred = estan.supplies.filter((pos)=>{
             return(
-              pos.codigo.includes(input.codigo)
+              pos.code?.includes(input.codigo)
             )    
           })
-          if (!insumosFiltred.length || estan.estanteria!==input.estanteria){
+          if (!insumosFiltred.length || estan.rack!==input.estanteria){
             return false
           }
-          estan.insumos = [...insumosFiltred]
+          estan.supplies = [...insumosFiltred]
           return(estan)
         }).filter(est=>est)
         console.log('DATA FILTRADA: ',dataAbsFil)
@@ -189,37 +190,37 @@ const TablasAbastecimiento =() =>{
         <tbody>
           {dataAbsFiltred?.map((estan,index) => {
             return(
-              estan.insumos.map((d,subIndex)=>{
+              estan.supplies.map((d,subIndex)=>{
                 return (
                   <Fragment key={index * 10 + subIndex}>
                     <tr className={styles.view} >
                       <td>
-                        {estan.estanteria}
+                        {estan.rack}
                       </td>
                       <td>
-                        {estan.posicion}
+                        {estan.position}
                       </td>
                       <td>
-                        {estan.altura}
+                        {estan.height}
                       </td>
                       <td>
-                        {d.codigo}
+                        {d.code}
                       </td>
                       <td
                         // className = {(estan.comentarios === 'EN USO') ? styles.enUso : '' }
                         className = {comentarios(d)}
                       >
-                        { d.codigo ? 
-                          d.cantidad === 0 ? 'Indefinido' : d.cantidad :
+                        { d.code ? 
+                          d.amount === 0 ? 'Indefinido' : d.amount :
                           '-'}
                       </td>
                       <td>
-                        {piezas.find((pz)=>{return (pz.articulo === d.codigo)
+                        {piezas.find((pz)=>{return (pz.articulo === d.code)
                         })?.detalle
                         }
                       </td>
                       <td>
-                        {d.comentarios}
+                        {d.comments}
                       </td>
                     </tr>
                   </Fragment>
@@ -228,7 +229,7 @@ const TablasAbastecimiento =() =>{
             )
           })}
           <Total
-            codigo = {inputs.codigo}
+            codigo = {inputs.code}
             table = {dataAbsFiltred}
           />
         </tbody> 

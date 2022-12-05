@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import ModalOk from "../../commonComponents/modalOk/index";
 import ModalError from "../../commonComponents/modal error";
 import styles from "./inputAbastecimiento.module.css"
+import {userContextProvider, checkPermission } from '../../commonComponents/context/userContext';
+import { useNavigate } from 'react-router-dom'
+
 
 const InputAbastecimiento = ()=>{
   const [inputs, setInputs] = useState({});
@@ -10,11 +13,20 @@ const InputAbastecimiento = ()=>{
   const [arrErrors, setArrErrors]= useState([])
   const [piezas, setPiezas] = useState([])
   const [to, setTo] = useState({to:false})
-  const abasUser = sessionStorage.getItem('AbastecimientoUser')
+
+  const [user,]= useContext(userContextProvider)
+  const navigate = useNavigate()
+  console.log(inputs)
   //console.log ('Inputs: ',inputs)
   useEffect (()=>{
     fetchingPiezas()
   },[])
+
+  useEffect (()=>{
+    if (! checkPermission('abastecimiento',user.permissions)){
+      navigate('/notAuthorized')
+    }
+  },[user,navigate])
 
   const fetchingPiezas = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/abastecimiento')
@@ -46,7 +58,7 @@ const InputAbastecimiento = ()=>{
     let arr = []
     const codigoPz = inputs?.codigo || ""
     const pzOk = piezas.find(pz => pz.articulo===(codigoPz))?.detalle
-    if (!pzOk) {
+    if (!pzOk && inputs.radio !== "clean") {
       arr.push('Codigo de pieza')
     }
     const estanteria = inputs?.estanteria
@@ -88,7 +100,7 @@ const InputAbastecimiento = ()=>{
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    const arr =handleCheckData()
+    const arr = handleCheckData()
     console.log ('resultado del arr', arr)
     setArrErrors(arr)
     if (arr.length !== 0){
@@ -100,7 +112,8 @@ const InputAbastecimiento = ()=>{
     const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.time = time
     inputs.date = date
-    inputs.operario = abasUser
+    inputs.name = user.name
+    inputs.lastname = user.lastname
     if (to.to){ //move section
       inputs.radio ='down'
     }
@@ -118,15 +131,17 @@ const InputAbastecimiento = ()=>{
         if(!res.ok){
           throw (res)
         }
-        openModal()
+        //openModal()
         return(res.json())
       })
       .then((json)=>{
-        console.log(json)
+        console.log(json.message)
+        openModal(json.message)
         if (to.to){ //move section
           fetchAdd()
           return
         }
+        //from here is just to maintain data in the form 
         const fetchedInputs = {}
         if (inputs.radio === 'down'){
           if (json.cantidad){
@@ -162,8 +177,8 @@ const InputAbastecimiento = ()=>{
     SetErrorMsg('')
     setShowModal(false)
   }
-  const openModal=()=>{
-    setShowModal(true)
+  const openModal=(msg)=>{
+    setShowModal(msg)
   }
   const fetchAdd = ()=>{
     console.log('Intro Move')
@@ -182,6 +197,7 @@ const InputAbastecimiento = ()=>{
       <ModalOk
         close={closeModal}
         show={showModal}
+        message={showModal ? showModal : "Registro Exitoso"}
       />
       <ModalError
         close={closeModal}
@@ -197,7 +213,7 @@ const InputAbastecimiento = ()=>{
             onFocus={clearErrMsg}
             type="text" 
             name="operario"
-            value={abasUser}  
+            value={user.name + " " + user.lastname }  
             onChange={handleChange} 
             placeholder="Operario"/>
         </label>

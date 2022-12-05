@@ -5,13 +5,20 @@ import { Fragment } from 'react'
 const HistorialAbastecimiento = () =>{
  
   const [dataInputs, setDataInputs] = useState([])
-  const [dataInputsFiltred,setDataInputsFiltred] = useState([])
   const [piezas, setPiezas] = useState([])
+  const [inputs, setInputs] = useState({month: new Date().getMonth()+1})
+
+  const months = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"]
 
   useEffect(()=>{
     fetchingPiezas()
-    fetchingTable()
   },[])
+
+
+  useEffect(()=>{
+    fetchingTable()
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[inputs])
 
   const fetchingPiezas = () => {
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/abastecimiento')
@@ -22,18 +29,25 @@ const HistorialAbastecimiento = () =>{
       .catch (err => console.log(err))
   }
   const fetchingTable = ()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/inputs')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/abastecimiento/inputs/'+ inputs.month)
       .then((res)=>res.json())
       .then ((json)=>{
         json.reverse()
         setDataInputs (json)
-        setDataInputsFiltred(json)
       })
       .catch (err => console.log(err))
   }
 
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs (({...inputs, [name]: value}))
+  }
+
+
   const SumaDown = (inp) => {
-    switch (inp.radio){
+    switch (inp.type){
       case 'add':
         return('Sumar')
       case 'down':
@@ -46,10 +60,25 @@ const HistorialAbastecimiento = () =>{
     }
   }
 
-  console.log(dataInputsFiltred)
-
   return(
   <>
+    <select 
+      className={`${styles.select}`}
+      required
+      type="text" 
+      name='month' 
+      value={inputs.month || ''}  
+      onChange={handleChange} 
+    >
+      <option disabled value="" hidden> MES </option>"
+      {months.map ((month, index)=>{
+        return(
+          <option value={index+1} key={month}>
+            {month}
+          </option>
+        )
+      }) }
+      </select>
     <div>
       <table className={styles.foldTable}>
         <colgroup>
@@ -94,31 +123,31 @@ const HistorialAbastecimiento = () =>{
               <Fragment key={index}>
                 <tr className={styles.view} >
                   <td>
-                    {inp.codigo}
+                    {inp.code}
                   </td>
                   <td>
                     {piezas.find((pz)=>{
-                      return (pz.articulo===inp.codigo)
-                      })?.Detalle
+                      return (pz.articulo===inp.code)
+                      })?.detalle
                     }
                   </td>
                   <td>
-                    {inp.estanteria + '-' + inp.posicion + '-' + inp.altura }
+                    {inp.rack + '-' + inp.position + '-' + inp.height}
                   </td>
                   <td>
-                    {inp.cantidad}
+                    {inp.amount}
                   </td>
                   <td>
                     {SumaDown(inp)}
                   </td>
                   <td>
-                    {inp.time}
+                    {inp.timeSend}
                   </td>
                   <td>
-                    {inp.date}
+                    {inp.dateSend}
                   </td>
                   <td>
-                    {inp.operario}
+                    {inp.worker}
                   </td>
                 </tr>
               </Fragment>

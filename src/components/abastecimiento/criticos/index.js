@@ -10,7 +10,7 @@ const TablasAbastecimiento =() =>{
   const [greaterZero, setGreaterZero] = useState(false)
   const [cantPallets, setCantPallets] = useState(0)
   const fetchingPiezas = ()=>{
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/piezas/abastecimiento')
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/abastecimiento')
       .then((res)=>res.json())
       .then ((json)=>{
         setPiezas([...json])
@@ -27,7 +27,7 @@ const TablasAbastecimiento =() =>{
       })
       .catch (err => console.log(err))
   }
-  console.log('piezas',piezasFiltred)
+  console.log('table',dataAbs)
   useEffect (()=>{
     fetchingTable()
     fetchingPiezas()
@@ -36,10 +36,10 @@ const TablasAbastecimiento =() =>{
   const cantPz=(pz)=>{
     const tot = dataAbs.reduce((prev,curr) => {
       return (
-        prev + curr.insumos?.reduce((prev2,curr2) => {
-          if (curr2.codigo === pz){
+        prev + curr.supplies?.reduce((prev2,curr2) => {
+          if (curr2.code === pz){
             return(
-              prev2 + curr2.cantidad
+              prev2 + curr2.amount
             )
           } else {
             return(prev2)

@@ -101,7 +101,7 @@ const Login = ()=>{
       <ModalOk
         close={closeModal}
         show={showModal}
-        messege = {showModal.message ? showModal.message  :"Registro Exitoso"}
+        message = {showModal.message ? showModal.message  :"Registro Exitoso"}
       />
       <ModalError
         close={closeModal}
