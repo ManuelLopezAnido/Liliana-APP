@@ -1,14 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { CompModal, Options, Table, ButtonSesion } from '../componentes';
-import { useOptions } from '../hooks';
+import { useOptions} from '../hooks';
 import styles from '../css/CompTablesInyectorasMatriceria.module.css';
 import { CompConfirmDelete } from '../componentes/CompConfirmDelete';
 import { DivContainer } from '../styledComponents';
+
+import {userContextProvider, checkPermission } from '../../../commonComponents/context/userContext';
+
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 
 export const CompTableInyectoras = () => {
   const [data, setData] = useState([]);
+  const [liderUser,]= useContext(userContextProvider)
+  const navigate = useNavigate()
   const {
     dataModal,
     modal,
@@ -23,7 +29,11 @@ export const CompTableInyectoras = () => {
   useEffect(() => {
     getData();
   }, []);
-  const liderUser = sessionStorage.getItem('InyeccionUser');
+  useEffect (()=>{
+    if (! checkPermission('abastecimiento',liderUser.permissions)){
+      navigate('/notAuthorized')
+    }
+  },[liderUser,navigate])
 
   const getData = async () => {
     try {

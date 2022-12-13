@@ -57,7 +57,7 @@ const InputAbastecimiento = ()=>{
   const handleCheckData = () => {
     let arr = []
     const codigoPz = inputs?.codigo || ""
-    const pzOk = piezas.find(pz => pz.articulo===(codigoPz))?.detalle
+    const pzOk = piezas.find(pz => pz.code===(codigoPz))?.description
     if (!pzOk && inputs.radio !== "clean") {
       arr.push('Codigo de pieza')
     }
@@ -119,7 +119,7 @@ const InputAbastecimiento = ()=>{
     }
     setInputs ({...inputs}) 
     const options = {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },

@@ -6,9 +6,9 @@ const Total = (props) => {
 
   const tot = props.table.reduce((prev,curr) => {
     return (
-      prev + curr.insumos?.reduce((prev2,curr2)=>{
+      prev + curr.supplies?.reduce((prev2,curr2)=>{
         return(
-          prev2 + curr2.cantidad
+          prev2 + curr2.amount
         )
       },0)
     )

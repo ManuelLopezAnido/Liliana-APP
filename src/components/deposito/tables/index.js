@@ -46,9 +46,9 @@ const TablasDeposito =() =>{
       else{
         let dataDepoFil = dataDepo.filter((pos)=>{
           return(
-            (input.estanteria ? (input.estanteria === pos.estanteria) : true) &&
-            (input.posicion ? (+input.posicion === pos.posicion) : true) &&
-            (input.altura ? (+input.altura === pos.altura) : true)
+            (input.estanteria ? (input.estanteria === pos.rack) : true) &&
+            (input.posicion ? (input.posicion === pos.position) : true) &&
+            (input.altura ? (input.altura === pos.height) : true)
           )    
         })
         setDataDepoFiltred([...dataDepoFil])
@@ -57,9 +57,9 @@ const TablasDeposito =() =>{
     else {
       if(!input.estanteria){
         const dataDepoFil = dataDepo.map((estan)=>{
-          const insumosFiltred = estan.insumos.filter((pos)=>{
+          const insumosFiltred = estan.supplies.filter((pos)=>{
             return(
-              pos.codigo.includes(input.codigo)
+              pos.code.includes(input.codigo)
             )    
           })
           if (!insumosFiltred.length){
@@ -181,32 +181,32 @@ const TablasDeposito =() =>{
         <tbody>
           {dataDepoFiltred?.map((estan,index) => {
             return(
-              estan.insumos?.map((d,subIndex)=>{
+              estan.supplies?.map((d,subIndex)=>{
                 return (
                   <Fragment key={index * 10 + subIndex}>
                     <tr className={styles.view} >
                       <td>
-                        {estan.estanteria}
+                        {estan.rack}
                       </td>
                       <td>
-                      {estan.posicion}
+                      {estan.position}
                       </td>
                       <td>
-                        {estan.altura}
+                        {estan.height}
                       </td>
                       <td>
-                        {d.codigo}
+                        {d.code}
                       </td>
                       <td>
-                        {d.cantidad === '' ? 'indefinido' : d.cantidad  }
+                        {d.code === '' ? '-' : d.amount}
                       </td>
                       <td>
-                        {piezas.find((pz)=>{return (pz.articulo===d.codigo)
-                        })?.Detalle
+                        {piezas.find((pz)=>{return (pz.code===d.code)
+                        })?.description
                         }
                       </td>
                       <td>
-                        {d.comentarios}
+                        {d.comments}
                       </td>
                     </tr>
                   </Fragment>

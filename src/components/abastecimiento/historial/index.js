@@ -132,7 +132,7 @@ const HistorialAbastecimiento = () =>{
                     }
                   </td>
                   <td>
-                    {inp.rack + '-' + inp.position + '-' + inp.height}
+                    {inp.rack + '-' + inp.position + '-' + (inp.height || "?")}
                   </td>
                   <td>
                     {inp.amount}

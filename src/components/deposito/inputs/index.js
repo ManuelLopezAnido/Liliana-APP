@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react"
+import styles from "./inputsDeposito.module.css"
+import { useEffect, useState, useContext } from "react"
 import ModalOk from "../../commonComponents/modalOk/index";
 import ModalError from "../../commonComponents/modal error";
-import styles from "./inputsDeposito.module.css"
+import { userContextProvider, checkPermission} from "../../commonComponents/context/userContext";
+import { useNavigate } from 'react-router-dom'
+
+
 
 const InputDeposito = ()=>{
   const [inputs, setInputs] = useState({});
@@ -9,11 +13,21 @@ const InputDeposito = ()=>{
   const[errorMsg, SetErrorMsg] =useState('')
   const [arrErrors, setArrErrors]= useState([])
   const [piezas, setPiezas] = useState([])
-  const depoUser = sessionStorage.getItem('DepositoUser')
+  
+  const [user,]= useContext(userContextProvider)
+  const navigate = useNavigate()
+
   console.log ('Inputs: ',inputs)
+  
   useEffect(()=>{
     fetchingPiezas()
   },[])
+  useEffect (()=>{
+    if (! checkPermission('abastecimiento',user.permissions)){
+      navigate('/notAuthorized')
+    }
+  },[user,navigate])
+
   const fetchingPiezas = ()=>{
     fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/data/piezas/deposito')
       .then((res)=>res.json())
@@ -25,7 +39,7 @@ const InputDeposito = ()=>{
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
-    if (name === 'codigo' || name === 'estanteria') {
+    if (name === 'codigo' || name === 'comentarios' || name === 'estanteria' || name === 'altura') {
       value=e.target.value.toUpperCase()
     }
     if (name ==='cantidad' || name ==='posicion' || name ==='altura'){
@@ -39,7 +53,7 @@ const InputDeposito = ()=>{
   const handleCheckData = () => {
     let arr = []
     const codigoPz = inputs?.codigo || ""
-    const pzOk = piezas.find(pz => pz.articulo===(codigoPz))?.detalle
+    const pzOk = piezas.find(pz => pz.code===(codigoPz))?.description
     if (!pzOk) {
       arr.push('Codigo de pieza')
     }
@@ -81,10 +95,11 @@ const InputDeposito = ()=>{
     const date = (today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
     inputs.time = time
     inputs.date = date
-    inputs.operario = depoUser
+    inputs.name = user.name
+    inputs.lastname = user.lastname
     setInputs ({...inputs}) 
     const options = {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
@@ -120,6 +135,7 @@ const InputDeposito = ()=>{
             fetchedInputs.altura = 1
           }
         }
+        setShowModal (json.message)
         setInputs({...fetchedInputs})
       })
       .catch(res => {
@@ -150,6 +166,7 @@ const InputDeposito = ()=>{
       <ModalOk
         close={closeModal}
         show={showModal}
+        message={showModal ? showModal : "Registro Exitoso"}
       />
       <ModalError
         close={closeModal}
@@ -165,7 +182,7 @@ const InputDeposito = ()=>{
             onFocus={clearErrMsg}
             type="text" 
             name="operario"
-            value={depoUser}  
+            value={user.name + " " + user.lastname }  
             onChange={handleChange} 
             placeholder="Operario"/>
         </label>

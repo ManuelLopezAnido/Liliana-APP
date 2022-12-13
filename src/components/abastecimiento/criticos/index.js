@@ -27,7 +27,7 @@ const TablasAbastecimiento =() =>{
       })
       .catch (err => console.log(err))
   }
-  console.log('table',dataAbs)
+  console.log('piezas',piezas)
   useEffect (()=>{
     fetchingTable()
     fetchingPiezas()
@@ -51,7 +51,7 @@ const TablasAbastecimiento =() =>{
   }
   const cantidadPallets = ()=>{
     let cantPallet = piezasFiltred.reduce((acc, curr)=>{
-      let pallets = Math.floor((cantPz(curr.articulo)-curr.stockM)/curr.cantxPallet)
+      let pallets = Math.floor((cantPz(curr.code)-curr.stockMin)/curr.inPallets)
       if (pallets < 0){
         return (acc - pallets) // is a rest cause pallets are negative
       } else {
@@ -66,7 +66,7 @@ const TablasAbastecimiento =() =>{
     setGreaterZero(bool)
     if (bool){
       let pzFiltred = piezas.filter((pz)=>{
-        return cantPz(pz.articulo)
+        return cantPz(pz.code)
       })
       setPzGreaterZero (pzFiltred)
       setPiezasFiltred(pzFiltred)
@@ -81,11 +81,11 @@ const TablasAbastecimiento =() =>{
     let pzFiltred
     if (greaterZero){
       pzFiltred = pzGreaterZero.filter((pz)=>{
-        return(pz.articulo.includes(value))
+        return(pz.code.includes(value))
       })
     } else {
       pzFiltred = piezas.filter((pz)=>{
-        return(pz.articulo.includes(value))
+        return(pz.code.includes(value))
       })
     }
     setPiezasFiltred(pzFiltred)
@@ -176,30 +176,30 @@ const TablasAbastecimiento =() =>{
         </thead>
         <tbody>
           {piezasFiltred?.map((pz,index) => {
-            let cant=cantPz(pz.articulo)
+            let cant=cantPz(pz.code)
             return(
               <Fragment key={index}>
                 <tr className={styles.view} >
                   <td>
-                    {pz.articulo}
+                    {pz.code}
                   </td>
                   <td>
-                    {pz.detalle}
+                    {pz.description}
                   </td>
                   <td>
-                    {pz.familia}
+                    {pz.family}
                   </td>
                   <td>
                     {cant}
                   </td>
                   <td>
-                    {pz.stockM}
+                    {pz.stockMin}
                   </td>
                   <td>
-                    {pz.stockM ? Math.round(cant*100/pz.stockM) + '%' : '-'}
+                    {pz.stockMin ? Math.round(cant*100/pz.stockMin) + '%' : '-'}
                   </td>
                   <td>
-                    {pz.cantxPallet ? Math.floor((cant-pz.stockM)/pz.cantxPallet) : '-'}
+                    {pz.inPallets ? Math.floor((cant-pz.stockMin)/pz.inPallets) : '-'}
                   </td>
                 </tr>
               </Fragment>

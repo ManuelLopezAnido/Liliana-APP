@@ -14,6 +14,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path='/' element={<Layout/>}>
+        <Route index element={<Navigate replace to="/login" />} />
         <Route path='/procesos/*' element = {<ProcesosRoutes/>}/>
         <Route path='/inyeccion/*' element = {<InyeccionRoutes/>}/>
         <Route path='/abastecimiento/*' element = {<AbastecimientoRoutes/>}/>
@@ -21,7 +22,7 @@ const AppRoutes = () => {
         <Route path='/armado/*' element={<ArmadoRoutes/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/notAuthorized' element={<NotAuthorized/>}/>
-        <Route path="*" element={<Navigate replace to="/login" />}/>
+        <Route path="/*" element={<Navigate replace to="/login" />}/>
       </Route>
     </Routes>
   )

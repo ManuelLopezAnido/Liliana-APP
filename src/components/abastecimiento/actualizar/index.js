@@ -67,7 +67,8 @@ const ActualizarAbastecimiento = ()=>{
       },
       body: JSON.stringify(inputs)
     };
-    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/home/'+ inputs.tipo + '/' + area, options)
+    const dataOrHome = inputs.tipo === "piezas" ? "data" : "home"
+    fetch('http://192.168.11.139'+ process.env.REACT_APP_PORTS +'/api/' + dataOrHome + '/'+ inputs.tipo + '/' + area, options)
       .then((res)=>{
         if(!res.ok){
           throw (res)
